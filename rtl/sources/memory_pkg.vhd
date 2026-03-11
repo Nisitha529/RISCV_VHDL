@@ -433,4 +433,4 @@ end package memory_pkg;
 
 package body memory_pkg is
 
-end package body memory_pkg
+end package body memory_pkg;

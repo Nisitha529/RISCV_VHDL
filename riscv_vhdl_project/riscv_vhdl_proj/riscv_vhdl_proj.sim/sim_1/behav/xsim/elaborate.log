@@ -1,0 +1,19 @@
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2020.2/bin/unwrapped/lnx64.o/xelab -wto 2501223c275240309bfd42124ce2d876 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot tb_alu_behav xil_defaultlib.tb_alu -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.math_real
+Compiling package ieee.std_logic_textio
+Compiling package xil_defaultlib.cpu_pkg
+Compiling package xil_defaultlib.memory_pkg
+Compiling architecture rtl of entity xil_defaultlib.alu [alu_default]
+ERROR: [XSIM 43-3316] Signal SIGSEGV received.

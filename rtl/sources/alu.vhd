@@ -23,7 +23,7 @@ end entity;
 architecture rtl of alu is begin
 
   -- Combinational process for the alu operations
-  process begin (op1, op2, aluop) begin
+  process (op1, op2, aluop) begin
     case aluop is
       
       -- Addition : Used for ADD, ADDI, loads/stores address calculation and PC + 4, when op1 = PC, op2 = 4
@@ -67,10 +67,10 @@ architecture rtl of alu is begin
                                  result <= x"00000000";
                                end if;
 
-      -- Default case (should not occur if ALUop is properly driven).
+      -- Default case (should not occur if aluop is properly driven).
       when others =>             result <= (others => '0');
 
     end case;
   end process;
 
-end architecture
+end architecture rtl;
