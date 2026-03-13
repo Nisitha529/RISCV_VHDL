@@ -11,9 +11,9 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
-Compiling package ieee.math_real
 Compiling package ieee.std_logic_textio
 Compiling package xil_defaultlib.cpu_pkg
 Compiling package xil_defaultlib.memory_pkg
 Compiling architecture rtl of entity xil_defaultlib.alu [alu_default]
-ERROR: [XSIM 43-3316] Signal SIGSEGV received.
+Compiling architecture sim of entity xil_defaultlib.tb_alu
+Built simulation snapshot tb_alu_behav

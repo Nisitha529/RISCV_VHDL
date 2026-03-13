@@ -3,7 +3,7 @@
 Nov 18 2020
 09:20:35
 /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_vhdl_project/riscv_vhdl_proj/riscv_vhdl_proj.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,uvm,,,,,,
-/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd,1773176241,vhdl,,,,tb_alu,,,,,,,,
+/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd,1773421985,vhdl,,,,tb_alu,,,,,,,,
 /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/alu.vhd,1773173642,vhdl,/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd,,,alu,,,,,,,,
 /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/cpu_pkg.vhd,1772875654,vhdl,/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd;/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/alu.vhd,,,cpu_pkg,,,,,,,,
 /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/memory_pkg.vhd,1773173688,vhdl,/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd;/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/alu.vhd,,,memory_pkg,,,,,,,,
