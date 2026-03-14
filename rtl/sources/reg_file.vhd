@@ -63,11 +63,13 @@ begin
   -- Reading process
 
   -- Output the value of the addressed register, unless the address is zero.
+ 
   rs1_data   <= (others => '0') when rs1_addr = "00000" else regs(to_integer (unsigned (rs1_addr)));
   rs2_data   <= (others => '0') when rs2_addr = "00000" else regs(to_integer (unsigned (rs2_addr)));
 
   -- Debugging purposes : Driving the whole register file into an external port.
+ 
   trace_regs <= regs;
 
 
-end architecture
+end architecture;

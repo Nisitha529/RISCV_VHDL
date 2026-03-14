@@ -8,9 +8,9 @@ use work.memory_pkg.all;
 entity inst_memory is 
   
   port (
-    en   : in std_logic                                 -- Enables the reading.
-    addr : in std_logic_vector (WORD_SIZE - 1 downto 0) -- Byte address
-    data : in std_logic_vector (WORD_SIZE - 1 downto 0) -- Instruction output
+    en   : in  std_logic;                                 -- Enables the reading.
+    addr : in  std_logic_vector (WORD_SIZE - 1 downto 0); -- Byte address
+    data : out std_logic_vector (WORD_SIZE - 1 downto 0)  -- Instruction output
   );
 
 end entity;
@@ -23,7 +23,7 @@ architecture rtl of inst_memory is
 
 begin
 
-  word_index <= to_integer(unsigned(addr(WORD_SIZE - 1 downto 0)));
+  word_index <= to_integer(unsigned(addr(31 downto 2)));
   -- Enabling the read when,
   --   1. The word index is within the valid range
   --   2. The address is word-aligned (The two LSBs are "00").

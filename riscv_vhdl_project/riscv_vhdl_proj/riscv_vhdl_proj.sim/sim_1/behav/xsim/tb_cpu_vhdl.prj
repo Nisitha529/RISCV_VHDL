@@ -1,0 +1,17 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../../rtl/sources/memory_pkg.vhd" \
+"../../../../../../rtl/sources/cpu_pkg.vhd" \
+"../../../../../../rtl/sources/alu.vhd" \
+"../../../../../../rtl/sources/control_unit.vhd" \
+"../../../../../../rtl/sources/decode.vhd" \
+"../../../../../../rtl/sources/reg_file.vhd" \
+"../../../../../../rtl/sources/cpu.vhd" \
+"../../../../../../rtl/sources/data_ram.vhd" \
+"../../../../../../rtl/sources/data_rom.vhd" \
+"../../../../../../rtl/sources/data_memory.vhd" \
+"../../../../../../rtl/sources/inst_memory.vhd" \
+"../../../../../../rtl/sim/cpu/tb_cpu.vhd" \
+
+# Do not sort compile order
+nosort

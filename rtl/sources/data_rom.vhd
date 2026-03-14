@@ -12,7 +12,7 @@ entity data_rom is
     en           : in  std_logic;                                 -- Global enable
     addr         : in  std_logic_vector (WORD_SIZE - 1 downto 0); -- Byte  address
     access_width : in  MEM_ACCESS_WIDTH_t;                        -- Access size 
-    dout         : out std_logic_vector (WORD_SIZE - 1 downto 0); -- Read data
+    dout         : out std_logic_vector (WORD_SIZE - 1 downto 0)  -- Read data
   );
 
 end data_rom;
@@ -47,7 +47,7 @@ begin
                      en; 
 
   -- Data reading part
-  do             <= memory (word_index) when (access_width = MEM_ACCESS_WIDTH_32 and access_enable = '1') else                                                                   -- Word read : output the entire 32-bit word.
+  dout           <= memory (word_index) when (access_width = MEM_ACCESS_WIDTH_32 and access_enable = '1') else                                                                   -- Word read : output the entire 32-bit word.
                     
                     x"0000" & memory (word_index) (8 * halfword_index + 16 - 1 downto 8 * halfword_index) when (access_width = MEM_ACCESS_WIDTH_16 and access_enable = '1') else -- Halfword read : Output the correct halfword based on the halfword_index.
 

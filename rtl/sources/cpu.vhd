@@ -1,199 +1,266 @@
--- ============================================
--- Module: control_unit
--- Description: RISC‑V control unit. Decodes the instruction opcode,
---              funct3, and funct7 to generate all control signals for
---              the datapath: ALU operation, register write enable,
---              memory write enable, branch/jump decisions, data source
---              for register write, memory access width, etc.
--- ============================================
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
-use work.cpu_pkg.all;   -- Provides all opcode constants and enumeration types
+use work.cpu_pkg.all;
 
-entity control_unit is
-    port (
-        -- Inputs from instruction decoder
-        opcode           : in  std_logic_vector(6 downto 0);  -- Instruction opcode
-        funct3           : in  std_logic_vector(2 downto 0);  -- Function 3 field
-        funct7           : in  std_logic_vector(6 downto 0);  -- Function 7 field
+entity cpu is 
 
-        -- ALU result (used for branch condition evaluation)
-        alu_result       : in  std_logic_vector(31 downto 0);
+  port (
 
-        -- Control outputs
-        alu_use_imm      : out std_logic;                     -- Select immediate as ALU operand B
-        write_rd         : out std_logic;                     -- Register file write enable
-        write_mem        : out std_logic;                     -- Data memory write enable
-        take_branch      : out std_logic;                     -- Branch taken (PC change)
-        rd_data_src      : out RD_DATA_SRC_t;                 -- Source for register write data
-        jump             : out std_logic;                     -- Unconditional jump (JAL/JALR)
-        ALUop            : out ALU_OP_TYPE_t;                 -- ALU operation to perform
-        mem_access_width : out MEM_ACCESS_WIDTH_t;            -- Memory access size (byte/half/word)
-        mem_access       : out std_logic                      -- Memory access enable (read/write)
-    );
+    clk               : in  std_logic;
+    resetn            : in  std_logic;
+
+    -- Instruction memory interface (Read only)
+
+    imem_ready        : in  std_logic;
+    imem_valid        : out std_logic;
+    imem_addr         : out std_logic_vector (31 downto 0);
+    imem_rdata        : in  std_logic_vector (31 downto 0);
+    
+    -- Data memory interface (Read / Write)
+
+    dmem_ready        : in  std_logic;
+    dmem_valid        : out std_logic;
+    dmem_addr         : out std_logic_vector (31 downto 0);
+    dmem_write_enable : out std_logic;
+    dmem_access_width : out MEM_ACCESS_WIDTH_t;
+    dmem_wdata        : out std_logic_vector (31 downto 0);
+    dmem_rdata        : in  std_logic_vector (31 downto 0);
+
+    -- Debug
+
+    trace_regs        : out REGISTER_ARRAY_t
+  );
+
 end entity;
 
-architecture rtl of control_unit is
+architecture rtl of cpu is 
 
-    -- Internal signal to hold the decoded branch type
-    signal branch : BRANCH_TYPE_t;
+  -- Initialization signals
+
+  -- Decoder 
+
+  signal instruction      : std_logic_vector (31 downto 0);
+
+  signal rs1_addr         : std_logic_vector (4 downto 0);
+  signal rs2_addr         : std_logic_vector (4 downto 0);
+
+  signal rd_addr          : std_logic_vector (4 downto 0);
+
+  signal imm              : std_logic_vector (31 downto 0);
+
+  signal opcode           : std_logic_vector (6 downto 0);
+  signal funct3           : std_logic_vector (2 downto 0);
+  signal funct7           : std_logic_vector (6 downto 0);
+
+  -- Regfile
+
+  signal rs1_data         : std_logic_vector (31 downto 0);
+  signal rs2_data         : std_logic_vector (31 downto 0);
+  
+  signal rd_data          : std_logic_vector (31 downto 0);
+
+  -- ALU
+
+  signal op1              : std_logic_vector (31 downto 0);
+  signal op2              : std_logic_vector (31 downto 0);
+  
+  signal alu_result       : std_logic_vector (31 downto 0);
+
+  -- Control unit
+
+  signal alu_use_imm      : std_logic;
+
+  signal write_mem        : std_logic;
+  signal write_rd         : std_logic;
+  signal take_branch      : std_logic;
+  signal rd_data_src      : RD_DATA_SRC_t;
+
+  signal jump             : std_logic;
+
+  signal aluop            : ALU_OP_TYPE_t;
+
+  signal memtoreg         : RD_DATA_SRC_t;
+
+  -- Program counter
+
+  signal pc_imm           : std_logic_vector(31 downto 0);
+  signal pc_4             : std_logic_vector(31 downto 0);
+  signal pc               : std_logic_vector(31 downto 0);
+  signal pc_next          : std_logic_vector(31 downto 0);
+  signal pc_next_sel      : PC_NEXT_SRC_t;
+
+  -- Memory
+
+  signal mem_data         : std_logic_vector(31 downto 0);
+  signal mem_access       : std_logic;
+  signal mem_access_width : MEM_ACCESS_WIDTH_t;
+
+  -- Stall
+  
+  signal enable           : std_logic;
 
 begin
 
-    ----------------------------------------------------------------------------
-    -- Jump signal (unconditional jumps)
-    -- Asserted for JAL and JALR instructions.
-    ----------------------------------------------------------------------------
-    jump <= '1' when opcode = INSTR_OP_JAL or opcode = INSTR_OP_JALR else '0';
+  -- Instruction decoder
 
-    ----------------------------------------------------------------------------
-    -- Branch type decoding
-    -- Translates the funct3 field of a branch instruction into the
-    -- BRANCH_TYPE_t enumeration. For signed/unsigned variants (BLT/BLTU,
-    -- BGE/BGEU) the same BRANCH_TYPE is used because the ALU produces the
-    -- comparison result (SLT/SLTU) and the branch condition is derived from
-    -- that result.
-    ----------------------------------------------------------------------------
-    branch <= BRANCH_TYPE_BEQ         when opcode = INSTR_OP_BRANCH and funct3 = INSTR_F3_BEQ else
-              BRANCH_TYPE_BNE         when opcode = INSTR_OP_BRANCH and funct3 = INSTR_F3_BNE else
-              BRANCH_TYPE_BLT         when opcode = INSTR_OP_BRANCH and (funct3 = INSTR_F3_BLT or funct3 = INSTR_F3_BLTU) else
-              BRANCH_TYPE_BGE         when opcode = INSTR_OP_BRANCH and (funct3 = INSTR_F3_BGE or funct3 = INSTR_F3_BGEU) else
-              BRANCH_TYPE_NONE;       -- Not a branch instruction
+  decode_00: entity work.decode port map (
+    instr            => instruction,
 
-    ----------------------------------------------------------------------------
-    -- ALU operation selection
-    -- Determines the ALU operation based on opcode, funct3, and funct7.
-    -- The priority is: first check for special cases (SUB, shifts with funct7),
-    -- then for immediate/register variants, finally default to ADD.
-    -- For branches, the ALU performs a subtraction (for BEQ/BNE) or a
-    -- signed/unsigned comparison (SLT/SLTU) depending on the branch type.
-    ----------------------------------------------------------------------------
-    ALUop <=
-        -- Subtraction: used for SUB (register‑register) and for branches
-        -- that need equality (BEQ/BNE) – ALU computes rs1 - rs2.
-        ALU_OP_TYPE_SUB when (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SUB and funct7 = INSTR_F7_SUB)
-                         or (opcode = INSTR_OP_BRANCH and (funct3 = INSTR_F3_BEQ or funct3 = INSTR_F3_BNE)) else
+    rs1              => rs1_addr,
+    rs2              => rs2_addr,
 
-        -- Set less than (signed): used for SLTI, SLT, and for signed branches
-        ALU_OP_TYPE_SLT when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_SLTI)
-                         or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SLT and funct7 = INSTR_F7_SLT)
-                         or (opcode = INSTR_OP_BRANCH and (funct3 = INSTR_F3_BLT or funct3 = INSTR_F3_BGE)) else
+    rd               => rd_addr,
 
-        -- Set less than (unsigned): used for SLTIU, SLTU, and for unsigned branches
-        ALU_OP_TYPE_SLTU when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_SLTIU)
-                          or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SLTU and funct7 = INSTR_F7_SLTU)
-                          or (opcode = INSTR_OP_BRANCH and (funct3 = INSTR_F3_BLTU or funct3 = INSTR_F3_BGEU)) else
+    imm              => imm,
 
-        -- Bitwise AND
-        ALU_OP_TYPE_AND when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_ANDI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_AND and funct7 = INSTR_F7_AND) else
+    opcode           => opcode,
+    funct3           => funct3,
+    funct7           => funct7
+  );
 
-        -- Bitwise OR
-        ALU_OP_TYPE_OR  when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_ORI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_OR and funct7 = INSTR_F7_OR) else
+  -- Control unit
 
-        -- Bitwise XOR
-        ALU_OP_TYPE_XOR when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_XORI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_XOR and funct7 = INSTR_F7_XOR) else
+  control_unit_00: entity work.control_unit port map (
+    opcode           => opcode,
+    funct3           => funct3,
+    funct7           => funct7,
+      
+    alu_result       => alu_result,
+    
+    alu_use_imm      => alu_use_imm,
+    
+    write_rd         => write_rd,
+    write_mem        => write_mem,
+    take_branch      => take_branch,
+    rd_data_src      => rd_data_src,
+    
+    jump             => jump,
+    
+    aluop            => aluop,
+    
+    mem_access_width => mem_access_width,
+    mem_access       => mem_access
+  );
 
-        -- Logical left shift
-        ALU_OP_TYPE_SLL when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_SLLI and funct7 = INSTR_F7_SLLI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SLL and funct7 = INSTR_F7_SLL) else
+  -- Register file
 
-        -- Logical right shift
-        ALU_OP_TYPE_SRL when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_SRLI and funct7 = INSTR_F7_SRLI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SRL and funct7 = INSTR_F7_SRL) else
+  reg_file_00: entity work.regfile port map (
+    clk              => clk,
+    resetn           => resetn,
+      
+    regwrite         => write_rd,
 
-        -- Arithmetic right shift
-        ALU_OP_TYPE_SRA when (opcode = INSTR_OP_REG_IMM and funct3 = INSTR_F3_SRAI and funct7 = INSTR_F7_SRAI)
-                        or (opcode = INSTR_OP_REG_REG and funct3 = INSTR_F3_SRA and funct7 = INSTR_F7_SRA) else
+    rs1_addr         => rs1_addr,
+    rs2_addr         => rs2_addr,
 
-        -- Default: ADD (used for ADDI, ADD, loads/stores address calculation,
-        -- JALR address, AUIPC (PC+imm), LUI (pass immediate), etc.)
-        ALU_OP_TYPE_ADD;
+    rd_addr          => rd_addr,
+    rd_data          => rd_data,
 
-    ----------------------------------------------------------------------------
-    -- ALU operand B source selection
-    -- '1' means the second ALU operand should be the immediate value
-    -- (from decoder) instead of the register value (rs2). This is true for
-    -- register‑immediate operations, loads, stores, and JALR.
-    ----------------------------------------------------------------------------
-    alu_use_imm <= '1' when opcode = INSTR_OP_REG_IMM
-                         or opcode = INSTR_OP_JALR
-                         or opcode = INSTR_OP_LOAD
-                         or opcode = INSTR_OP_STORE else
-                   '0';
+    rs1_data         => rs1_data,
+    rs2_data         => rs2_data,
 
-    ----------------------------------------------------------------------------
-    -- Register file write enable
-    -- Disabled for branches, stores, fences, and system instructions.
-    -- All other instructions write back to the register file.
-    ----------------------------------------------------------------------------
-    write_rd <= '0' when opcode = INSTR_OP_BRANCH
-                     or opcode = INSTR_OP_STORE
-                     or opcode = INSTR_OP_FENCE
-                     or opcode = INSTR_OP_SYSTEM else
-                '1';
+    trace_regs       => trace_regs
+  );
 
-    ----------------------------------------------------------------------------
-    -- Data memory write enable
-    -- Asserted only for store instructions.
-    ----------------------------------------------------------------------------
-    write_mem <= '1' when opcode = INSTR_OP_STORE else '0';
+  -- ALU initialization
 
-    ----------------------------------------------------------------------------
-    -- Memory access enable
-    -- Asserted for both loads and stores (indicates that a memory operation
-    -- is taking place). Used to enable the data memory module.
-    ----------------------------------------------------------------------------
-    mem_access <= '1' when opcode = INSTR_OP_LOAD or opcode = INSTR_OP_STORE else '0';
+  alu_inst: entity work.alu port map (
+    op1              => op1,
+    op2              => op2,
+    ALUop            => ALUop,
+    result           => alu_result
+  );
 
-    ----------------------------------------------------------------------------
-    -- Branch taken condition
-    -- Uses the ALU result (which has been computed in the same cycle) to
-    -- decide whether a conditional branch should be taken.
-    -- For BEQ:  ALU result = rs1 - rs2; branch if result = 0.
-    -- For BNE:  branch if result ≠ 0.
-    -- For BLT:  ALU performed SLT; branch if result = 1 (i.e., rs1 < rs2).
-    -- For BGE:  ALU performed SLT; branch if result = 0 (i.e., rs1 ≥ rs2).
-    ----------------------------------------------------------------------------
-    take_branch <= '1' when (branch = BRANCH_TYPE_BEQ and alu_result = x"00000000")
-                        or (branch = BRANCH_TYPE_BNE and alu_result /= x"00000000")
-                        or (branch = BRANCH_TYPE_BLT and alu_result = x"00000001")
-                        or (branch = BRANCH_TYPE_BGE and alu_result = x"00000000") else
-                   '0';
+  -- ALU operand selection
 
-    ----------------------------------------------------------------------------
-    -- Register write data source selection
-    -- Determines what value is written back to the destination register.
-    --   - AUIPC: write PC + immediate (supplied by ALU, but selected here)
-    --   - JAL/JALR: write PC + 4 (return address)
-    --   - LUI: write immediate (shifted left 12)
-    --   - LOAD: write data read from memory
-    --   - All others: write ALU result
-    ----------------------------------------------------------------------------
-    rd_data_src <= RD_DATA_SRC_PC_IMM       when opcode = INSTR_OP_AUIPC else
-                   RD_DATA_SRC_PC_4         when opcode = INSTR_OP_JAL or opcode = INSTR_OP_JALR else
-                   RD_DATA_SRC_IMM          when opcode = INSTR_OP_LUI else
-                   RD_DATA_SRC_MEM_DATA_OUT when opcode = INSTR_OP_LOAD else
-                   RD_DATA_SRC_ALU_RESULT;   -- default for arithmetic, etc.
+  -- Operand A is always rs1_data.
+  -- Operand B is either rs2_data or the immediate.
 
-    ----------------------------------------------------------------------------
-    -- Memory access width
-    -- For load/store instructions, decode the funct3 field to determine
-    -- whether the access is byte, halfword, or word.
-    -- For loads, both signed and unsigned variants use the same width,
-    -- sign/zero extension is handled inside the memory module.
-    ----------------------------------------------------------------------------
-    mem_access_width <=
-        MEM_ACCESS_WIDTH_32 when (opcode = INSTR_OP_LOAD  and funct3 = INSTR_F3_LW)
-                             or (opcode = INSTR_OP_STORE and funct3 = INSTR_F3_SW) else
-        MEM_ACCESS_WIDTH_16 when (opcode = INSTR_OP_LOAD  and (funct3 = INSTR_F3_LH or funct3 = INSTR_F3_LHU))
-                             or (opcode = INSTR_OP_STORE and funct3 = INSTR_F3_SH) else
-        MEM_ACCESS_WIDTH_8;   -- default for byte accesses (LB/LBU/SB)
+  op1       <= rs1_data;
+  op2       <= imm when alu_use_imm = '1' else rs2_data;
+
+  -- Program counter logic
+
+  pc_imm    <= std_logic_vector(unsigned(pc) + unsigned(imm));
+  pc_4      <= std_logic_vector(unsigned(pc) + 4);
+
+  pc_next_sel <=  PC_NEXT_SRC_PC_ALU_RES    when    (jump = '1' and opcode = INSTR_OP_JALR) else
+                  PC_NEXT_SRC_PC_IMM        when    (jump = '1' and opcode = INSTR_OP_JAL)
+                                                 or (take_branch = '1')                     else
+                  PC_NEXT_SRC_PC_4;
+
+  -- Generate the next PC value according to the selected source.
+
+  -- For JALR, the target is the ALU result (rs1 + imm) with the LSB forced to 0.
+ 
+  pc_next   <= alu_result(31 downto 1) & '0' when pc_next_sel = PC_NEXT_SRC_PC_ALU_RES else
+             
+               pc_imm                        when pc_next_sel = PC_NEXT_SRC_PC_IMM     else
+             
+               pc_4;
+
+  -- Register write‑back multiplexer
+
+  -- Selects the value to write to the destination register based on rd_data_src.
+
+  with rd_data_src select
+    rd_data <= imm                           when RD_DATA_SRC_IMM,
+               
+               mem_data                      when RD_DATA_SRC_MEM_DATA_OUT,
+      
+               pc_4                          when RD_DATA_SRC_PC_4,
+       
+               pc_imm                        when RD_DATA_SRC_PC_IMM,
+      
+               alu_result                    when others;   
+
+  -- Instruction memory interface
+
+  imem_valid  <= '1';          -- The CPU always requests an instruction (imem_valid = '1') from the current PC.
+  imem_addr   <= pc;
+  instruction <= imem_rdata;   -- Capture the fetched instruction
+
+  -- Data memory interface
+
+  dmem_valid        <= mem_access;
+  dmem_addr         <= alu_result;        -- Address is ALU result : base + offset         
+  dmem_wdata        <= rs2_data;          -- Write data for stores      
+  dmem_write_enable <= write_mem;
+  dmem_access_width <= mem_access_width;
+
+  -- Load data sign‑extension
+
+  -- For load instructions, the data read from memory may need to be sign‑extended (LB, LH) or zero‑extended (LBU, LHU). 
+  -- Currently only LB and LH are implemented. 
+  -- Other loads simply pass the full word (LW) or are extended with zeros in future versions.
+
+  mem_data          <= std_logic_vector(resize(signed(dmem_rdata(15 downto 0)), 32)) when (opcode = INSTR_OP_LOAD and funct3 = INSTR_F3_LH) else
+                       
+                       std_logic_vector(resize(signed(dmem_rdata(7 downto 0)), 32))  when (opcode = INSTR_OP_LOAD and funct3 = INSTR_F3_LB) else
+    
+                       dmem_rdata;                                                                                                                -- For LW (and for non‑load instructions, the value is unused)
+
+  -- Stall / pipeline enable logic
+
+  -- The CPU advances (PC updates) only when the instruction memory is ready and (if a data memory access is requested, the data memory is also ready).
+  
+  enable            <= imem_ready and ((not mem_access) or dmem_ready);
+
+  -- Program counter register (synchronous)
+
+  process(clk) begin
+    if rising_edge(clk) then
+      if resetn = '0' then
+        pc <= (others => '0');          -- Reset PC to 0 (reset vector)
+      else
+        if enable = '1' then
+          pc <= pc_next;                 -- Update PC when pipeline advances
+        end if;
+      end if;
+    end if;
+  end process;
 
 end architecture;

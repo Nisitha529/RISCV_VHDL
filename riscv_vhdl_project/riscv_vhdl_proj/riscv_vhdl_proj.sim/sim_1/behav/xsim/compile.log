@@ -1,2 +1,38 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/alu/tb_alu.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'tb_alu'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/control_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'control_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/decode.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'decode'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/reg_file.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'regfile'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/cpu.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'cpu'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/data_ram.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'data_ram'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/data_rom.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'data_rom'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/data_memory.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'data_memory'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sources/inst_memory.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'inst_memory'
+INFO: [VRFC 10-163] Analyzing VHDL file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'tb_cpu'
+ERROR: [VRFC 10-3462] indexed name is not a 'bit_vector' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:43]
+ERROR: [VRFC 10-1471] type error near slv_imm_u ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:70]
+ERROR: [VRFC 10-1471] type error near slv_imm_u ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:72]
+ERROR: [VRFC 10-1471] type error near slv_imm_j ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:78]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:81]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:88]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:89]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:90]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:91]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:92]
+ERROR: [VRFC 10-1471] type error near slv_imm_b ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:93]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:102]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:103]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:104]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:105]
+ERROR: [VRFC 10-1471] type error near slv_imm_i ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:106]
+ERROR: [VRFC 10-1471] type error near slv_imm_s ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:115]
+ERROR: [VRFC 10-1471] type error near slv_imm_s ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:116]
+ERROR: [VRFC 10-1471] type error near slv_imm_s ; current type std_logic_vector; expected type bit_vector [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/rtl/sim/cpu/tb_cpu.vhd:117]
+INFO: [#UNDEF] Sorry, too many errors..

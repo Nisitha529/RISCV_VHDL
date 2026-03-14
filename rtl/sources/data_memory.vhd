@@ -18,7 +18,7 @@ entity data_memory is
     access_width  : in  MEM_ACCESS_WIDTH_t;                        -- Access size : byte/ halfword/ word
 
     wdata         : in  std_logic_vector (WORD_SIZE - 1 downto 0); -- Write data (Aligned to LSB)
-    rdata         : out std_logic_vector (WORD_SIZE - 1 downto 0); -- Read data
+    rdata         : out std_logic_vector (WORD_SIZE - 1 downto 0)  -- Read data
   );
 
 end entity;
@@ -36,6 +36,8 @@ architecture Behavioral of data_memory is
   signal rom_access_en       : std_logic;
   signal ram_access_en       : std_logic;
 
+begin
+
   -- Debugging only
   -- Would print the accessed address in each cycle.
   -- synthesis translate_off
@@ -50,8 +52,8 @@ architecture Behavioral of data_memory is
 
   -- Address decoding and relative address calculation
 
-  addr_relative <= std_logic_vector(unsigned(addr) - to_unsigned(DATA_RAM_BASE_ADDRESS, addr'length)) when (unsinged (addr) >= DATA_RAM_BASE_ADDRESS) and (unsinged (addr) < DATA_RAM_BASE_ADDRESS + DATA_RAM_MEMORY_SIZE_BYTES) else -- RAM region selection
-                   std_logic_vector(unsigned(addr) - to_unsigned(DATA_ROM_BASE_ADDRESS, addr'length)) when (unsigned (addr) >= DATA_ROM_BASE_ADDRESS) and (unsinged (addr) < DATA_ROM_BASE_ADDRESS + DATA_ROM_MEMORY_SIZE_BYTES) else -- ROM region selection
+  addr_relative <= std_logic_vector(unsigned(addr) - to_unsigned(DATA_RAM_BASE_ADDRESS, addr'length)) when (unsigned (addr) >= DATA_RAM_BASE_ADDRESS) and (unsigned (addr) < DATA_RAM_BASE_ADDRESS + DATA_RAM_MEMORY_SIZE_BYTES) else -- RAM region selection
+                   std_logic_vector(unsigned(addr) - to_unsigned(DATA_ROM_BASE_ADDRESS, addr'length)) when (unsigned (addr) >= DATA_ROM_BASE_ADDRESS) and (unsigned (addr) < DATA_ROM_BASE_ADDRESS + DATA_ROM_MEMORY_SIZE_BYTES) else -- ROM region selection
                    (others => '0');
 
   -- Region specific access enables handling
@@ -90,7 +92,7 @@ architecture Behavioral of data_memory is
 
   -- Final read data selection
   rdata <= data_out_rom_signal when rom_access_en = '1' else 
-           data_out_rom_signal when ram_access_en = '1' else 
+           data_out_ram_signal when ram_access_en = '1' else 
            (others => '1');
 
 end Behavioral;

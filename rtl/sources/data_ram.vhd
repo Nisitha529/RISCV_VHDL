@@ -23,7 +23,7 @@ entity data_ram is
 
 end data_ram;
 
-architecture Behavioral of data_rem is
+architecture Behavioral of data_ram is
   
   -- RAM initialization
   signal memory         : DATA_RAM_MEMORY_ARRAY_t;
@@ -39,7 +39,7 @@ architecture Behavioral of data_rem is
 begin
   
   word_index     <= to_integer (unsigned(addr(31 downto 2)));         -- Dividing the address by 4
-  halfword_index <= to_integer (unsinged(addr(1 downto 0) and "10")); -- Would yield 0 for byte addresses 0 and 1, and 2 for addresses 2, and 3.
+  halfword_index <= to_integer (unsigned(addr(1 downto 0) and "10")); -- Would yield 0 for byte addresses 0 and 1, and 2 for addresses 2, and 3.
   byte_index     <= to_integer (unsigned(addr(1 downto 0)));          -- Indexing the two low bits.
 
   -- Access enable generation
@@ -64,7 +64,7 @@ begin
   process (clk) begin
 
     if rising_edge (clk) then
-      if (access_enable = '1' and we '1') then
+      if access_enable = '1' and we = '1' then
         case access_width is
           when MEM_ACCESS_WIDTH_16 => memory(word_index)(8 * halfword_index + 16 - 1 downto 8 * halfword_index) <= di(15 downto 0); -- Halfword write to correct halfword slot.
        
