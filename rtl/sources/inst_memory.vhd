@@ -10,6 +10,7 @@ entity inst_memory is
   port (
     en   : in  std_logic;                                 -- Enables the reading.
     addr : in  std_logic_vector (WORD_SIZE - 1 downto 0); -- Byte address
+    
     data : out std_logic_vector (WORD_SIZE - 1 downto 0)  -- Instruction output
   );
 
