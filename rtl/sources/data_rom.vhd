@@ -12,6 +12,7 @@ entity data_rom is
     en           : in  std_logic;                                 -- Global enable
     addr         : in  std_logic_vector (WORD_SIZE - 1 downto 0); -- Byte  address
     access_width : in  MEM_ACCESS_WIDTH_t;                        -- Access size 
+    
     dout         : out std_logic_vector (WORD_SIZE - 1 downto 0)  -- Read data
   );
 
