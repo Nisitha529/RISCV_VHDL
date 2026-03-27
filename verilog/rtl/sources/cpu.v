@@ -1,7 +1,7 @@
 `include "cpu_defines.vh"
 `include "memory_defines.vh"
 
-module cpu_top (
+module cpu (
   input  wire          clk,
   input  wire          resetn,
 
@@ -18,10 +18,10 @@ module cpu_top (
   output wire          dmem_write_enable,
   output wire [1 : 0]  dmem_access_width,
   output wire [31 : 0] dmem_wdata,
-  input  wire [31 : 0] dmem_rdata,
+  input  wire [31 : 0] dmem_rdata
   
   // Debug
-  output wire [31 : 0] trace_regs [0 : 31]
+  // output wire [31 : 0] trace_regs [0 : 31]
 );
 
   wire [31 : 0] instruction;
@@ -36,10 +36,10 @@ module cpu_top (
 
   wire [31 : 0] rs1_data; 
   wire [31 : 0] rs2_data; 
-  wire [31 : 0] rd_data;
+  reg  [31 : 0] rd_data;
   wire [31 : 0] alu_result;
-  wire [31 : 0] pc; 
-	wire [31 : 0] pc_next; 
+  reg  [31 : 0] pc; 
+	reg  [31 : 0] pc_next; 
 	wire [31 : 0] pc_4; 
 	wire [31 : 0] pc_imm;
 
@@ -53,10 +53,10 @@ module cpu_top (
   wire [2 : 0]  rd_data_src;
   wire [3 : 0]  aluop;
   wire [1 : 0]  mem_access_width;
-  wire [1 : 0]  pc_next_sel;
+  reg  [1 : 0]  pc_next_sel;
 
   wire          enable;
-  wire [31 : 0] mem_data;
+  reg  [31 : 0] mem_data;
 
   // Decoder
   decode decode_inst (
@@ -111,9 +111,9 @@ module cpu_top (
     .rd_data          (rd_data),
 
     .rs1_data         (rs1_data),
-    .rs2_data         (rs2_data),
+    .rs2_data         (rs2_data)
 
-    .regs             (trace_regs)
+    // .regs             (trace_regs)
   );
 
   // ALU

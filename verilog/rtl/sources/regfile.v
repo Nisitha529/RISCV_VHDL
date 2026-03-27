@@ -14,8 +14,8 @@ module regfile (
   input  wire [`WORD_SIZE - 1 : 0] rd_data,
 
   output wire [`WORD_SIZE - 1 : 0] rs1_data,
-  output wire [`WORD_SIZE - 1 : 0] rs2_data,
-  output reg  [`WORD_SIZE - 1 : 0] regs [0 : 31]   // Only for debugging purposes
+  output wire [`WORD_SIZE - 1 : 0] rs2_data
+  // output reg  [`WORD_SIZE - 1 : 0] regs [0 : 31]   // Only for debugging purposes
 );
 
 // Register array (initialised to 0)

@@ -6,7 +6,7 @@ module alu (
   input  wire [`WORD_SIZE - 1 : 0] op2,
   input  wire [3 : 0]              aluop,
   
-	output reg  [`WORD_SIZE - 1 : 0] result
+  output reg  [`WORD_SIZE - 1 : 0] result
 );
 
   wire [4:0] shamt = op2[4:0];

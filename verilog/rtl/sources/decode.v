@@ -9,7 +9,7 @@ module decode (
 
   output wire [4 : 0]              rd,
 
-  output wire [`WORD_SIZE - 1 : 0] imm,
+  output reg  [`WORD_SIZE - 1 : 0] imm,
 
   output wire [6 : 0]              opcode,
   output wire [2 : 0]              funct3,

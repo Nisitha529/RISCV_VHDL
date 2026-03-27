@@ -1,0 +1,20 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/alu.v" \
+"../../../../../../verilog/rtl/sources/control_unit.v" \
+"../../../../../../verilog/rtl/sources/cpu.v" \
+"../../../../../../verilog/rtl/sources/data_memory.v" \
+"../../../../../../verilog/rtl/sources/data_ram.v" \
+"../../../../../../verilog/rtl/sources/data_rom.v" \
+"../../../../../../verilog/rtl/sources/decode.v" \
+"../../../../../../verilog/rtl/sources/inst_memory.v" \
+"../../../../../../verilog/rtl/sources/regfile.v" \
+
+sv xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sim/cpu/tb_cpu.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

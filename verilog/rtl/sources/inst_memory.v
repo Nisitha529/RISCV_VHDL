@@ -13,9 +13,11 @@ reg [`WORD_SIZE - 1 : 0] mem [0 : `INSTRUCTION_MEMORY_SIZE_WORDS - 1];
 integer i;
 
 initial begin
-  for (i = 0; i < `INSTRUCTION_MEMORY_SIZE_WORDS; i = i + 1) begin
-    mem[i] = 32'h00000013;
-  end
+    $readmemh("/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/program.hex", mem);
+    // Fill any remaining words with NOP if the file is shorter
+    for (i = 0; i < `INSTRUCTION_MEMORY_SIZE_WORDS; i = i + 1) begin
+        if (mem[i] === 32'hx) mem[i] = 32'h00000013;
+    end
 end
 
 wire word_index    = addr[31 : 2];
