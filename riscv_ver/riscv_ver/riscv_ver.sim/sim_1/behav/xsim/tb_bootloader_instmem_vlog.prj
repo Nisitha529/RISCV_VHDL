@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/inst_memory.v" \
+
+sv xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/bootloader.sv" \
+"../../../../../../verilog/rtl/sim/bootloader/tb_bootloader_instmem.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

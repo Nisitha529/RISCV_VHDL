@@ -1,18 +1,25 @@
 `ifndef CPU_DEFINES_VH
 `define CPU_DEFINES_VH
 
+`define WORD_SIZE                32
+`define REG_COUNT                32
+`define REG_ADDR_WIDTH           5
+
+// NOP instruction
+`define INSTR_NOP                32'h00000013
+
 // ALU operation codes 
 `define ALU_OP_ADD               4'd0
-`define ALU_OP_PASS              4'd1
-`define ALU_OP_SUB               4'd2
-`define ALU_OP_AND               4'd3
-`define ALU_OP_OR                4'd4
-`define ALU_OP_XOR               4'd5
-`define ALU_OP_SLL               4'd6
-`define ALU_OP_SRL               4'd7
-`define ALU_OP_SRA               4'd8
-`define ALU_OP_SLT               4'd9
-`define ALU_OP_SLTU              4'd10
+`define ALU_OP_SUB               4'd1
+`define ALU_OP_SLT               4'd2
+`define ALU_OP_SLTU              4'd3
+`define ALU_OP_AND               4'd4
+`define ALU_OP_OR                4'd5
+`define ALU_OP_XOR               4'd6
+`define ALU_OP_SLL               4'd7
+`define ALU_OP_SRL               4'd8
+`define ALU_OP_SRA               4'd9
+`define ALU_OP_PASS              4'd10
 
 // Opcodes 
 `define INSTR_OP_LUI             7'b0110111

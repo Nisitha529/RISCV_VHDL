@@ -1,0 +1,13 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+TEST 1: valid load
+PASS: addr=00000000 = ddccbbaa
+PASS: addr=00000004 = 44332211
+TEST 2: overwrite
+PASS: addr=00000000 = 12345678
+TEST 3: invalid length
+FAIL: addr=00000000 expected=00000013 got=12345678
+TESTS FAILED: 1 errors
+Fatal: 
+Time: 486 ns  Iteration: 0  Process: /tb_bootloader_instmem/Initial110_6  Scope: tb_bootloader_instmem  File: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sim/bootloader/tb_bootloader_instmem.sv Line: 173
+$finish called at time : 486 ns : File "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sim/bootloader/tb_bootloader_instmem.sv" Line 173

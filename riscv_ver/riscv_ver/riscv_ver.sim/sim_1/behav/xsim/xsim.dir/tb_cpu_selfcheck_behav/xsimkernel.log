@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_cpu_selfcheck_behav/xsimk -simmode gui -wdb tb_cpu_selfcheck_behav.wdb -simrunnum 0 -socket 50995
+Design successfully loaded
+Design Loading Memory Usage: 33464 KB (Peak: 33976 KB)
+Design Loading CPU Usage: 10 ms

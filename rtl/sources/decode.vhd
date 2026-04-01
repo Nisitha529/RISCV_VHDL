@@ -70,8 +70,8 @@ begin
 
   -- I-type instr
 
-  imm_i (10 downto 0)  <= instr (30 downto 20);
-  imm_i (31 downto 11) <= (others => instr (31));  -- Sign extension
+  imm_i (11 downto 0)  <= instr (31 downto 20);
+  imm_i (31 downto 12) <= (others => instr (31));  -- Sign extension
 
   -- B-type instr
 
