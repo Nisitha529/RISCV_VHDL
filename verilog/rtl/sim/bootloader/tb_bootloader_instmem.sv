@@ -55,9 +55,11 @@ module tb_bootloader_instmem ();
 
   inst_memory imem (
     .clk            (clk),
+    .rst_n          (rst_n),
+    
     .en             (imem_en),
-
     .addr           (imem_addr),
+    
     .data           (imem_data),
 
     .load_we        (load_valid),
@@ -66,15 +68,15 @@ module tb_bootloader_instmem ();
   );
 
   task reset(); 
-	  begin
+	begin
       rst_n         = 0;
       uart_rx_valid = 0;
       uart_rx_data  = 0;
       imem_en       = 0;
     
-		  repeat (3) @(posedge clk);
+      repeat (3) @(posedge clk);
     
-		  rst_n         = 1;
+	  rst_n         = 1;
       @(posedge clk);
     end
   endtask

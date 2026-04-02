@@ -2,6 +2,7 @@
 
 module inst_memory (
   input                            clk,
+  input                            rst_n,
   
   input  wire                      en,
   input  wire [`WORD_SIZE - 1 : 0] addr,
@@ -26,7 +27,7 @@ integer i;
         if (mem[i] === 32'hx) mem[i] = 32'h00000013;
     end
   end
- `endif
+`endif
 
   wire [`WORD_SIZE - 3 : 0] word_index    = addr[31 : 2];
   wire [`WORD_SIZE - 3 : 0] load_index    = load_addr[31 : 2];
@@ -34,11 +35,23 @@ integer i;
   wire                      access_enable = en && (word_index < `INSTRUCTION_MEMORY_SIZE_WORDS) && (addr[1 : 0] == 2'b00);
   wire                      load_valid    = load_we && (load_index < `INSTRUCTION_MEMORY_SIZE_WORDS) && (load_addr[1 : 0] == 2'b00);
 
-  always @ (posedge clk) begin
-    if (load_valid) begin
-      mem[load_index] <= load_data;
+  `ifndef INIT_FROM_HEX
+    always @ (posedge clk or negedge rst_n) begin
+      if (!rst_n) begin
+        for (i = 0; i < `INSTRUCTION_MEMORY_SIZE_WORDS; i = i + 1) begin
+          mem[i]        <= 32'h00000013;
+        end
+      end else if (load_valid) begin
+        mem[load_index] <= load_data;
+      end
     end
-  end
+  `else
+    always @ (posedge clk) begin
+      if (load_valid) begin
+        mem[load_index] <= load_data;
+      end
+    end
+  `endif
 
   always @(*) begin
     if (access_enable) begin
