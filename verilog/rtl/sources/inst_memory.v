@@ -22,6 +22,7 @@ integer i;
 `ifdef INIT_FROM_HEX
   initial begin
     $readmemh("/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/program.hex", mem);
+    $display("IMEM[0]=%h", mem[0]);
     // Fill any remaining words with NOP if the file is shorter
     for (i = 0; i < `INSTRUCTION_MEMORY_SIZE_WORDS; i = i + 1) begin
         if (mem[i] === 32'hx) mem[i] = 32'h00000013;

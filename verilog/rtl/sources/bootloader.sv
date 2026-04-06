@@ -35,8 +35,8 @@ module bootloader #(
   //   - length byte > MEM_BYTES
   //   - any unexpected behavior after error
 
-//  localparam int ADDR_W    = (MEM_BYTES <= 1) ? 1 : $clog2(MEM_BYTES);
-//  localparam int COUNT_W   = ADDR_W + 1;
+  //  localparam int ADDR_W    = (MEM_BYTES <= 1) ? 1 : $clog2(MEM_BYTES);
+  //  localparam int COUNT_W   = ADDR_W + 1;
 
   typedef enum logic [1 : 0] {
     BL_WAIT_LEN,
@@ -47,11 +47,11 @@ module bootloader #(
 
   bl_state_t state;
 
-//  logic [7:0] program_mem [0:MEM_DEPTH-1];
+  //  logic [7:0] program_mem [0:MEM_DEPTH-1];
 
   logic [COUNT_W - 1 : 0] expected_bytes;
   logic [COUNT_W - 1 : 0] received_bytes;
-//  logic [COUNT_W-1:0] write_ptr;
+  //  logic [COUNT_W-1:0] write_ptr;
    
   logic [1 : 0]           byte_in_word;
   logic [31 : 0]          assembled_word;
@@ -59,13 +59,13 @@ module bootloader #(
 
   integer i;
 
-//  // Flatten unpacked memory array to packed output bus
-//  genvar g;
-//  generate
-//    for (g = 0; g < MEM_DEPTH; g++) begin : gen_flatten
-//      assign program_mem_flat[g*8 +: 8] = program_mem[g];
-//    end
-//  endgenerate
+  //  // Flatten unpacked memory array to packed output bus
+  //  genvar g;
+  //  generate
+  //    for (g = 0; g < MEM_DEPTH; g++) begin : gen_flatten
+  //      assign program_mem_flat[g*8 +: 8] = program_mem[g];
+  //    end
+  //  endgenerate
 
 
   always_comb begin
@@ -76,42 +76,43 @@ module bootloader #(
     bytes_loaded   = received_bytes;          // write_ptr;
   end
 
-  always_ff @(posedge clk) begin
+  always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      state          <= BL_WAIT_LEN;
-      expected_bytes <= '0;
-      received_bytes <= '0;
-      byte_in_word   <= 2'd0;
-      assembled_word <= 32'h00000000;
-      next_word_addr <= 32'h00000000;
+      state                               <= BL_WAIT_LEN;
+      expected_bytes                      <= '0;
+      received_bytes                      <= '0;
+      byte_in_word                        <= 2'd0;
+      assembled_word                      <= 32'h00000000;
+      next_word_addr                      <= 32'h00000000;
 
-      load_valid     <= 1'b0;
-      load_addr      <= 32'h00000000;
-      load_data      <= 32'h00000000;
+      load_valid                          <= 1'b0;
+      load_addr                           <= 32'h00000000;
+      load_data                           <= 32'h00000000;
     end else begin
       // default: pulse load_valid for one cycle only
-      load_valid <= 1'b0;
+      load_valid                          <= 1'b0;
 
       case (state)
       
         BL_WAIT_LEN: begin
           if (uart_rx_valid) begin
             if (uart_rx_data == 8'd0) begin
-              state <= BL_ERROR;
+              state                       <= BL_ERROR;
               
-            end else if (uart_rx_data > MEM_BYTES[7:0]) begin
-              state <= BL_ERROR;
+            end else if (uart_rx_data > MEM_BYTES) begin
+              // compare against full MEM_BYTES, not MEM_BYTES[7:0]
+              state                       <= BL_ERROR;
               
             end else if (uart_rx_data[1:0] != 2'b00) begin
               // must be a whole number of 32-bit instructions
-              state <= BL_ERROR;
+              state                       <= BL_ERROR;
             end else begin
-              expected_bytes <= COUNT_W'(uart_rx_data);
-              received_bytes <= '0;
-              byte_in_word   <= 2'd0;
-              assembled_word <= 32'h00000000;
-              next_word_addr <= 32'h00000000;
-              state          <= BL_LOAD_DATA;
+              expected_bytes              <= COUNT_W'(uart_rx_data);
+              received_bytes              <= '0;
+              byte_in_word                <= 2'd0;
+              assembled_word              <= 32'h00000000;
+              next_word_addr              <= 32'h00000000;
+              state                       <= BL_LOAD_DATA;
             end
           end
         end
@@ -149,16 +150,16 @@ module bootloader #(
 
         // Done: hold until reset
         BL_DONE: begin
-          state <= BL_DONE;
+          state                           <= BL_DONE;
         end
 
         // Error: hold until reset
         BL_ERROR: begin
-          state <= BL_ERROR;
+          state                           <= BL_ERROR;
         end
 
         default: begin
-          state <= BL_ERROR;
+          state                           <= BL_ERROR;
         end
       endcase
     end

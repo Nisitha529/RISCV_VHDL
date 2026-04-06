@@ -1,11 +1,15 @@
 Vivado Simulator 2020.2
 Time resolution is 1 ps
-TEST 1: valid load
-PASS: addr=00000000 = ddccbbaa
-PASS: addr=00000004 = 44332211
-TEST 2: overwrite
-PASS: addr=00000000 = 12345678
-TEST 3: invalid length
-PASS: addr=00000000 = 00000013
-ALL TESTS PASSED
-$finish called at time : 486 ns : File "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sim/bootloader/tb_bootloader_instmem.sv" Line 177
+INFO: sending program header = 32 bytes (8 words total)
+PASS: DUT decoded UART header byte = 20
+PASS: bootload_done asserted
+PASS: bytes_loaded_out = 32
+PASS: cpu_resetn_out released
+PASS: instruction memory contents match UART-loaded program
+PASS: UART TX success byte A5 observed
+PASS: CPU wrote DATA_RAM[0] = 12
+PASS: CPU register results matched
+==============================================
+PASS: top_soc_uart_boot self-checking test passed
+==============================================
+$finish called at time : 32935 ns : File "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sim/uart/tb_top_soc_uart_boot.sv" Line 395

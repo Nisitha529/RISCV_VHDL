@@ -1,0 +1,24 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/alu.v" \
+"../../../../../../verilog/rtl/sources/control_unit.v" \
+"../../../../../../verilog/rtl/sources/cpu.v" \
+"../../../../../../verilog/rtl/sources/data_memory.v" \
+"../../../../../../verilog/rtl/sources/data_ram.v" \
+"../../../../../../verilog/rtl/sources/data_rom.v" \
+"../../../../../../verilog/rtl/sources/decode.v" \
+"../../../../../../verilog/rtl/sources/inst_memory.v" \
+"../../../../../../verilog/rtl/sources/regfile.v" \
+"../../../../../../verilog/rtl/sources/uart_rx.v" \
+"../../../../../../verilog/rtl/sources/uart_tx.v" \
+
+sv xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/bootloader.sv" \
+"../../../../../../verilog/rtl/sources/top_soc_uart_boot.sv" \
+"../../../../../../verilog/rtl/sim/uart/tb_top_soc_uart_boot.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
