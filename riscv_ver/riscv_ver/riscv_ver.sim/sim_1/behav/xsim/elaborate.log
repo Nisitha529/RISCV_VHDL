@@ -1,52 +1,16 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: /tools/Xilinx/Vivado/2020.2/bin/unwrapped/lnx64.o/xelab -wto 4b767ca125c04c14b86809d9f248ed5b --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_top_soc_uart_boot_behav xil_defaultlib.tb_top_soc_uart_boot xil_defaultlib.glbl -log elaborate.log 
+Running: /tools/Xilinx/Vivado/2020.2/bin/unwrapped/lnx64.o/xelab -wto 4b767ca125c04c14b86809d9f248ed5b --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_result_writer_behav xil_defaultlib.tb_result_writer xil_defaultlib.glbl -log elaborate.log 
 Using 8 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
 Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v" Line 1. Module uart_rx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv" Line 1. Module bootloader(MEM_BYTES=1540) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/inst_memory.v" Line 3. Module inst_memory doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/cpu.v" Line 4. Module cpu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/decode.v" Line 4. Module decode doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/control_unit.v" Line 4. Module control_unit doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/regfile.v" Line 4. Module regfile doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/alu.v" Line 4. Module alu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_memory.v" Line 3. Module data_memory doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_ram.v" Line 3. Module data_ram doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_rom.v" Line 3. Module data_rom doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_tx.v" Line 1. Module uart_tx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v" Line 1. Module uart_rx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v" Line 1. Module uart_rx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv" Line 1. Module bootloader(MEM_BYTES=1540) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/inst_memory.v" Line 3. Module inst_memory doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/cpu.v" Line 4. Module cpu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/decode.v" Line 4. Module decode doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/control_unit.v" Line 4. Module control_unit doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/regfile.v" Line 4. Module regfile doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/alu.v" Line 4. Module alu doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_memory.v" Line 3. Module data_memory doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_ram.v" Line 3. Module data_ram doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/data_rom.v" Line 3. Module data_rom doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_tx.v" Line 1. Module uart_tx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v" Line 1. Module uart_rx(CLKS_PER_BIT=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/result_writer.sv" Line 1. Module result_writer_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/result_writer.sv" Line 1. Module result_writer_default doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.uart_rx(CLKS_PER_BIT=8)
-Compiling module xil_defaultlib.bootloader(MEM_BYTES=1540)
-Compiling module xil_defaultlib.inst_memory
-Compiling module xil_defaultlib.decode
-Compiling module xil_defaultlib.control_unit
-Compiling module xil_defaultlib.regfile
-Compiling module xil_defaultlib.alu
-Compiling module xil_defaultlib.cpu
-Compiling module xil_defaultlib.data_ram
-Compiling module xil_defaultlib.data_rom
-Compiling module xil_defaultlib.data_memory
-Compiling module xil_defaultlib.uart_tx(CLKS_PER_BIT=8)
-Compiling module xil_defaultlib.top_soc_uart_boot
-Compiling module xil_defaultlib.tb_top_soc_uart_boot
+Compiling module xil_defaultlib.result_writer_default
+Compiling module xil_defaultlib.tb_result_writer
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_top_soc_uart_boot_behav
+Built simulation snapshot tb_result_writer_behav
