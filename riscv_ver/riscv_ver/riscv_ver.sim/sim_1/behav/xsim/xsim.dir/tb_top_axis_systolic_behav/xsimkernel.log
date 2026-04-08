@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_top_axis_systolic_behav/xsimk -simmode gui -wdb tb_top_axis_systolic_behav.wdb -simrunnum 0 -socket 43257
+Design successfully loaded
+Design Loading Memory Usage: 33420 KB (Peak: 33928 KB)
+Design Loading CPU Usage: 10 ms

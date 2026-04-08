@@ -17,21 +17,26 @@ module block #(
 
   reg        [2*DATA_WIDTH-1:0] mult_reg;
 
-  always @(posedge clk) begin
-    if (!rst_n || rst_flush) begin
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n ) begin
       output_south   <= {DATA_WIDTH{1'b0}};
       output_east    <= {DATA_WIDTH{1'b0}};
       result         <= {2*DATA_WIDTH{1'b0}};
       mult_reg       <= {2*DATA_WIDTH{1'b0}};
+    end else if (rst_flush) begin
+//      output_south   <= {DATA_WIDTH{1'b0}};
+//      output_east    <= {DATA_WIDTH{1'b0}};
+      result         <= {2*DATA_WIDTH{1'b0}};
+//      mult_reg       <= {2*DATA_WIDTH{1'b0}};
     end else begin
-//      if (valid) begin
-        output_south <= input_north;
-        output_east  <= input_west;
+      output_south   <= input_north;
+      output_east    <= input_west;
+      
+      if (valid) begin        
+//        mult_reg     <= input_north * input_west;
         
-        mult_reg     <= input_north * input_west;
-        
-        result       <= result + mult_reg;
-//      end
+        result       <= result + input_north * input_west;
+      end 
     end
   end
     

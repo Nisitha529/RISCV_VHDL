@@ -2,3 +2,6 @@ Running: xsim.dir/tb_result_writer_behav/xsimk -simmode gui -wdb tb_result_write
 Design successfully loaded
 Design Loading Memory Usage: 33304 KB (Peak: 33896 KB)
 Design Loading CPU Usage: 10 ms
+Simulation completed
+Simulation Memory Usage: 115300 KB (Peak: 172572 KB)
+Simulation CPU Usage: 10 ms

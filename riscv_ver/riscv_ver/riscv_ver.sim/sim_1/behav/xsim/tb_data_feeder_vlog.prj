@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../systolic_array/sources/data_feeder.sv" \
+"../../../../../../systolic_array/sim/tb_data_feeder.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

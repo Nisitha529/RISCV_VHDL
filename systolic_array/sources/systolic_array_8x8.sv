@@ -20,8 +20,8 @@ module systolic_array_8x8 # (
   wire [DATA_WIDTH - 1 : 0] south [0 : ARRAY_WIDTH * ARRAY_WIDTH - 1];
   wire [DATA_WIDTH - 1 : 0] east  [0 : ARRAY_WIDTH * ARRAY_WIDTH - 1];
 
-  // PE Grid
-  genvar i,j;
+  genvar i;
+  genvar j;
 
   generate
     for (i = 0; i < ARRAY_WIDTH; i = i + 1) begin : ROW

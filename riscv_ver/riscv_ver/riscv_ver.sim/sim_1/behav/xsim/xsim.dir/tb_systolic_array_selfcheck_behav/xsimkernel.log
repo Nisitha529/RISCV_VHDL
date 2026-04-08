@@ -2,3 +2,6 @@ Running: xsim.dir/tb_systolic_array_selfcheck_behav/xsimk -simmode gui -wdb tb_s
 Design successfully loaded
 Design Loading Memory Usage: 33788 KB (Peak: 33952 KB)
 Design Loading CPU Usage: 10 ms
+Simulation completed
+Simulation Memory Usage: 115784 KB (Peak: 173056 KB)
+Simulation CPU Usage: 30 ms
