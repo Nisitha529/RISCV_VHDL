@@ -1,0 +1,881 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Apr  9 01:23:22 2026
+# Process ID: 220456
+# Current directory: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.runs/synth_1
+# Command line: vivado -log top_soc_matmul.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_soc_matmul.tcl
+# Log file: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.runs/synth_1/top_soc_matmul.vds
+# Journal file: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source top_soc_matmul.tcl -notrace
+Command: synth_design -top top_soc_matmul -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 220468
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 2335.582 ; gain = 0.000 ; free physical = 227 ; free virtual = 7225
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top_soc_matmul' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_soc_matmul.sv:5]
+	Parameter CLKS_PER_BIT bound to: 8 - type: integer 
+	Parameter ACCEL_RAM_ADDR_WIDTH bound to: 10 - type: integer 
+	Parameter ACCEL_CFG_BASE bound to: 50331648 - type: integer 
+	Parameter ACCEL_CFG_SIZE_BYTES bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v:1]
+	Parameter CLKS_PER_BIT bound to: 8 - type: integer 
+	Parameter S_IDLE bound to: 3'b000 
+	Parameter S_RX_START_BIT bound to: 3'b001 
+	Parameter S_RX_DATA_BITS bound to: 3'b010 
+	Parameter S_RX_STOP_BIT bound to: 3'b011 
+	Parameter S_CLEANUP bound to: 3'b100 
+	Parameter CLK_CNT_WIDTH bound to: 3 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (1#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/uart_rx.v:1]
+INFO: [Synth 8-6157] synthesizing module 'bootloader' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv:1]
+	Parameter MEM_BYTES bound to: 32'sb00000000000000000000011000000100 
+	Parameter ADDR_W bound to: 32'sb00000000000000000000000000001011 
+	Parameter COUNT_W bound to: 32'sb00000000000000000000000000001100 
+INFO: [Synth 8-226] default block is never used [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv:95]
+INFO: [Synth 8-6155] done synthesizing module 'bootloader' (2#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'inst_memory' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/inst_memory.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'inst_memory' (3#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/inst_memory.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/cpu.v:4]
+INFO: [Synth 8-6157] synthesizing module 'decode' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/decode.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'decode' (4#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/decode.v:4]
+INFO: [Synth 8-6157] synthesizing module 'control_unit' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/control_unit.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'control_unit' (5#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/control_unit.v:4]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/regfile.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (6#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/regfile.v:4]
+INFO: [Synth 8-6157] synthesizing module 'alu' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/alu.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (7#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/alu.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'cpu' (8#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/cpu.v:4]
+INFO: [Synth 8-6157] synthesizing module 'shared_data_ram_accel' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:4]
+	Parameter ADDR_WIDTH bound to: 10 - type: integer 
+	Parameter WORDS bound to: 1024 - type: integer 
+INFO: [Synth 8-226] default block is never used [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:73]
+INFO: [Synth 8-6155] done synthesizing module 'shared_data_ram_accel' (9#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'top_matmul_accel' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_matmul_accel.sv:3]
+	Parameter N bound to: 4 - type: integer 
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter ADDR_WIDTH bound to: 10 - type: integer 
+	Parameter DRAIN bound to: 10 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'data_feeder' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:3]
+	Parameter N bound to: 4 - type: integer 
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter LAST_T bound to: 10 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'data_feeder' (10#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'systolic_array_8x8' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/systolic_array_8x8.sv:3]
+	Parameter ARRAY_WIDTH bound to: 4 - type: integer 
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'block' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:2]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'block' (11#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'systolic_array_8x8' (12#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/systolic_array_8x8.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'top_matmul_accel' (13#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_matmul_accel.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'top_soc_matmul' (14#1) [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_soc_matmul.sv:5]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 3831.488 ; gain = 1495.906 ; free physical = 337 ; free virtual = 6320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:11 ; elapsed = 00:01:16 . Memory (MB): peak = 3831.488 ; gain = 1495.906 ; free physical = 313 ; free virtual = 6410
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:11 ; elapsed = 00:01:16 . Memory (MB): peak = 3851.414 ; gain = 1515.832 ; free physical = 313 ; free virtual = 6410
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Synth 8-802] inferred FSM for state register 'r_sm_main_reg' in module 'uart_rx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'bootloader'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'top_matmul_accel'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                            00001 |                              000
+          S_RX_START_BIT |                            00010 |                              001
+          S_RX_DATA_BITS |                            00100 |                              010
+           S_RX_STOP_BIT |                            01000 |                              011
+               S_CLEANUP |                            10000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_sm_main_reg' using encoding 'one-hot' in module 'uart_rx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+             BL_WAIT_LEN |                               00 |                               00
+                BL_ERROR |                               01 |                               11
+            BL_LOAD_DATA |                               10 |                               01
+                 BL_DONE |                               11 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'bootloader'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                      00000000001 |                             0000
+              READ_A_REQ |                      00000000010 |                             0001
+            READ_A_WAIT1 |                      00000000100 |                             0010
+            READ_A_WAIT2 |                      00000001000 |                             0011
+              READ_B_REQ |                      00000010000 |                             0100
+            READ_B_WAIT1 |                      00000100000 |                             0101
+            READ_B_WAIT2 |                      00001000000 |                             0110
+                 COMPUTE |                      00010000000 |                             0111
+                 CAPTURE |                      00100000000 |                             1000
+                 WRITE_C |                      01000000000 |                             1001
+                 DONE_ST |                      10000000000 |                             1010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'top_matmul_accel'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:02:06 ; elapsed = 00:02:20 . Memory (MB): peak = 3855.500 ; gain = 1519.918 ; free physical = 270 ; free virtual = 3557
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 10    
+	   3 Input   32 Bit       Adders := 1     
+	   2 Input   12 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 1     
+	   3 Input   10 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 2     
+	   2 Input    2 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               64 Bit    Registers := 16    
+	               32 Bit    Registers := 497   
+	               12 Bit    Registers := 2     
+	               10 Bit    Registers := 4     
+	                8 Bit    Registers := 2     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 15    
++---Multipliers : 
+	              32x32  Multipliers := 16    
++---Muxes : 
+	   4 Input   64 Bit        Muxes := 5     
+	   2 Input   32 Bit        Muxes := 31    
+	   3 Input   32 Bit        Muxes := 1     
+	   4 Input   32 Bit        Muxes := 17    
+	   6 Input   32 Bit        Muxes := 1     
+	  33 Input   32 Bit        Muxes := 2     
+	  11 Input   32 Bit        Muxes := 1     
+	   5 Input   32 Bit        Muxes := 1     
+	   4 Input   12 Bit        Muxes := 1     
+	  11 Input   11 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 2     
+	  11 Input   10 Bit        Muxes := 2     
+	   3 Input    8 Bit        Muxes := 3     
+	   4 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 1     
+	   5 Input    8 Bit        Muxes := 1     
+	   5 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 1     
+	  10 Input    4 Bit        Muxes := 1     
+	  11 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 4     
+	   5 Input    3 Bit        Muxes := 3     
+	   6 Input    3 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 4     
+	   4 Input    2 Bit        Muxes := 2     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 484   
+	   3 Input    1 Bit        Muxes := 4096  
+	   4 Input    1 Bit        Muxes := 4102  
+	   5 Input    1 Bit        Muxes := 10    
+	  11 Input    1 Bit        Muxes := 44    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:38]
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: Generating DSP result1, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator result1 is absorbed into DSP result1.
+DSP Report: operator result1 is absorbed into DSP result1.
+WARNING: [Synth 8-7129] Port cfg_wdata[31] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[30] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[29] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[28] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[27] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[26] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[25] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[24] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[23] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[22] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[21] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[20] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[19] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[18] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[17] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[16] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[15] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[14] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[13] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[12] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[11] in module top_matmul_accel is either unconnected or has no load
+WARNING: [Synth 8-7129] Port cfg_wdata[10] in module top_matmul_accel is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:03 ; elapsed = 00:03:19 . Memory (MB): peak = 3867.426 ; gain = 1531.844 ; free physical = 576 ; free virtual = 3248
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping	Report (see note below)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|block       | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:08 ; elapsed = 00:03:25 . Memory (MB): peak = 3867.426 ; gain = 1531.844 ; free physical = 341 ; free virtual = 3241
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:23]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/block.v:22]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv:39]
+INFO: [Common 17-14] Message 'Synth 8-5844' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-5844' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:13 ; elapsed = 00:03:30 . Memory (MB): peak = 3875.430 ; gain = 1539.848 ; free physical = 208 ; free virtual = 3121
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:24 ; elapsed = 00:03:42 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 372 ; free virtual = 3284
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:24 ; elapsed = 00:03:42 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 373 ; free virtual = 3285
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][7] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][7]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][7] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][7]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][6] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][6]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][6] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][6]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][5] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][5]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][5] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][5]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][4] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][4]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][4] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][4]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][3] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][3]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][3] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][3]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][2] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][2]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][2] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][2]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][1] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][1]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][1] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][1]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[60][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[60][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[60][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][7] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][7]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][7] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][7]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][6] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][6]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][6] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][6]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][5] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][5]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][5] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][5]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][4] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][4]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][4] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][4]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][3] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][3]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][3] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][3]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][2] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][2]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][2] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][2]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][1] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][1]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][1] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][1]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[875][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[875][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[875][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][7] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][7]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][7] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][7]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][6] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][6]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][6] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][6]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][5] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][5]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][5] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][5]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][4] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][4]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][4] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][4]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][3] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][3]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][3] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][3]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][2] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][2]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][2] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][2]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][1] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][1]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][1] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][1]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[77][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[77][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[77][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][7] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][7]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][7] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][7]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][6] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][6]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][6] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][6]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][5] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][5]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][5] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][5]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][4] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][4]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][4] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][4]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][3] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][3]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][3] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][3]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][2] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][2]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][2] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][2]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][1] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][1]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][1] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][1]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[906][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[906][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[906][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[3]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[3][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[3]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[3][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[2]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[2][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[2]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[2][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[1]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[1][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[1]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[1][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[0]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[0][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[0]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[0][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[7]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[7][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[7]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[7][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[6]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[6][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[6]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[6][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[5]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[5][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[5]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[5][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[4]__0[0] with 1st driver pin 'shared_ram_i/mem_b3_reg[4][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[4]__0[0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[4][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[11][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[11][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[11][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[11][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[10][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[10][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[10][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[10][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[9][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[9][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[9][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[9][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[8][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[8][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[8][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[8][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[15][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[15][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[15][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[15][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[14][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[14][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[14][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[14][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[13][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[13][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[13][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[13][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[12][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[12][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[12][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[12][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[19][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[19][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[19][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[19][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[18][0] with 1st driver pin 'shared_ram_i/mem_b3_reg[18][0]/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:130]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin shared_ram_i/mem_b3[18][0] with 2nd driver pin 'shared_ram_i/mem_b3_reg[18][0]__0/Q' [/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv:97]
+INFO: [Common 17-14] Message 'Synth 8-6859' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|    32768|Failed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:29 ; elapsed = 00:03:47 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 368 ; free virtual = 3281
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:31 ; elapsed = 00:03:49 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 378 ; free virtual = 3291
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:32 ; elapsed = 00:03:50 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 385 ; free virtual = 3298
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:33 ; elapsed = 00:03:51 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 388 ; free virtual = 3302
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |   562|
+|3     |DSP48E1 |    64|
+|4     |LUT1    |   209|
+|5     |LUT2    |  2125|
+|6     |LUT3    |   389|
+|7     |LUT4    |  1336|
+|8     |LUT5    |  1270|
+|9     |LUT6    | 27971|
+|10    |MUXF7   | 10477|
+|11    |MUXF8   |  5152|
+|12    |FDCE    | 16315|
+|13    |FDPE    |  1156|
+|14    |FDRE    | 66669|
+|15    |FDSE    |     1|
+|16    |IBUF    |     3|
+|17    |OBUF    |    38|
++------+--------+------+
+
+Report Instance Areas: 
++------+-------------------------+----------------------+-------+
+|      |Instance                 |Module                |Cells  |
++------+-------------------------+----------------------+-------+
+|1     |top                      |                      | 133738|
+|2     |  accel_i                |top_matmul_accel      |  25688|
+|3     |    array                |systolic_array_8x8    |   4080|
+|4     |      \ROW[0].COL[0].PE  |block                 |    271|
+|5     |      \ROW[0].COL[1].PE  |block_0               |    271|
+|6     |      \ROW[0].COL[2].PE  |block_1               |    271|
+|7     |      \ROW[0].COL[3].PE  |block_2               |    239|
+|8     |      \ROW[1].COL[0].PE  |block_3               |    271|
+|9     |      \ROW[1].COL[1].PE  |block_4               |    271|
+|10    |      \ROW[1].COL[2].PE  |block_5               |    271|
+|11    |      \ROW[1].COL[3].PE  |block_6               |    239|
+|12    |      \ROW[2].COL[0].PE  |block_7               |    271|
+|13    |      \ROW[2].COL[1].PE  |block_8               |    271|
+|14    |      \ROW[2].COL[2].PE  |block_9               |    271|
+|15    |      \ROW[2].COL[3].PE  |block_10              |    239|
+|16    |      \ROW[3].COL[0].PE  |block_11              |    239|
+|17    |      \ROW[3].COL[1].PE  |block_12              |    239|
+|18    |      \ROW[3].COL[2].PE  |block_13              |    239|
+|19    |      \ROW[3].COL[3].PE  |block_14              |    207|
+|20    |    feeder               |data_feeder           |   1055|
+|21    |  bootloader_i           |bootloader            |    835|
+|22    |  cpu_i                  |cpu                   |  23495|
+|23    |    alu_inst             |alu                   |     67|
+|24    |    regfile_inst         |regfile               |  23276|
+|25    |  imem_i                 |inst_memory           |  18025|
+|26    |  shared_ram_i           |shared_data_ram_accel |  65568|
+|27    |  uart_rx_i              |uart_rx               |     65|
++------+-------------------------+----------------------+-------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:33 ; elapsed = 00:03:51 . Memory (MB): peak = 3925.766 ; gain = 1590.184 ; free physical = 388 ; free virtual = 3302
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 65536 critical warnings and 22 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:36 ; elapsed = 00:03:56 . Memory (MB): peak = 3929.676 ; gain = 1594.094 ; free physical = 3614 ; free virtual = 6538
+Synthesis Optimization Complete : Time (s): cpu = 00:03:36 ; elapsed = 00:03:56 . Memory (MB): peak = 3929.676 ; gain = 1594.094 ; free physical = 3629 ; free virtual = 6536
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 3929.676 ; gain = 0.000 ; free physical = 3590 ; free virtual = 6497
+INFO: [Netlist 29-17] Analyzing 16255 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3973.789 ; gain = 0.000 ; free physical = 3518 ; free virtual = 6440
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+167 Infos, 22 Warnings, 100 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:03:56 ; elapsed = 00:04:17 . Memory (MB): peak = 3973.789 ; gain = 1638.301 ; free physical = 3744 ; free virtual = 6666
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Common 17-1381] The checkpoint '/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.runs/synth_1/top_soc_matmul.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:13 ; elapsed = 00:00:12 . Memory (MB): peak = 4005.805 ; gain = 32.016 ; free physical = 3584 ; free virtual = 6677
+INFO: [runtcl-4] Executing : report_utilization -file top_soc_matmul_utilization_synth.rpt -pb top_soc_matmul_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Apr  9 01:27:56 2026...

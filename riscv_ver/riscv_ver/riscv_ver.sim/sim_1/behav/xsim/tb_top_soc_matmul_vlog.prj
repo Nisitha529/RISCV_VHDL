@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/alu.v" \
+"../../../../../../systolic_array/sources/block.v" \
+"../../../../../../verilog/rtl/sources/control_unit.v" \
+"../../../../../../verilog/rtl/sources/cpu.v" \
+"../../../../../../verilog/rtl/sources/decode.v" \
+"../../../../../../verilog/rtl/sources/inst_memory.v" \
+"../../../../../../verilog/rtl/sources/regfile.v" \
+"../../../../../../verilog/rtl/sources/uart_rx.v" \
+
+sv xil_defaultlib  --include "../../../../../../verilog/rtl/sources" \
+"../../../../../../verilog/rtl/sources/bootloader.sv" \
+"../../../../../../systolic_array/sources/data_feeder.sv" \
+"../../../../../../systolic_array/sources/shared_data_ram_accel.sv" \
+"../../../../../../systolic_array/sources/systolic_array_8x8.sv" \
+"../../../../../../systolic_array/sources/top_matmul_accel.sv" \
+"../../../../../../systolic_array/sources/top_soc_matmul.sv" \
+"../../../../../../systolic_array/sim/tb_top_soc_matmul.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

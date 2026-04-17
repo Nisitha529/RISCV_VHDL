@@ -1,8 +1,14 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/verilog/rtl/sources/bootloader.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bootloader
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/data_feeder.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module data_feeder
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/shared_data_ram_accel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module shared_data_ram_accel
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/systolic_array_8x8.sv" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module systolic_array_8x8
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_axis_systolic_array.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module top_axis_systolic
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sim/tb_top_axis_systolic.sv" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_top_axis_systolic
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_matmul_accel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_matmul_accel
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sources/top_soc_matmul.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_soc_matmul
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/systolic_array/sim/tb_top_soc_matmul.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top_soc_matmul

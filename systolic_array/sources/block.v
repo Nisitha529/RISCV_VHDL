@@ -22,20 +22,20 @@ module block #(
       output_south   <= {DATA_WIDTH{1'b0}};
       output_east    <= {DATA_WIDTH{1'b0}};
       result         <= {2*DATA_WIDTH{1'b0}};
-      mult_reg       <= {2*DATA_WIDTH{1'b0}};
+      // mult_reg       <= {2*DATA_WIDTH{1'b0}};
     end else if (rst_flush) begin
 //      output_south   <= {DATA_WIDTH{1'b0}};
 //      output_east    <= {DATA_WIDTH{1'b0}};
       result         <= {2*DATA_WIDTH{1'b0}};
-//      mult_reg       <= {2*DATA_WIDTH{1'b0}};
+      // mult_reg       <= {2*DATA_WIDTH{1'b0}};
     end else begin
       output_south   <= input_north;
       output_east    <= input_west;
       
       if (valid) begin        
-//        mult_reg     <= input_north * input_west;
+        // mult_reg     <= {{DATA_WIDTH{1'b0}}, input_north} * {{DATA_WIDTH{1'b0}}, input_west};
         
-        result       <= result + input_north * input_west;
+        result       <= result + ({{DATA_WIDTH{1'b0}}, input_north} * {{DATA_WIDTH{1'b0}}, input_west});
       end 
     end
   end

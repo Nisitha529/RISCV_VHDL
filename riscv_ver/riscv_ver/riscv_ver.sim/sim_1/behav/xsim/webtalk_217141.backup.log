@@ -2,12 +2,12 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Wed Apr  8 10:04:11 2026
-# Process ID: 98224
+# Start of session at: Thu Apr  9 01:05:49 2026
+# Process ID: 217141
 # Current directory: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim
-# Command line: wbtcv -mode batch -source /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/xsim.dir/tb_data_feeder_behav/webtalk/xsim_webtalk.tcl -notrace
+# Command line: wbtcv -mode batch -source /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/xsim.dir/tb_top_soc_matmul_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/webtalk.jou
 #-----------------------------------------------------------
-source /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/xsim.dir/tb_data_feeder_behav/webtalk/xsim_webtalk.tcl -notrace
-INFO: [Common 17-206] Exiting Webtalk at Wed Apr  8 10:04:12 2026...
+source /media/nisitha/My_Passport/MOODLE/Vivado_projects/RISCV_VHDL/riscv_ver/riscv_ver/riscv_ver.sim/sim_1/behav/xsim/xsim.dir/tb_top_soc_matmul_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Apr  9 01:05:50 2026...
