@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/alu_test.dir/tests/alu_test.cpp.o -o alu_test  libcore.a 

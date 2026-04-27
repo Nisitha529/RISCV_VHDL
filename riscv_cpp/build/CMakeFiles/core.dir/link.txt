@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcore.a CMakeFiles/core.dir/src/core/alu.cpp.o CMakeFiles/core.dir/src/core/regfile.cpp.o CMakeFiles/core.dir/src/core/decoder.cpp.o CMakeFiles/core.dir/src/core/control.cpp.o CMakeFiles/core.dir/src/core/immediate.cpp.o
+/usr/bin/ranlib libcore.a
