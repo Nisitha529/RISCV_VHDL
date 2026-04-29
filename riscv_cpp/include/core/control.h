@@ -6,20 +6,20 @@
 struct ControlSignals {
 
   // ALU
-  ALUOp alu_op;
-  bool alu_use_imm;
+  ALUOp   alu_op;
+  bool    alu_use_imm;
 
   // Register file
-  bool write_rd;
+  bool    write_rd;
 
   // Memory
-  bool write_mem;
-  bool mem_access;
+  bool    write_mem;
+  bool    mem_access;
   uint8_t mem_width;
 
   // Control flow
-  bool jump;
-  bool take_branch;
+  bool    jump;
+  bool    is_branch;
 
   // Writeback
   uint8_t rd_data_src;
@@ -30,5 +30,5 @@ struct ControlSignals {
 
 class Control {
   public:
-    static ControlSignals generate(uint32_t opcode, uint32_t funct3, uint32_t funct7, uint32_t alu_result);
+    static ControlSignals generate(uint32_t opcode, uint32_t funct3, uint32_t funct7);
 };
