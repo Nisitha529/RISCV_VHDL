@@ -1,6 +1,6 @@
 #include "core/decoder.h"
 
-DecodedInst Decoder:: decode (uint32_t inst) {
+DecodedInst Decoder::decode (uint32_t inst) {
   DecodedInst decoder_inst;
 
 	decoder_inst.opcode = inst & 0x7F;

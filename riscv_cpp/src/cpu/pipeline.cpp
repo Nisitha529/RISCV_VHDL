@@ -55,7 +55,7 @@ void Pipeline::tick() {
 
   // IF stage
   if (!hazard.stall) {
-    StageIF::run(pc, imem, redirect, redirect_pc, next_if_id);
+    StageIF::run(pc, imem, redirect, redirect_pc, hazard.stall, next_if_id);
   } else {
     // Freeze IF
     next_if_id = if_id;

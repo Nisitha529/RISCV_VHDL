@@ -11,7 +11,7 @@ ControlSignals Control::generate(uint32_t opcode, uint32_t funct3, uint32_t func
   control_signals.write_rd    = true;
 
   control_signals.write_mem   = false;
-  control_signals.mem_access  = (opcode == 0x03 || opcode == 0x23);
+  // control_signals.mem_access  = (opcode == 0x03 || opcode == 0x23);
 
   control_signals.mem_width   = 32;
 

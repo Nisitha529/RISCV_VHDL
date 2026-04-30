@@ -1,4 +1,5 @@
 #include "cpu/stage_ex.h"
+#include "cpu/forwarding_unit.h"
 
 void StageEX::run(const ID_EX& id_ex, const EX_MEM& ex_mem, const MEM_WB& mem_wb, EX_MEM& next_ex_mem) {
 
@@ -10,9 +11,11 @@ void StageEX::run(const ID_EX& id_ex, const EX_MEM& ex_mem, const MEM_WB& mem_wb
   // Forwarding logic
   auto fwd = ForwardingUnit::resolve (id_ex, ex_mem, mem_wb);
 
+  uint32_t wb_value = (mem_wb.ctrl.rd_data_src == 4) ? mem_wb.mem_data : mem_wb.alu_result;
+
   // Select ALU operands
-  uint32_t opA  = (fwd.forwardA == 1) ? ex_mem.alu_result : (fwd.forwardA == 2) ? mem_wb.alu_result : id_ex.A;
-  uint32_t regB = (fwd.forwardB == 1) ? ex_mem.alu_result : (fwd.forwardB == 2) ? mem_wb.alu_result : id_ex.B;
+  uint32_t opA  = (fwd.forwardA == 1) ? ex_mem.alu_result : (fwd.forwardA == 2) ? wb_value : id_ex.A;
+  uint32_t regB = (fwd.forwardB == 1) ? ex_mem.alu_result : (fwd.forwardB == 2) ? wb_value : id_ex.B;
 
   uint32_t opB  = id_ex.ctrl.alu_use_imm ? id_ex.imm : regB;
   // uint32_t opA = id_ex.A;

@@ -29,8 +29,14 @@ int32_t Immediate::generate(uint32_t instr, ImmType type) {
 
 		}
 
-    case ImmType::S: 
-		  return (int32_t)( ((instr >> 25) << 5) | ((instr >> 7) & 0x1F));
+    case ImmType::S: { 
+		  int32_t imm = (int32_t)( ((instr >> 25) << 5) | ((instr >> 7) & 0x1F));
+
+			if (imm & (1 < 11))
+			  imm |= 0xFFFFF000;
+
+			return imm;
+		}
 
     default:
       return 0;
