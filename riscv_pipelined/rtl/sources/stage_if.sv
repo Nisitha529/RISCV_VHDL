@@ -27,7 +27,7 @@ module stage_if #(
   logic [DATA_WIDTH - 1 : 0] next_pc;
 
   // PC mux
-  pc_mux pc_mux_inst (
+  pc_mux pc_mux_01 (
     .pc          (pc),
 
     .redirect    (redirect),
@@ -37,7 +37,7 @@ module stage_if #(
   );
 
   // PC register
-  pc_reg pc_reg_inst (
+  pc_reg pc_reg_01 (
     .clk         (clk),
     .rst         (rst),
 
