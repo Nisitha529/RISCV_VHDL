@@ -5,10 +5,7 @@ module tb_stage_mem;
   parameter DATA_WIDTH = 32;
   parameter ADDR_WIDTH = 5;
 
-  // --------------------------------------------------
   // DUT inputs
-  // --------------------------------------------------
-
   logic [DATA_WIDTH - 1 : 0] ex_mem_alu_result;
   logic [DATA_WIDTH - 1 : 0] ex_mem_B;
 
@@ -24,10 +21,7 @@ module tb_stage_mem;
 
   logic                      ex_mem_valid;
 
-  // --------------------------------------------------
   // DMEM interface
-  // --------------------------------------------------
-
   logic                      dmem_mem_access;
   logic                      dmem_write_enable;
 
@@ -38,10 +32,7 @@ module tb_stage_mem;
 
   logic [DATA_WIDTH - 1 : 0] dmem_read_data;
 
-  // --------------------------------------------------
   // MEM/WB outputs
-  // --------------------------------------------------
-
   logic [DATA_WIDTH - 1 : 0] mem_wb_alu_result;
   logic [DATA_WIDTH - 1 : 0] mem_wb_mem_data;
 
@@ -53,10 +44,7 @@ module tb_stage_mem;
 
   logic                      mem_wb_valid;
 
-  // --------------------------------------------------
   // DUT
-  // --------------------------------------------------
-
   stage_mem dut (
     .ex_mem_alu_result  (ex_mem_alu_result),
     .ex_mem_B           (ex_mem_B),
@@ -95,10 +83,7 @@ module tb_stage_mem;
     .mem_wb_valid       (mem_wb_valid)
   );
 
-  // --------------------------------------------------
   // Self-check task
-  // --------------------------------------------------
-
   task automatic check_outputs (
     input [31 : 0] expected_alu,
     input [31 : 0] expected_mem,
@@ -146,10 +131,7 @@ module tb_stage_mem;
 
   endtask
 
-  // --------------------------------------------------
   // Test sequence
-  // --------------------------------------------------
-
   initial begin
 
     // Defaults
@@ -170,28 +152,12 @@ module tb_stage_mem;
 
     dmem_read_data     = '0;
 
-    // --------------------------------------------------
     // Invalid bubble
-    // --------------------------------------------------
-
     #1;
 
-    check_outputs(
-      32'd0,
-      32'd0,
+    check_outputs(32'd0, 32'd0, 5'd0, 1'b0, 1'b0, "INVALID BUBBLE");
 
-      5'd0,
-
-      1'b0,
-      1'b0,
-
-      "INVALID BUBBLE"
-    );
-
-    // --------------------------------------------------
     // ALU-only instruction
-    // --------------------------------------------------
-
     ex_mem_valid       = 1'b1;
 
     ex_mem_alu_result  = 32'h12345678;
@@ -204,22 +170,9 @@ module tb_stage_mem;
 
     #1;
 
-    check_outputs(
-      32'h12345678,
-      32'd0,
+    check_outputs(32'h12345678, 32'd0, 5'd3, 1'b1, 1'b1, "ALU ONLY");
 
-      5'd3,
-
-      1'b1,
-      1'b1,
-
-      "ALU ONLY"
-    );
-
-    // --------------------------------------------------
     // LOAD instruction
-    // --------------------------------------------------
-
     ex_mem_mem_access  = 1'b1;
     ex_mem_write_mem   = 1'b0;
 
@@ -229,22 +182,9 @@ module tb_stage_mem;
 
     #1;
 
-    check_outputs(
-      32'h12345678,
-      32'hDEADBEEF,
+    check_outputs(32'h12345678, 32'hDEADBEEF, 5'd8, 1'b1, 1'b1, "LOAD");
 
-      5'd8,
-
-      1'b1,
-      1'b1,
-
-      "LOAD"
-    );
-
-    // --------------------------------------------------
     // STORE instruction
-    // --------------------------------------------------
-
     ex_mem_write_rd    = 1'b0;
 
     ex_mem_write_mem   = 1'b1;
@@ -259,21 +199,13 @@ module tb_stage_mem;
       (dmem_addr         !== 32'h12345678) ||
       (dmem_write_data   !== 32'hCAFEBABE)
     ) begin
-
       $display("[FAIL] STORE INTERFACE");
-
       $finish;
-
     end else begin
-
       $display("[PASS] STORE INTERFACE");
-
     end
 
-    // --------------------------------------------------
     // DONE
-    // --------------------------------------------------
-
     $display("");
     $display("ALL STAGE_MEM TESTS PASSED");
     $display("");

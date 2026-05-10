@@ -2,6 +2,9 @@ module stage_mem #(
   parameter DATA_WIDTH = 32,
   parameter ADDR_WIDTH = 5
 )(
+  input  logic                      clk,
+  input  logic                      rst,
+  
   // EX/MEM pipeline inputs
   input  logic [DATA_WIDTH - 1 : 0] ex_mem_alu_result,
   input  logic [DATA_WIDTH - 1 : 0] ex_mem_B,
@@ -52,39 +55,37 @@ module stage_mem #(
   assign dmem_write_data   = ex_mem_B;
 
   // MEM/WB pipeline generation
-  always_comb begin : mem_wb_comb
-    // Defaults
-    mem_wb_alu_result  = 32'd0;
-    mem_wb_mem_data    = 32'd0;
-
-    mem_wb_rd          = '0;
-
-    mem_wb_write_rd    = 1'b0;
-
-    mem_wb_rd_data_src = 3'd0;
-
-    mem_wb_valid       = 1'b0;
-
-    // Invalid pipeline bubble
-    if (!ex_mem_valid) begin
-      mem_wb_valid     = 1'b0;
+  always_ff @(posedge clk) begin : mem_wb_ff
+    if (rst) begin
+      mem_wb_alu_result    <= '0;
+      mem_wb_mem_data      <= '0;
+      mem_wb_rd            <= '0;
+      mem_wb_write_rd      <= 1'b0;
+      mem_wb_rd_data_src   <= '0;
+      mem_wb_valid         <= 1'b0;
     end else begin
+      // Invalid bubble
+      if (!ex_mem_valid) begin
+        mem_wb_valid       <= 1'b0;
+      end else begin
+        // ALU result
+        mem_wb_alu_result  <= ex_mem_alu_result;
 
-      // ALU result forwarding
-      mem_wb_alu_result  = ex_mem_alu_result;
+        // LOAD data
+        if (ex_mem_mem_access && !ex_mem_write_mem) begin
+          mem_wb_mem_data  <= dmem_read_data;
+        end else begin
+          mem_wb_mem_data  <= '0;
+        end
 
-      // LOAD data
-      if (ex_mem_mem_access && !ex_mem_write_mem) begin
-        mem_wb_mem_data  = dmem_read_data;
+        // Pipeline propagation
+        mem_wb_rd          <= ex_mem_rd;
+        mem_wb_write_rd    <= ex_mem_write_rd;
+        mem_wb_rd_data_src <= ex_mem_rd_data_src;
+        mem_wb_valid       <= 1'b1;
+
       end
-
-      mem_wb_rd          = ex_mem_rd;
-      mem_wb_write_rd    = ex_mem_write_rd;
-      mem_wb_rd_data_src = ex_mem_rd_data_src;
-      mem_wb_valid       = 1'b1;
-
     end
-
   end
 
 endmodule

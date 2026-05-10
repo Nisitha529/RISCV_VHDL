@@ -7,11 +7,16 @@ module imem #(
   output logic [DATA_WIDTH - 1 : 0] instr
 );
 
+  integer i;
   // Instruction memory array
   logic [DATA_WIDTH - 1 : 0] mem [0 : MEM_DEPTH - 1];
 
   // Program loading
   initial begin
+    for (i = 0; i < MEM_DEPTH; i = i + 1) begin
+      mem[i] = 32'h00000013;
+    end
+
     $readmemh(MEM_FILE, mem);
   end
 

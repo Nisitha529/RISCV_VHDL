@@ -2,6 +2,9 @@ module stage_ex #(
   parameter DATA_WIDTH = 32,
   parameter ADDR_WIDTH = 5
 )(
+  input  logic                      clk,
+  input  logic                      rst,
+
   // ID/EX pipeline inputs
   input  logic [DATA_WIDTH - 1 : 0] id_ex_pc,
 
@@ -34,12 +37,12 @@ module stage_ex #(
   input  logic                      id_ex_valid,
 
   // EX/MEM forwarding inputs
-  input  logic                      ex_mem_valid,
-  input  logic                      ex_mem_write_rd,
+  input  logic                      fwd_ex_mem_valid,
+  input  logic                      fwd_ex_mem_write_rd,
 
-  input  logic [ADDR_WIDTH - 1 : 0] ex_mem_rd,
+  input  logic [ADDR_WIDTH - 1 : 0] fwd_ex_mem_rd,
 
-  input  logic [DATA_WIDTH - 1 : 0] ex_mem_alu_result,
+  input  logic [DATA_WIDTH - 1 : 0] fwd_ex_mem_alu_result,
 
   // MEM/WB forwarding inputs
   input  logic                      mem_wb_valid,
@@ -110,10 +113,10 @@ module stage_ex #(
     .id_ex_rs1       (id_ex_rs1),
     .id_ex_rs2       (id_ex_rs2),
 
-    .ex_mem_valid    (ex_mem_valid),
-    .ex_mem_write_rd (ex_mem_write_rd),
+    .ex_mem_valid    (fwd_ex_mem_valid),
+    .ex_mem_write_rd (fwd_ex_mem_write_rd),
 
-    .ex_mem_rd       (ex_mem_rd),
+    .ex_mem_rd       (fwd_ex_mem_rd),
 
     .mem_wb_valid    (mem_wb_valid),
     .mem_wb_write_rd (mem_wb_write_rd),
@@ -136,13 +139,24 @@ module stage_ex #(
   );
 
   // WB value selection
-  assign wb_value = (mem_wb_rd_data_src == 3'd4) ? mem_wb_mem_data : mem_wb_alu_result;
+  always_comb begin
+
+    case (mem_wb_rd_data_src)
+      3'd4:
+        wb_value = mem_wb_mem_data;
+
+      default:
+        wb_value = mem_wb_alu_result;
+
+    endcase
+
+  end
 
   // Forwarded operand A
   always_comb begin : operandA_comb
     case (forward_a)
       2'b00   : opA = id_ex_A;
-      2'b01   : opA = ex_mem_alu_result;
+      2'b01   : opA = fwd_ex_mem_alu_result;
       2'b10   : opA = wb_value;
 
       default : opA = id_ex_A;
@@ -154,7 +168,7 @@ module stage_ex #(
   always_comb begin : operandB_comb
     case (forward_b)
       2'b00   : regB = id_ex_B;
-      2'b01   : regB = ex_mem_alu_result;
+      2'b01   : regB = fwd_ex_mem_alu_result;
       2'b10   : regB = wb_value;
 
       default : regB = id_ex_B;
@@ -205,36 +219,68 @@ module stage_ex #(
   assign branch_target = id_ex_pc + id_ex_imm;
 
   // EX/MEM pipeline outputs
-  always_comb begin : ex_mem_comb
-    ex_mem_pc            = id_ex_pc;
+  always_ff @(posedge clk) begin : ex_mem_ff
+    if (rst) begin
+      ex_mem_pc            <= '0;
 
-    ex_mem_alu_result    = alu_result;
+      ex_mem_alu_result    <= '0;
+      ex_mem_B             <= '0;
 
-    ex_mem_B             = regB;
+      ex_mem_rd            <= '0;
 
-    ex_mem_rd            = id_ex_rd;
+      ex_mem_alu_op        <= '0;
+      ex_mem_alu_use_imm   <= '0;
 
-    ex_mem_alu_op        = id_ex_alu_op;
-    ex_mem_alu_use_imm   = id_ex_alu_use_imm;
+      ex_mem_write_rd      <= '0;
 
-    ex_mem_write_rd      = id_ex_write_rd;
+      ex_mem_write_mem     <= '0;
+      ex_mem_mem_access    <= '0;
+      ex_mem_mem_width     <= '0;
 
-    ex_mem_write_mem     = id_ex_write_mem;
-    ex_mem_mem_access    = id_ex_mem_access;
-    ex_mem_mem_width     = id_ex_mem_width;
+      ex_mem_jump          <= '0;
+      ex_mem_is_branch     <= '0;
 
-    ex_mem_jump          = id_ex_jump;
-    ex_mem_is_branch     = id_ex_is_branch;
+      ex_mem_rd_data_src   <= '0;
 
-    ex_mem_rd_data_src   = id_ex_rd_data_src;
+      ex_mem_imm_type      <= '0;
 
-    ex_mem_imm_type      = id_ex_imm_type;
+      ex_mem_take_branch   <= '0;
 
-    ex_mem_take_branch   = take_branch;
+      ex_mem_branch_target <= '0;
 
-    ex_mem_branch_target = branch_target;
+      ex_mem_valid         <= 1'b0;
 
-    ex_mem_valid         = id_ex_valid;
+    end else begin
+      ex_mem_pc            <= id_ex_pc;
+
+      ex_mem_alu_result    <= alu_result;
+
+      ex_mem_B             <= regB;
+
+      ex_mem_rd            <= id_ex_rd;
+
+      ex_mem_alu_op        <= id_ex_alu_op;
+      ex_mem_alu_use_imm   <= id_ex_alu_use_imm;
+
+      ex_mem_write_rd      <= id_ex_write_rd;
+
+      ex_mem_write_mem     <= id_ex_write_mem;
+      ex_mem_mem_access    <= id_ex_mem_access;
+      ex_mem_mem_width     <= id_ex_mem_width;
+
+      ex_mem_jump          <= id_ex_jump;
+      ex_mem_is_branch     <= id_ex_is_branch;
+
+      ex_mem_rd_data_src   <= id_ex_rd_data_src;
+
+      ex_mem_imm_type      <= id_ex_imm_type;
+
+      ex_mem_take_branch   <= take_branch;
+
+      ex_mem_branch_target <= branch_target;
+
+      ex_mem_valid         <= id_ex_valid;
+    end
   end
 
 endmodule
