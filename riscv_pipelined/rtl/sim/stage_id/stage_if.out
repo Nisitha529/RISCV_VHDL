@@ -1,0 +1,167 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5ee685dce910 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x5ee685dceaa0 .scope module, "stage_if" "stage_if" 3 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 1 "stall";
+    .port_info 3 /INPUT 1 "redirect";
+    .port_info 4 /INPUT 32 "redirect_pc";
+    .port_info 5 /INPUT 32 "instr_in";
+    .port_info 6 /INPUT 1 "instr_valid";
+    .port_info 7 /OUTPUT 32 "imem_addr";
+    .port_info 8 /OUTPUT 1 "instr_addr_valid";
+    .port_info 9 /OUTPUT 32 "if_id_pc";
+    .port_info 10 /OUTPUT 32 "if_id_instr";
+    .port_info 11 /OUTPUT 1 "if_id_valid";
+P_0x5ee685dcec30 .param/l "DATA_WIDTH" 0 3 2, +C4<00000000000000000000000000100000>;
+o0x742a6b898498 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x5ee685dbefb0 .functor OR 1, o0x742a6b898498, L_0x5ee685dec100, C4<0>, C4<0>;
+L_0x5ee685dec2b0 .functor BUFZ 32, v0x5ee685deb030_0, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+v0x5ee685deb360_0 .net *"_ivl_1", 0 0, L_0x5ee685dec100;  1 drivers
+o0x742a6b898198 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5ee685deb440_0 .net "clk", 0 0, o0x742a6b898198;  0 drivers
+v0x5ee685deb500_0 .var "if_id_instr", 31 0;
+v0x5ee685deb5d0_0 .var "if_id_pc", 31 0;
+v0x5ee685deb690_0 .var "if_id_valid", 0 0;
+v0x5ee685deb7a0_0 .net "imem_addr", 31 0, L_0x5ee685dec2b0;  1 drivers
+v0x5ee685deb880_0 .net "instr_addr_valid", 0 0, L_0x5ee685dec320;  1 drivers
+o0x742a6b898438 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x5ee685deb940_0 .net "instr_in", 31 0, o0x742a6b898438;  0 drivers
+o0x742a6b898468 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5ee685deba20_0 .net "instr_valid", 0 0, o0x742a6b898468;  0 drivers
+v0x5ee685debae0_0 .net "next_pc", 31 0, v0x5ee685dbf110_0;  1 drivers
+v0x5ee685debba0_0 .net "pc", 31 0, v0x5ee685deb030_0;  1 drivers
+o0x742a6b898078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5ee685debcb0_0 .net "redirect", 0 0, o0x742a6b898078;  0 drivers
+o0x742a6b8980a8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x5ee685debd50_0 .net "redirect_pc", 31 0, o0x742a6b8980a8;  0 drivers
+o0x742a6b8981c8 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5ee685debdf0_0 .net "rst", 0 0, o0x742a6b8981c8;  0 drivers
+v0x5ee685debe90_0 .net "stall", 0 0, o0x742a6b898498;  0 drivers
+L_0x5ee685dec100 .reduce/nor o0x742a6b898468;
+L_0x5ee685dec320 .reduce/nor o0x742a6b898498;
+S_0x5ee685dd15f0 .scope begin, "if_id_ff" "if_id_ff" 3 60, 3 60 0, S_0x5ee685dceaa0;
+ .timescale 0 0;
+S_0x5ee685dd17d0 .scope module, "pc_mux_01" "pc_mux" 3 33, 4 1 0, S_0x5ee685dceaa0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "pc";
+    .port_info 1 /INPUT 1 "redirect";
+    .port_info 2 /INPUT 32 "redirect_pc";
+    .port_info 3 /OUTPUT 32 "next_pc";
+P_0x5ee685dd4600 .param/l "DATA_WIDTH" 0 4 2, +C4<00000000000000000000000000100000>;
+v0x5ee685dbf110_0 .var "next_pc", 31 0;
+v0x5ee685dea7d0_0 .net "pc", 31 0, v0x5ee685deb030_0;  alias, 1 drivers
+v0x5ee685dea8b0_0 .net "redirect", 0 0, o0x742a6b898078;  alias, 0 drivers
+v0x5ee685dea950_0 .net "redirect_pc", 31 0, o0x742a6b8980a8;  alias, 0 drivers
+E_0x5ee685d948d0 .event edge, v0x5ee685dea8b0_0, v0x5ee685dea950_0, v0x5ee685dea7d0_0;
+S_0x5ee685deaae0 .scope module, "pc_reg_01" "pc_reg" 3 43, 5 1 0, S_0x5ee685dceaa0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 1 "stall";
+    .port_info 3 /INPUT 32 "next_pc";
+    .port_info 4 /OUTPUT 32 "pc";
+P_0x5ee685deacc0 .param/l "DATA_WIDTH" 0 5 2, +C4<00000000000000000000000000100000>;
+v0x5ee685deae60_0 .net "clk", 0 0, o0x742a6b898198;  alias, 0 drivers
+v0x5ee685deaf40_0 .net "next_pc", 31 0, v0x5ee685dbf110_0;  alias, 1 drivers
+v0x5ee685deb030_0 .var "pc", 31 0;
+v0x5ee685deb130_0 .net "rst", 0 0, o0x742a6b8981c8;  alias, 0 drivers
+v0x5ee685deb1d0_0 .net "stall", 0 0, L_0x5ee685dbefb0;  1 drivers
+E_0x5ee685dcd400 .event posedge, v0x5ee685deae60_0;
+    .scope S_0x5ee685dd17d0;
+T_0 ;
+Ewait_0 .event/or E_0x5ee685d948d0, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v0x5ee685dea8b0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %load/vec4 v0x5ee685dea950_0;
+    %store/vec4 v0x5ee685dbf110_0, 0, 32;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x5ee685dea7d0_0;
+    %addi 4, 0, 32;
+    %store/vec4 v0x5ee685dbf110_0, 0, 32;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x5ee685deaae0;
+T_1 ;
+    %wait E_0x5ee685dcd400;
+    %load/vec4 v0x5ee685deb130_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_1.0, 8;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5ee685deb030_0, 0;
+    %jmp T_1.1;
+T_1.0 ;
+    %load/vec4 v0x5ee685deb1d0_0;
+    %nor/r;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_1.2, 8;
+    %load/vec4 v0x5ee685deaf40_0;
+    %assign/vec4 v0x5ee685deb030_0, 0;
+T_1.2 ;
+T_1.1 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x5ee685dceaa0;
+T_2 ;
+    %wait E_0x5ee685dcd400;
+    %fork t_1, S_0x5ee685dd15f0;
+    %jmp t_0;
+    .scope S_0x5ee685dd15f0;
+t_1 ;
+    %load/vec4 v0x5ee685debdf0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_2.0, 8;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5ee685deb5d0_0, 0;
+    %pushi/vec4 0, 0, 32;
+    %assign/vec4 v0x5ee685deb500_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x5ee685deb690_0, 0;
+    %jmp T_2.1;
+T_2.0 ;
+    %load/vec4 v0x5ee685debe90_0;
+    %nor/r;
+    %load/vec4 v0x5ee685deba20_0;
+    %and;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_2.2, 8;
+    %load/vec4 v0x5ee685debba0_0;
+    %assign/vec4 v0x5ee685deb5d0_0, 0;
+    %load/vec4 v0x5ee685deb940_0;
+    %assign/vec4 v0x5ee685deb500_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x5ee685deb690_0, 0;
+    %jmp T_2.3;
+T_2.2 ;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x5ee685deb690_0, 0;
+T_2.3 ;
+T_2.1 ;
+    %end;
+    .scope S_0x5ee685dceaa0;
+t_0 %join;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 6;
+    "N/A";
+    "<interactive>";
+    "-";
+    "../../sources/stage_if.sv";
+    "../../sources/pc_mux.sv";
+    "../../sources/pc_reg.sv";

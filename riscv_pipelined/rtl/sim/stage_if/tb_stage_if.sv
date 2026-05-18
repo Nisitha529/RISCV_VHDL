@@ -15,7 +15,10 @@ module tb_stage_if;
 
   // IMEM interface
   logic [DATA_WIDTH - 1 : 0] instr_in;
+  logic                      instr_valid;
+
   logic [DATA_WIDTH - 1 : 0] imem_addr;
+  logic                      instr_addr_valid;
 
   // IF/ID outputs
   logic [DATA_WIDTH - 1 : 0] if_id_pc;
@@ -25,21 +28,24 @@ module tb_stage_if;
 
   // DUT
   stage_if dut_stage_if (
-    .clk         (clk),
-    .rst         (rst),
+    .clk              (clk),
+    .rst              (rst),
 
-    .stall       (stall),
+    .stall            (stall),
 
-    .redirect    (redirect),
-    .redirect_pc (redirect_pc),
+    .redirect         (redirect),
+    .redirect_pc      (redirect_pc),
 
-    .instr_in    (instr_in),
-    .imem_addr   (imem_addr),
+    .instr_in         (instr_in),
+    .instr_valid      (instr_valid),
 
-    .if_id_pc    (if_id_pc),
-    .if_id_instr (if_id_instr),
+    .imem_addr        (imem_addr),
+    .instr_addr_valid (instr_addr_valid),
 
-    .if_id_valid (if_id_valid)
+    .if_id_pc         (if_id_pc),
+    .if_id_instr      (if_id_instr),
+
+    .if_id_valid      (if_id_valid)
   );
 
   // Clock generation
@@ -49,16 +55,39 @@ module tb_stage_if;
     forever #5 clk = ~clk;
   end
 
-  // Fake instruction memory
-  always_comb begin
-    case (imem_addr)
-      32'd0   : instr_in = 32'h11111111;
-      32'd4   : instr_in = 32'h22222222;
-      32'd8   : instr_in = 32'h33333333;
-      32'd12  : instr_in = 32'h44444444;
-      32'd64  : instr_in = 32'hAAAAAAAA;
-      default : instr_in = 32'hDEADBEEF;
-    endcase
+  logic [31:0] instr_mem [0:31];
+
+  initial begin
+    integer i;
+
+    instr_valid   = 1'b0;
+
+    for (i = 0; i < 32; i = i + 1) begin
+      instr_mem[i] = 32'hDEADBEEF;
+    end
+
+    instr_mem[0]  = 32'h11111111;
+    instr_mem[1]  = 32'h22222222;
+    instr_mem[2]  = 32'h33333333;
+    instr_mem[3]  = 32'h44444444;
+
+    instr_mem[16] = 32'hAAAAAAAA;
+  end
+
+  always_ff @(posedge clk) begin
+    if (rst) begin
+      instr_in    <= 32'd0;
+      instr_valid <= 1'b0;
+
+    end else begin
+      instr_valid <= instr_addr_valid;
+
+      if (instr_addr_valid) begin
+        instr_in  <= instr_mem[imem_addr[31:2]];
+      end
+
+    end
+
   end
 
   task automatic check_if (
@@ -96,7 +125,10 @@ module tb_stage_if;
 
     rst = 1'b0;
 
+    @(posedge clk);
+
     // FETCH @ PC=0
+   @(posedge clk);
    @(posedge clk);
    check_if(32'd0, 32'h11111111, 1'b1, "FETCH PC=0");
 
@@ -111,9 +143,13 @@ module tb_stage_if;
    // STALL
    stall = 1'b1;
    @(posedge clk);
-   check_if(32'd8, 32'h33333333, 1'b1, "STALL HOLD");
+   check_if(32'd8, 32'h33333333, 1'b0, "STALL HOLD");
 
    stall = 1'b0;
+
+   // First cycle after stall: bubble (valid=0)
+   @(posedge clk);
+   check_if(32'd8, 32'h33333333, 1'b0, "BUBBLE AFTER STALL");
 
    // NEXT FETCH
    @(posedge clk);
@@ -125,6 +161,7 @@ module tb_stage_if;
 
    @(posedge clk);  
    redirect = 1'b0;
+   @(posedge clk);
    @(posedge clk);
    check_if(32'd64, 32'hAAAAAAAA, 1'b1, "REDIRECT FETCH");
 
