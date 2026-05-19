@@ -29,7 +29,12 @@ module stage_if #(
   logic [DATA_WIDTH - 1 : 0] pc;
   logic [DATA_WIDTH - 1 : 0] next_pc;
 
+  logic                      fetch_stall;
   logic [DATA_WIDTH - 1 : 0] fetch_pc;
+
+  logic                      pending_valid;
+  logic [DATA_WIDTH - 1 : 0] pending_instr;
+  logic [DATA_WIDTH - 1 : 0] pending_pc;
 
   // PC mux
   pc_mux pc_mux_01 (
@@ -46,7 +51,7 @@ module stage_if #(
     .clk         (clk),
     .rst         (rst),
 
-    .stall       (stall || !instr_valid),
+    .stall       (fetch_stall),
 
     .next_pc     (next_pc),
 
@@ -55,6 +60,8 @@ module stage_if #(
 
   // Instruction memory address
   assign imem_addr        = pc;
+
+  assign fetch_stall      = stall || !instr_valid;
 
   assign instr_addr_valid = !stall;
 
@@ -66,22 +73,53 @@ module stage_if #(
     end
   end
 
-  // IF/ID pipeline register
-  always_ff @(posedge clk) begin : if_id_ff
+  always_ff @(posedge clk) begin
     if (rst) begin
-      if_id_pc    <= '0;
-      if_id_instr <= '0;
-
-      if_id_valid <= 1'b0;
-    end else if (!stall && instr_valid) begin
-      if_id_pc    <= fetch_pc;
-      if_id_instr <= instr_in;
-
-      if_id_valid <= 1'b1;
+      pending_valid     <= 1'b0;
+      if_id_pc          <= '0;
+      if_id_instr       <= '0;
+      if_id_valid       <= 1'b0;
     end else begin
-      if_id_valid <= 1'b0;
+      if (instr_valid && stall) begin
+        pending_valid   <= 1'b1;
+        pending_instr   <= instr_in;
+        pending_pc      <= fetch_pc;
+      end
+      if (!stall) begin
+        if (pending_valid) begin
+          if_id_pc      <= pending_pc;
+          if_id_instr   <= pending_instr;
+          if_id_valid   <= 1'b1;
+          pending_valid <= 1'b0;   
+        end else if (instr_valid) begin
+          if_id_pc      <= fetch_pc;
+          if_id_instr   <= instr_in;
+          if_id_valid   <= 1'b1;
+        end else begin
+          if_id_valid   <= 1'b0;
+        end
+      end else begin
+        if_id_valid     <= 1'b0;
+      end
     end
-
   end
+
+  // // IF/ID pipeline register
+  // always_ff @(posedge clk) begin : if_id_ff
+  //   if (rst) begin
+  //     if_id_pc    <= '0;
+  //     if_id_instr <= '0;
+
+  //     if_id_valid <= 1'b0;
+  //   end else if (!fetch_stall && instr_valid) begin
+  //     if_id_pc    <= fetch_pc;
+  //     if_id_instr <= instr_in;
+
+  //     if_id_valid <= 1'b1;
+  //   end else begin
+  //     if_id_valid <= 1'b0;
+  //   end
+
+  // end
 
 endmodule

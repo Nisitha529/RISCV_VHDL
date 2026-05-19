@@ -1,0 +1,308 @@
+$date
+	Tue May 19 20:41:08 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_stage_if $end
+$var wire 1 ! instr_addr_valid $end
+$var wire 32 " imem_addr [31:0] $end
+$var wire 1 # if_id_valid $end
+$var wire 32 $ if_id_pc [31:0] $end
+$var wire 32 % if_id_instr [31:0] $end
+$var reg 1 & clk $end
+$var reg 32 ' instr_in [31:0] $end
+$var reg 1 ( instr_valid $end
+$var reg 1 ) redirect $end
+$var reg 32 * redirect_pc [31:0] $end
+$var reg 1 + rst $end
+$var reg 1 , stall $end
+$scope module dut_stage_if $end
+$var wire 1 & clk $end
+$var wire 1 - fetch_stall $end
+$var wire 32 . imem_addr [31:0] $end
+$var wire 32 / instr_in [31:0] $end
+$var wire 1 ( instr_valid $end
+$var wire 1 ) redirect $end
+$var wire 32 0 redirect_pc [31:0] $end
+$var wire 1 + rst $end
+$var wire 1 , stall $end
+$var wire 32 1 pc [31:0] $end
+$var wire 32 2 next_pc [31:0] $end
+$var wire 1 ! instr_addr_valid $end
+$var reg 32 3 fetch_pc [31:0] $end
+$var reg 32 4 if_id_instr [31:0] $end
+$var reg 32 5 if_id_pc [31:0] $end
+$var reg 1 # if_id_valid $end
+$scope module pc_mux_01 $end
+$var wire 1 ) redirect $end
+$var wire 32 6 redirect_pc [31:0] $end
+$var wire 32 7 pc [31:0] $end
+$var reg 32 8 next_pc [31:0] $end
+$upscope $end
+$scope module pc_reg_01 $end
+$var wire 1 & clk $end
+$var wire 32 9 next_pc [31:0] $end
+$var wire 1 + rst $end
+$var wire 1 - stall $end
+$var reg 32 : pc [31:0] $end
+$upscope $end
+$scope begin if_id_ff $end
+$upscope $end
+$upscope $end
+$scope begin init_mem $end
+$var integer 32 ; i [31:0] $end
+$upscope $end
+$scope task check_if $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b100000 ;
+bx :
+bx 9
+bx 8
+bx 7
+b0 6
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+b0 0
+bx /
+bx .
+x-
+0,
+1+
+b0 *
+0)
+x(
+bx '
+0&
+bx %
+bx $
+x#
+bx "
+1!
+$end
+#5000
+b100 2
+b100 8
+b100 9
+1-
+0#
+b0 %
+b0 4
+b0 $
+b0 5
+b0 "
+b0 .
+b0 1
+b0 7
+b0 :
+b0 3
+0(
+b0 '
+b0 /
+1&
+#10000
+0&
+#15000
+0+
+1&
+#20000
+0&
+#25000
+0-
+b10001000100010001000100010001 '
+b10001000100010001000100010001 /
+1(
+1&
+#30000
+0&
+#35000
+b1000 2
+b1000 8
+b1000 9
+1#
+b10001000100010001000100010001 %
+b10001000100010001000100010001 4
+b100 "
+b100 .
+b100 1
+b100 7
+b100 :
+1&
+#40000
+0&
+#45000
+b1100 2
+b1100 8
+b1100 9
+b1000 "
+b1000 .
+b1000 1
+b1000 7
+b1000 :
+b100 3
+b100010001000100010001000100010 '
+b100010001000100010001000100010 /
+1&
+#50000
+0&
+#55000
+b10000 2
+b10000 8
+b10000 9
+b100010001000100010001000100010 %
+b100010001000100010001000100010 4
+b100 $
+b100 5
+b110011001100110011001100110011 '
+b110011001100110011001100110011 /
+b1000 3
+b1100 "
+b1100 .
+b1100 1
+b1100 7
+b1100 :
+1&
+#60000
+0&
+#65000
+b10100 2
+b10100 8
+b10100 9
+b110011001100110011001100110011 %
+b110011001100110011001100110011 4
+b1000 $
+b1000 5
+b10000 "
+b10000 .
+b10000 1
+b10000 7
+b10000 :
+b1100 3
+b1000100010001000100010001000100 '
+b1000100010001000100010001000100 /
+1&
+#66000
+1-
+0!
+1,
+#70000
+0&
+#75000
+0#
+0(
+1&
+#76000
+1!
+0,
+#80000
+0&
+#85000
+0-
+b10000 3
+b11011110101011011011111011101111 '
+b11011110101011011011111011101111 /
+1(
+1&
+#90000
+0&
+#95000
+b11000 2
+b11000 8
+b11000 9
+1#
+b11011110101011011011111011101111 %
+b11011110101011011011111011101111 4
+b10000 $
+b10000 5
+b10100 "
+b10100 .
+b10100 1
+b10100 7
+b10100 :
+1&
+#96000
+b1000000 2
+b1000000 8
+b1000000 9
+b1000000 *
+b1000000 0
+b1000000 6
+1)
+#100000
+0&
+#105000
+b1000000 "
+b1000000 .
+b1000000 1
+b1000000 7
+b1000000 :
+b10100 3
+b1000100 2
+b1000100 8
+b1000100 9
+0)
+1&
+#110000
+0&
+#115000
+b1001000 2
+b1001000 8
+b1001000 9
+b10100 $
+b10100 5
+b10101010101010101010101010101010 '
+b10101010101010101010101010101010 /
+b1000000 3
+b1000100 "
+b1000100 .
+b1000100 1
+b1000100 7
+b1000100 :
+1&
+#120000
+0&
+#125000
+b1001100 2
+b1001100 8
+b1001100 9
+b10101010101010101010101010101010 %
+b10101010101010101010101010101010 4
+b1000000 $
+b1000000 5
+b1001000 "
+b1001000 .
+b1001000 1
+b1001000 7
+b1001000 :
+b1000100 3
+b11011110101011011011111011101111 '
+b11011110101011011011111011101111 /
+1&
+#130000
+0&
+#135000
+b1010000 2
+b1010000 8
+b1010000 9
+b11011110101011011011111011101111 %
+b11011110101011011011111011101111 4
+b1000100 $
+b1000100 5
+b1001000 3
+b1001100 "
+b1001100 .
+b1001100 1
+b1001100 7
+b1001100 :
+1&
+#136000

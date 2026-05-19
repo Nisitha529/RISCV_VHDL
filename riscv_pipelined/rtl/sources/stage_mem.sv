@@ -23,7 +23,7 @@ module stage_mem #(
   input  logic                      ex_mem_valid,
 
   // Data memory interface
-  output logic                      dmem_mem_access,
+  output logic                      dmem_mem_valid,
   output logic                      dmem_write_enable,
 
   output logic [5 : 0]              dmem_mem_width,
@@ -32,6 +32,9 @@ module stage_mem #(
   output logic [DATA_WIDTH - 1 : 0] dmem_write_data,
 
   input  logic [DATA_WIDTH - 1 : 0] dmem_read_data,
+
+  input  logic                      dmem_read_valid,
+  input  logic                      dmem_mem_ready,
 
   // MEM/WB pipeline outputs
   output logic [DATA_WIDTH - 1 : 0] mem_wb_alu_result,
@@ -47,8 +50,11 @@ module stage_mem #(
   output logic                      mem_wb_valid
 );
 
+  logic [DATA_WIDTH - 1 : 0] mem_wb_mem_data_reg;
+  logic                      mem_wb_load_valid;
+
   // Data memory control
-  assign dmem_mem_access   = ex_mem_mem_access;
+  assign dmem_mem_access   = ex_mem_valid && ex_mem_mem_access;
   assign dmem_write_enable = ex_mem_write_mem;
   assign dmem_mem_width    = ex_mem_mem_width;
   assign dmem_addr         = ex_mem_alu_result;
@@ -63,6 +69,7 @@ module stage_mem #(
       mem_wb_write_rd      <= 1'b0;
       mem_wb_rd_data_src   <= '0;
       mem_wb_valid         <= 1'b0;
+      mem_wb_load_valid    <= 1'b0;
     end else begin
       // Invalid bubble
       if (!ex_mem_valid) begin
