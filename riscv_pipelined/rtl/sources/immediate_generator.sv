@@ -12,7 +12,7 @@ module immediate_generator (
   logic [31 : 0] imm_j;
 
   // Immediate extraction
-  always_comb begin : imm_extract
+  always @ (*) begin : imm_extract
     // I-type
     imm_i = {{20{instr[31]}}, instr[31 : 20]};
 
@@ -31,7 +31,7 @@ module immediate_generator (
   end
 
   // Immediate selection
-  always_comb begin : imm_select
+  always @ (*) begin : imm_select
     case (imm_type)
       // I-type
       3'd0    : imm_out = imm_i;

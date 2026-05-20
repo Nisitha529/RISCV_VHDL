@@ -35,7 +35,7 @@ module dmem #(
 
   integer i;
 
-  always_comb begin
+  always @ (*) begin
     case (mem_width) 
       MEM_BYTE : 
         addr_aligned = 1'b1;

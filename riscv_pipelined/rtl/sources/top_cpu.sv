@@ -1,8 +1,11 @@
 module top_cpu #(
-  parameter DATA_WIDTH = 32,
-  parameter ADDR_WIDTH = 5,
-  parameter MEM_DEPTH  = 256,
-  parameter MEM_FILE   = "program.hex"
+  parameter DATA_WIDTH  = 32,
+  parameter ADDR_WIDTH  = 32,
+
+  parameter IMEM_DEPTH  = 256,
+  parameter DMEM_DEPTH  = 256,
+
+  parameter MEM_FILE    = "program.hex"
 )(
   input logic clk,
   input logic rst
@@ -15,7 +18,10 @@ module top_cpu #(
   logic          if_id_valid;
 
   logic [31 : 0] imem_addr;
+  logic          imem_instr_addr_valid;
+
   logic [31 : 0] imem_instr;
+  logic          imem_instr_valid;
 
   // ID/EX wires
   logic [31 : 0] id_ex_pc;
@@ -102,9 +108,12 @@ module top_cpu #(
   // Hazard wires
   logic stall;
   logic flush;
+  logic stall_mem;
 
   // DMEM interface
-  logic          dmem_mem_access;
+  logic          dmem_mem_valid;
+  logic          dmem_mem_ready;
+
   logic          dmem_write_enable;
 
   logic [5 : 0]  dmem_mem_width;
@@ -113,39 +122,50 @@ module top_cpu #(
   logic [31 : 0] dmem_write_data;
 
   logic [31 : 0] dmem_read_data;
+  logic          dmem_read_valid;
 
   // Flush pipeline when branch/jump redirect happens
   assign flush = ex_mem_valid && (ex_mem_take_branch || ex_mem_jump);
 
-  assign stall = 1'b0;
+  assign stall = stall_mem;
 
   // IMEM
   imem #(
     .DATA_WIDTH            (32),
-    .MEM_DEPTH             (MEM_DEPTH),
+    .MEM_DEPTH             (IMEM_DEPTH),
     .MEM_FILE              (MEM_FILE)
   ) imem_01 (
+    .clk                   (clk),
+    .rst                   (rst),
+
     .addr                  (imem_addr),
-    .instr                 (imem_instr)
+    .instr_addr_valid      (imem_instr_addr_valid),
+
+    .instr                 (imem_instr),
+    .instr_valid           (imem_instr_valid)
   );
 
   // DMEM
   dmem #(
-    .DATA_WIDTH            (32),
-    .MEM_DEPTH             (MEM_DEPTH)
+    .DATA_WIDTH            (DATA_WIDTH),
+    .ADDR_WIDTH            (ADDR_WIDTH),
+    .MEM_DEPTH             (DMEM_DEPTH)
   ) dmem_01 (
     .clk                   (clk),
+    .rst                   (rst),
 
-    .mem_access            (dmem_mem_access),
+    .mem_valid             (dmem_mem_valid),
+    .mem_ready             (dmem_mem_ready),
+
     .write_enable          (dmem_write_enable),
 
     .mem_width             (dmem_mem_width),
 
     .addr                  (dmem_addr),
-
     .write_data            (dmem_write_data),
 
-    .read_data             (dmem_read_data)
+    .read_data             (dmem_read_data),
+    .read_valid            (dmem_read_valid)
   );
 
   // IF STAGE
@@ -159,7 +179,10 @@ module top_cpu #(
     .redirect_pc           (ex_mem_branch_target),
 
     .instr_in              (imem_instr),
+    .instr_valid           (imem_instr_valid),
+
     .imem_addr             (imem_addr),
+    .instr_addr_valid      (imem_instr_addr_valid),
 
     .if_id_pc              (if_id_pc),
     .if_id_instr           (if_id_instr),
@@ -316,7 +339,9 @@ module top_cpu #(
 
     .ex_mem_valid          (ex_mem_valid),
 
-    .dmem_mem_access       (dmem_mem_access),
+    .dmem_mem_ready        (dmem_mem_ready),
+    .dmem_mem_valid        (dmem_mem_valid),
+    
     .dmem_write_enable     (dmem_write_enable),
 
     .dmem_mem_width        (dmem_mem_width),
@@ -325,6 +350,9 @@ module top_cpu #(
     .dmem_write_data       (dmem_write_data),
 
     .dmem_read_data        (dmem_read_data),
+    .dmem_read_valid       (dmem_read_valid),
+
+    .stall_mem             (stall_mem),
 
     .mem_wb_alu_result     (mem_wb_alu_result),
     .mem_wb_mem_data       (mem_wb_mem_data),

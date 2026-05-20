@@ -107,6 +107,8 @@ module stage_ex #(
   logic                      take_branch;
 
   logic [DATA_WIDTH - 1 : 0] branch_target;
+  
+  logic                      ex_mem_is_load;
 
   // Forwarding unit
   forwarding_unit forwarding_unit_01 (
@@ -115,6 +117,8 @@ module stage_ex #(
 
     .ex_mem_valid    (fwd_ex_mem_valid),
     .ex_mem_write_rd (fwd_ex_mem_write_rd),
+
+    .ex_mem_is_load  (ex_mem_is_load),
 
     .ex_mem_rd       (fwd_ex_mem_rd),
 
@@ -137,6 +141,8 @@ module stage_ex #(
     .result          (alu_result),
     .zero            (alu_zero)
   );
+
+  assign ex_mem_is_load = id_ex_mem_access && !id_ex_write_mem;
 
   // WB value selection
   always_comb begin
