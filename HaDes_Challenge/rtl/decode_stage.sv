@@ -1,24 +1,21 @@
-// decode_stage.sv
+// decode_stage.sv – corrected forwarding with operand usage detection
 `timescale 1ns/1ps
 
 module decode_stage (
     input logic clk,
     input logic rst,
 
-    // Inputs
     input logic [31:0]  instruction_in,
     input logic [31:0]  program_counter_in,
     input forwarding::t exe_forwarding_in,
     input forwarding::t mem_forwarding_in,
     input forwarding::t wb_forwarding_in,
 
-    // Output Registers
     output logic [31:0]   rs1_data_reg_out,
     output logic [31:0]   rs2_data_reg_out,
     output logic [31:0]   program_counter_reg_out,
     output instruction::t instruction_reg_out,
 
-    // Pipeline control
     input  pipeline_status::forwards_t  status_forwards_in,
     output pipeline_status::forwards_t  status_forwards_out,
     input  pipeline_status::backwards_t status_backwards_in,
@@ -28,47 +25,27 @@ module decode_stage (
 );
 
     // ------------------------------------------------------------------
-    // Internal signals
+    //  Internal signals
     // ------------------------------------------------------------------
-
     logic [6:0] opcode;
-    logic [4:0] rd;
-    logic [4:0] rs1;
-    logic [4:0] rs2;
+    logic [4:0] rd, rs1, rs2;
     logic [2:0] funct3;
     logic [6:0] funct7;
 
-    logic [3:0] alu_op;
-    logic       alu_use_imm;
-    logic       write_rd;
-    logic       write_mem;
-    logic       mem_access;
-    logic [5:0] mem_width;
-    logic       jump;
-    logic       branch;
-    logic [2:0] rd_data_src;
-    logic [2:0] imm_type;
-
+    logic [2:0]  imm_type;
     logic [31:0] imm_out;
-
-    logic [31:0] rs1_raw;
-    logic [31:0] rs2_raw;
-    logic [31:0] rs1_fwd;
-    logic [31:0] rs2_fwd;
+    logic [31:0] rs1_raw, rs2_raw;
+    logic [31:0] rs1_fwd, rs2_fwd;
 
     instruction::t instr_packed;
+    logic downstream_stall, downstream_jump;
+    logic stall, flush;
 
-    logic downstream_stall;
-    logic downstream_jump;
-    logic stall;
-    logic flush;
-
-    logic uses_rs2;
+    logic rs1_used, rs2_used;   // true if operand is a real register source
 
     // ------------------------------------------------------------------
-    // Decoder
+    //  Decoder
     // ------------------------------------------------------------------
-
     decoder decoder_inst (
         .instr  (instruction_in),
         .opcode (opcode),
@@ -80,34 +57,22 @@ module decode_stage (
     );
 
     // ------------------------------------------------------------------
-    // Control unit
+    //  Immediate type – computed directly from opcode
     // ------------------------------------------------------------------
-
-    control_unit ctrl_inst (
-        .opcode       (opcode),
-        .funct3       (funct3),
-        .funct7       (funct7),
-
-        .alu_op       (alu_op),
-        .alu_use_imm  (alu_use_imm),
-
-        .write_rd     (write_rd),
-
-        .write_mem    (write_mem),
-        .mem_access   (mem_access),
-        .mem_width    (mem_width),
-
-        .jump         (jump),
-        .is_branch    (branch),
-
-        .rd_data_src  (rd_data_src),
-        .imm_type     (imm_type)
-    );
+    always_comb begin
+        case (opcode)
+            7'h37, 7'h17: imm_type = 3'd3;     // LUI, AUIPC (U‑type)
+            7'h6F:        imm_type = 3'd4;     // JAL (J‑type)
+            7'h63:        imm_type = 3'd2;     // Branches (B‑type)
+            7'h23:        imm_type = 3'd1;     // Stores (S‑type)
+            7'h13, 7'h03, 7'h67: imm_type = 3'd0; // I‑type
+            default:      imm_type = 3'd7;
+        endcase
+    end
 
     // ------------------------------------------------------------------
-    // Immediate generator
+    //  Immediate generator
     // ------------------------------------------------------------------
-
     immediate_generator imm_inst (
         .instr    (instruction_in),
         .imm_type (imm_type),
@@ -115,30 +80,84 @@ module decode_stage (
     );
 
     // ------------------------------------------------------------------
-    // Register file
+    //  Register file
     // ------------------------------------------------------------------
-
     regfile regfile_inst (
         .clk          (clk),
         .rst          (rst),
-
         .rs1_addr     (rs1),
         .rs2_addr     (rs2),
-
-        .write_enable (wb_forwarding_in.data_valid &&
-                       (wb_forwarding_in.address != 5'd0)),
-
+        .write_enable (wb_forwarding_in.data_valid),
         .rd_addr      (wb_forwarding_in.address),
         .rd_data      (wb_forwarding_in.data),
-
         .rs1_data     (rs1_raw),
         .rs2_data     (rs2_raw)
     );
 
     // ------------------------------------------------------------------
-    // Instruction packer
+    //  Determine which operands are actually used as registers
     // ------------------------------------------------------------------
+    always_comb begin
+        // default: both are used
+        rs1_used = 1'b1;
+        rs2_used = 1'b1;
 
+        case (opcode)
+            // OP-IMM (ADDI, SLTI, etc.), LOAD, JALR: rs2 field holds immediate, not a register
+            7'b0010011, 7'b0000011, 7'b1100111:
+                rs2_used = 1'b0;
+
+            // LUI, AUIPC, JAL: no register sources
+            7'b0110111, 7'b0010111, 7'b1101111: begin
+                rs1_used = 1'b0;
+                rs2_used = 1'b0;
+            end
+
+            // Store uses rs1 (base) and rs2 (data)
+            7'b0100011:
+                ; // both used
+
+            // Branch uses both rs1 and rs2
+            7'b1100011:
+                ; // both used
+
+            // R‑type, CSR, etc. both used by default
+            default: ;
+        endcase
+    end
+
+    // ------------------------------------------------------------------
+    //  Forwarding muxes (only forward if operand is used)
+    // ------------------------------------------------------------------
+    always_comb begin
+        rs1_fwd = rs1_raw;
+        rs2_fwd = rs2_raw;
+
+        if (rs1_used) begin
+            if (exe_forwarding_in.data_valid && (exe_forwarding_in.address == rs1) && (rs1 != 0))
+                rs1_fwd = exe_forwarding_in.data;
+            else if (mem_forwarding_in.data_valid && (mem_forwarding_in.address == rs1) && (rs1 != 0))
+                rs1_fwd = mem_forwarding_in.data;
+            else if (wb_forwarding_in.data_valid && (wb_forwarding_in.address == rs1) && (rs1 != 0))
+                rs1_fwd = wb_forwarding_in.data;
+        end
+
+        if (rs2_used) begin
+            if (exe_forwarding_in.data_valid && (exe_forwarding_in.address == rs2) && (rs2 != 0))
+                rs2_fwd = exe_forwarding_in.data;
+            else if (mem_forwarding_in.data_valid && (mem_forwarding_in.address == rs2) && (rs2 != 0))
+                rs2_fwd = mem_forwarding_in.data;
+            else if (wb_forwarding_in.data_valid && (wb_forwarding_in.address == rs2) && (rs2 != 0))
+                rs2_fwd = wb_forwarding_in.data;
+        end else begin
+            // For instructions that do not use rs2 as a register, force output to 0
+            rs2_fwd = 32'd0;
+        end
+    end
+
+    // ------------------------------------------------------------------
+    //  Instruction packer (produces instruction::t)
+    // ------------------------------------------------------------------
     logic [11:0] csr_addr;
     assign csr_addr = instruction_in[31:20];
 
@@ -149,10 +168,6 @@ module decode_stage (
         instr_packed.rs2_address = rs2;
         instr_packed.immediate   = imm_out;
         instr_packed.csr         = csr::t'(csr_addr);
-
-        // --------------------------------------------------------------
-        // CSR / SYSTEM
-        // --------------------------------------------------------------
 
         if (opcode == 7'h73) begin
             if (funct3 != 3'b000) begin
@@ -165,11 +180,7 @@ module decode_stage (
                     3'b111: instr_packed.op = op::CSRRCI;
                     default: instr_packed.op = op::ILLEGAL;
                 endcase
-
-                // Current design behavior:
-                // CSR address is also copied to immediate.
                 instr_packed.immediate = {20'b0, csr_addr};
-
             end else begin
                 case (csr_addr)
                     12'h000: instr_packed.op = op::ECALL;
@@ -178,85 +189,40 @@ module decode_stage (
                     12'h105: instr_packed.op = op::WFI;
                     default: instr_packed.op = op::ILLEGAL;
                 endcase
-
                 instr_packed.immediate = 32'd0;
             end
         end
-
-        // --------------------------------------------------------------
-        // OP-IMM
-        // --------------------------------------------------------------
-
+        // OP‑IMM
         else if (opcode == 7'b0010011) begin
             case (funct3)
                 3'b000: instr_packed.op = op::ADDI;
-                3'b001: instr_packed.op = (funct7 == 7'b0000000) ? op::SLLI : op::ILLEGAL;
+                3'b001: instr_packed.op = op::SLLI;
                 3'b010: instr_packed.op = op::SLTI;
                 3'b011: instr_packed.op = op::SLTIU;
                 3'b100: instr_packed.op = op::XORI;
-                3'b101: begin
-                    if (funct7 == 7'b0000000) begin
-                        instr_packed.op = op::SRLI;
-                    end else if (funct7 == 7'b0100000) begin
-                        instr_packed.op = op::SRAI;
-                    end else begin
-                        instr_packed.op = op::ILLEGAL;
-                    end
-                end
+                3'b101: instr_packed.op = (funct7 == 7'b0000000) ? op::SRLI : op::SRAI;
                 3'b110: instr_packed.op = op::ORI;
                 3'b111: instr_packed.op = op::ANDI;
                 default: instr_packed.op = op::ILLEGAL;
             endcase
-
-            if ((funct3 == 3'b001) || (funct3 == 3'b101)) begin
+            if (funct3 == 3'b001 || funct3 == 3'b101) // shift
                 instr_packed.immediate = {27'b0, rs2};
-            end
         end
-
-        // --------------------------------------------------------------
-        // OP / R-type
-        // --------------------------------------------------------------
-
+        // OP (R‑type)
         else if (opcode == 7'b0110011) begin
-            instr_packed.immediate = 32'd0;
-
             case (funct3)
-                3'b000: begin
-                    if (funct7 == 7'b0000000) begin
-                        instr_packed.op = op::ADD;
-                    end else if (funct7 == 7'b0100000) begin
-                        instr_packed.op = op::SUB;
-                    end else begin
-                        instr_packed.op = op::ILLEGAL;
-                    end
-                end
-
-                3'b001: instr_packed.op = (funct7 == 7'b0000000) ? op::SLL  : op::ILLEGAL;
-                3'b010: instr_packed.op = (funct7 == 7'b0000000) ? op::SLT  : op::ILLEGAL;
-                3'b011: instr_packed.op = (funct7 == 7'b0000000) ? op::SLTU : op::ILLEGAL;
-                3'b100: instr_packed.op = (funct7 == 7'b0000000) ? op::XOR  : op::ILLEGAL;
-
-                3'b101: begin
-                    if (funct7 == 7'b0000000) begin
-                        instr_packed.op = op::SRL;
-                    end else if (funct7 == 7'b0100000) begin
-                        instr_packed.op = op::SRA;
-                    end else begin
-                        instr_packed.op = op::ILLEGAL;
-                    end
-                end
-
-                3'b110: instr_packed.op = (funct7 == 7'b0000000) ? op::OR  : op::ILLEGAL;
-                3'b111: instr_packed.op = (funct7 == 7'b0000000) ? op::AND : op::ILLEGAL;
-
+                3'b000: instr_packed.op = (funct7 == 7'b0000000) ? op::ADD : op::SUB;
+                3'b001: instr_packed.op = op::SLL;
+                3'b010: instr_packed.op = op::SLT;
+                3'b011: instr_packed.op = op::SLTU;
+                3'b100: instr_packed.op = op::XOR;
+                3'b101: instr_packed.op = (funct7 == 7'b0000000) ? op::SRL : op::SRA;
+                3'b110: instr_packed.op = op::OR;
+                3'b111: instr_packed.op = op::AND;
                 default: instr_packed.op = op::ILLEGAL;
             endcase
         end
-
-        // --------------------------------------------------------------
         // LOAD
-        // --------------------------------------------------------------
-
         else if (opcode == 7'b0000011) begin
             case (funct3)
                 3'b000: instr_packed.op = op::LB;
@@ -267,11 +233,7 @@ module decode_stage (
                 default: instr_packed.op = op::ILLEGAL;
             endcase
         end
-
-        // --------------------------------------------------------------
         // STORE
-        // --------------------------------------------------------------
-
         else if (opcode == 7'b0100011) begin
             case (funct3)
                 3'b000: instr_packed.op = op::SB;
@@ -280,11 +242,7 @@ module decode_stage (
                 default: instr_packed.op = op::ILLEGAL;
             endcase
         end
-
-        // --------------------------------------------------------------
         // BRANCH
-        // --------------------------------------------------------------
-
         else if (opcode == 7'b1100011) begin
             case (funct3)
                 3'b000: instr_packed.op = op::BEQ;
@@ -296,174 +254,51 @@ module decode_stage (
                 default: instr_packed.op = op::ILLEGAL;
             endcase
         end
-
-        // --------------------------------------------------------------
-        // U/J/JALR/FENCE
-        // --------------------------------------------------------------
-
-        else if (opcode == 7'b0110111) begin
-            instr_packed.op = op::LUI;
-        end
-
-        else if (opcode == 7'b0010111) begin
-            instr_packed.op = op::AUIPC;
-        end
-
-        else if (opcode == 7'b1101111) begin
-            instr_packed.op = op::JAL;
-        end
-
-        else if (opcode == 7'b1100111) begin
-            instr_packed.op = (funct3 == 3'b000) ? op::JALR : op::ILLEGAL;
-        end
-
+        // LUI, AUIPC, JAL, JALR
+        else if (opcode == 7'b0110111) instr_packed.op = op::LUI;
+        else if (opcode == 7'b0010111) instr_packed.op = op::AUIPC;
+        else if (opcode == 7'b1101111) instr_packed.op = op::JAL;
+        else if (opcode == 7'b1100111) instr_packed.op = (funct3 == 3'b000) ? op::JALR : op::ILLEGAL;
+        // FENCE
         else if (opcode == 7'b0001111) begin
-            if (funct3 == 3'b000) begin
-                instr_packed.op = op::FENCE;
-            end else if (funct3 == 3'b001) begin
-                instr_packed.op = op::FENCE_I;
-            end else begin
-                instr_packed.op = op::ILLEGAL;
-            end
+            if (funct3 == 3'b000) instr_packed.op = op::FENCE;
+            else if (funct3 == 3'b001) instr_packed.op = op::FENCE_I;
+            else instr_packed.op = op::ILLEGAL;
         end
+        // otherwise default ILLEGAL
     end
 
     // ------------------------------------------------------------------
-    // Source-register usage
+    //  Pipeline control
     // ------------------------------------------------------------------
-    // I-type instructions expose raw rs2_address = imm[4:0], but do not
-    // actually use rs2 as an operand. Therefore rs2 forwarding must be
-    // disabled for I-type instructions.
-
-    always_comb begin
-        uses_rs2 = 1'b0;
-
-        case (instr_packed.op)
-            op::ADD,  op::SUB,  op::SLL,  op::SLT,
-            op::SLTU, op::XOR,  op::SRL,  op::SRA,
-            op::OR,   op::AND,
-
-            op::SB,   op::SH,   op::SW,
-
-            op::BEQ,  op::BNE,  op::BLT,  op::BGE,
-            op::BLTU, op::BGEU: begin
-                uses_rs2 = 1'b1;
-            end
-
-            default: begin
-                uses_rs2 = 1'b0;
-            end
-        endcase
-    end
-
-    // ------------------------------------------------------------------
-    // Forwarding muxes
-    // ------------------------------------------------------------------
-    // Priority must be:
-    //   EX > MEM > WB > regfile
-    //
-    // Independent if-statements are incorrect here because WB would
-    // overwrite MEM and EX when all target the same register.
-
-    always_comb begin
-        rs1_fwd = rs1_raw;
-        rs2_fwd = 32'd0;
-
-        if (exe_forwarding_in.data_valid &&
-            (exe_forwarding_in.address == rs1) &&
-            (rs1 != 5'd0)) begin
-
-            rs1_fwd = exe_forwarding_in.data;
-
-        end else if (mem_forwarding_in.data_valid &&
-                     (mem_forwarding_in.address == rs1) &&
-                     (rs1 != 5'd0)) begin
-
-            rs1_fwd = mem_forwarding_in.data;
-
-        end else if (wb_forwarding_in.data_valid &&
-                     (wb_forwarding_in.address == rs1) &&
-                     (rs1 != 5'd0)) begin
-
-            rs1_fwd = wb_forwarding_in.data;
-        end
-
-        if (uses_rs2) begin
-            rs2_fwd = rs2_raw;
-
-            if (exe_forwarding_in.data_valid &&
-                (exe_forwarding_in.address == rs2) &&
-                (rs2 != 5'd0)) begin
-
-                rs2_fwd = exe_forwarding_in.data;
-
-            end else if (mem_forwarding_in.data_valid &&
-                         (mem_forwarding_in.address == rs2) &&
-                         (rs2 != 5'd0)) begin
-
-                rs2_fwd = mem_forwarding_in.data;
-
-            end else if (wb_forwarding_in.data_valid &&
-                         (wb_forwarding_in.address == rs2) &&
-                         (rs2 != 5'd0)) begin
-
-                rs2_fwd = wb_forwarding_in.data;
-            end
-        end else begin
-            rs2_fwd = 32'd0;
-        end
-    end
-
-    // ------------------------------------------------------------------
-    // Pipeline control
-    // ------------------------------------------------------------------
-
     assign downstream_stall = (status_backwards_in == pipeline_status::STALL);
     assign downstream_jump  = (status_backwards_in == pipeline_status::JUMP);
-
     assign stall = downstream_stall;
     assign flush = downstream_jump;
 
-    // Current simplified decode-stage behavior:
-    // JAL/JALR are sent backwards immediately.
-    // Branch condition is assumed to be evaluated later.
-    assign status_backwards_out = (jump && !downstream_stall && !downstream_jump) ?
-                                  pipeline_status::JUMP :
-                                  pipeline_status::READY;
-
-    assign jump_address_backwards_out = (jump && !downstream_stall && !downstream_jump) ?
-                                        (program_counter_in + imm_out) :
-                                        32'd0;
+    assign status_backwards_out = (instr_packed.op == op::JAL || instr_packed.op == op::JALR) ?
+                                  pipeline_status::JUMP : pipeline_status::READY;
+    assign jump_address_backwards_out = (instr_packed.op == op::JAL || instr_packed.op == op::JALR) ?
+                                        (program_counter_in + imm_out) : 32'd0;
 
     // ------------------------------------------------------------------
-    // ID/EX pipeline register
+    //  ID/EX pipeline register (registered outputs)
     // ------------------------------------------------------------------
-
     always_ff @(posedge clk) begin
         if (rst || flush) begin
-            rs1_data_reg_out        <= 32'd0;
-            rs2_data_reg_out        <= 32'd0;
+            rs1_data_reg_out      <= 32'd0;
+            rs2_data_reg_out      <= 32'd0;
             program_counter_reg_out <= 32'd0;
-            instruction_reg_out     <= instruction::NOP;
-            status_forwards_out     <= pipeline_status::BUBBLE;
-
+            instruction_reg_out   <= instruction::NOP;
+            status_forwards_out   <= pipeline_status::BUBBLE;
         end else if (!stall) begin
-            rs1_data_reg_out        <= rs1_fwd;
-            rs2_data_reg_out        <= rs2_fwd;
+            rs1_data_reg_out      <= rs1_fwd;
+            rs2_data_reg_out      <= rs2_fwd;
             program_counter_reg_out <= program_counter_in;
-            instruction_reg_out     <= instr_packed;
-
-            if (status_forwards_in != pipeline_status::VALID) begin
-                status_forwards_out <= status_forwards_in;
-            end else if (instr_packed.op == op::ILLEGAL) begin
-                status_forwards_out <= pipeline_status::ILLEGAL_INSTRUCTION;
-            end else if (instr_packed.op == op::ECALL) begin
-                status_forwards_out <= pipeline_status::ECALL;
-            end else if (instr_packed.op == op::EBREAK) begin
-                status_forwards_out <= pipeline_status::EBREAK;
-            end else begin
-                status_forwards_out <= pipeline_status::VALID;
-            end
+            instruction_reg_out   <= instr_packed;
+            status_forwards_out   <= (instr_packed.op == op::ILLEGAL) ?
+                                     pipeline_status::ILLEGAL_INSTRUCTION :
+                                     pipeline_status::VALID;
         end
     end
 

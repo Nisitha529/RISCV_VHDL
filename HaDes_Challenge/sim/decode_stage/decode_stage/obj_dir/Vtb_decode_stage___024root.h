@@ -19,14 +19,9 @@ class Vtb_decode_stage___024root final : public VerilatedModule {
     CData/*3:0*/ tb_decode_stage__DOT__status_forwards_in;
     CData/*1:0*/ tb_decode_stage__DOT__status_backwards_in;
     CData/*3:0*/ tb_decode_stage__DOT__status_forwards_out;
-    CData/*3:0*/ tb_decode_stage__DOT__dut__DOT__alu_op;
-    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT__write_rd;
-    CData/*5:0*/ tb_decode_stage__DOT__dut__DOT__mem_width;
-    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT__jump;
-    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT__branch;
-    CData/*2:0*/ tb_decode_stage__DOT__dut__DOT__rd_data_src;
     CData/*2:0*/ tb_decode_stage__DOT__dut__DOT__imm_type;
-    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT____VdfgTmp_hfc87fe46__0;
+    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT__rs1_used;
+    CData/*0:0*/ tb_decode_stage__DOT__dut__DOT__rs2_used;
     CData/*0:0*/ __Vtrigrprev__TOP__tb_decode_stage__DOT__clk;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_decode_stage__DOT__instruction_in;
