@@ -276,8 +276,9 @@ module decode_stage (
     assign stall = downstream_stall;
     assign flush = downstream_jump;
 
-    assign status_backwards_out = (instr_packed.op == op::JAL || instr_packed.op == op::JALR) ?
-                                  pipeline_status::JUMP : pipeline_status::READY;
+    assign status_backwards_out = stall ? pipeline_status::STALL :
+                              (instr_packed.op == op::JAL || instr_packed.op == op::JALR) ?
+                              pipeline_status::JUMP : pipeline_status::READY;
     assign jump_address_backwards_out = (instr_packed.op == op::JAL || instr_packed.op == op::JALR) ?
                                         (program_counter_in + imm_out) : 32'd0;
 
