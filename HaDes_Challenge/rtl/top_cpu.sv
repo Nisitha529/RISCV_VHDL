@@ -1,4 +1,4 @@
-// top_cpu.sv – all unused ports left open (no dummy wire)
+// top_cpu.sv – top-level CPU with hazard detection
 `timescale 1ns/1ps
 
 module top_cpu (
@@ -64,7 +64,7 @@ module top_cpu (
         .wb(memory_fetch_port),
         .instruction_reg_out(if_id_instr),
         .program_counter_reg_out(if_id_pc),
-        .status_forwards_out(),      // unconnected
+        .status_forwards_out(),
         .status_backwards_in(decode_backwards_out),
         .jump_address_backwards_in(decode_jump_addr)
     );
@@ -81,7 +81,7 @@ module top_cpu (
         .program_counter_reg_out(id_ex_pc),
         .instruction_reg_out(id_ex_instr),
         .status_forwards_in(VALID),
-        .status_forwards_out(),      // unconnected
+        .status_forwards_out(),
         .status_backwards_in(decode_backwards_in),
         .status_backwards_out(decode_backwards_out),
         .jump_address_backwards_in(execute_jump_addr),
@@ -101,7 +101,7 @@ module top_cpu (
         .next_program_counter_reg_out(ex_mem_next_pc),
         .forwarding_out(ex_mem_fwd),
         .status_forwards_in(VALID),
-        .status_forwards_out(),      // unconnected
+        .status_forwards_out(),
         .status_backwards_in(memory_backwards_out),
         .status_backwards_out(execute_backwards_out),
         .jump_address_backwards_in(memory_jump_addr),
@@ -123,7 +123,7 @@ module top_cpu (
         .next_program_counter_reg_out(mem_wb_next_pc),
         .forwarding_out(mem_wb_fwd),
         .status_forwards_in(VALID),
-        .status_forwards_out(),      // unconnected
+        .status_forwards_out(),
         .status_backwards_in(writeback_backwards_out),
         .status_backwards_out(memory_backwards_out),
         .jump_address_backwards_in(writeback_jump_addr),

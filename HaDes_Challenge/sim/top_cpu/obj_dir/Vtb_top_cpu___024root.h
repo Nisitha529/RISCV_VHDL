@@ -50,9 +50,9 @@ class Vtb_top_cpu___024root final : public VerilatedModule {
         CData/*3:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__status_forwards_out;
         CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__is_load;
         CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__is_store;
-        CData/*5:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__mem_width;
-        CData/*3:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_sel;
-        CData/*1:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state;
+        CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state;
+        CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_is_load;
+        CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_is_store;
         CData/*0:0*/ tb_top_cpu__DOT__dut__DOT__writeback_inst__DOT__writes_rd;
         CData/*0:0*/ __Vtrigrprev__TOP__tb_top_cpu__DOT__clk;
         CData/*0:0*/ __VactContinue;
@@ -81,17 +81,22 @@ class Vtb_top_cpu___024root final : public VerilatedModule {
         IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__execute_inst__DOT__op2;
         IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__execute_inst__DOT__alu_result;
         IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__execute_inst__DOT__rd_value;
-        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__load_data;
+        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_source_data;
+        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_rd_data;
+        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_pc;
+        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_next_pc;
+    };
+    struct {
+        IData/*31:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__load_value;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __VactIterCount;
         VlWide<3>/*64:0*/ tb_top_cpu__DOT__dut__DOT__id_ex_instr;
-    };
-    struct {
         QData/*37:0*/ tb_top_cpu__DOT__dut__DOT__ex_mem_fwd;
         VlWide<3>/*64:0*/ tb_top_cpu__DOT__dut__DOT__mem_wb_instr;
         QData/*37:0*/ tb_top_cpu__DOT__dut__DOT__mem_wb_fwd;
         QData/*37:0*/ tb_top_cpu__DOT__dut__DOT__wb_fwd;
         VlWide<3>/*64:0*/ tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__instr_packed;
+        VlWide<3>/*64:0*/ tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_instr;
         VlUnpacked<IData/*31:0*/, 1024> tb_top_cpu__DOT__imem;
         VlUnpacked<IData/*31:0*/, 1024> tb_top_cpu__DOT__dmem;
         VlUnpacked<IData/*31:0*/, 32> tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__regfile_inst__DOT__regs;

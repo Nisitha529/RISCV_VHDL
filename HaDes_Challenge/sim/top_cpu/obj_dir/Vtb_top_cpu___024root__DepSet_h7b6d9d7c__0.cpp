@@ -35,7 +35,7 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__0(Vtb_top_c
     while (1U) {
         co_await vlSelf->__VdlySched.delay(0x1388U, 
                                            "tb_top_cpu.sv", 
-                                           9);
+                                           10);
         vlSelf->tb_top_cpu__DOT__clk = (1U & (~ (IData)(vlSelf->tb_top_cpu__DOT__clk)));
     }
 }
@@ -49,15 +49,15 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__1(Vtb_top_c
     co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
                                                        "@(posedge tb_top_cpu.clk)", 
                                                        "tb_top_cpu.sv", 
-                                                       13);
+                                                       15);
     co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
                                                        "@(posedge tb_top_cpu.clk)", 
                                                        "tb_top_cpu.sv", 
-                                                       13);
+                                                       15);
     co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
                                                        "@(posedge tb_top_cpu.clk)", 
                                                        "tb_top_cpu.sv", 
-                                                       13);
+                                                       15);
     vlSelf->tb_top_cpu__DOT__rst = 0U;
 }
 
@@ -66,8 +66,8 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
     Vtb_top_cpu__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_top_cpu___024root___eval_initial__TOP__2\n"); );
     // Init
-    IData/*31:0*/ tb_top_cpu__DOT____Vrepeat2;
-    tb_top_cpu__DOT____Vrepeat2 = 0;
+    IData/*31:0*/ tb_top_cpu__DOT____Vrepeat1;
+    tb_top_cpu__DOT____Vrepeat1 = 0;
     IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__0__reg_num;
     __Vtask_tb_top_cpu__DOT__check_register__0__reg_num = 0;
     IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__0__expected;
@@ -92,142 +92,25 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
     __Vtask_tb_top_cpu__DOT__check_register__3__expected = 0;
     IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__3__actual;
     __Vtask_tb_top_cpu__DOT__check_register__3__actual = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__4__reg_num;
-    __Vtask_tb_top_cpu__DOT__check_register__4__reg_num = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__4__expected;
-    __Vtask_tb_top_cpu__DOT__check_register__4__expected = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_register__4__actual;
-    __Vtask_tb_top_cpu__DOT__check_register__4__actual = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__5__addr;
-    __Vtask_tb_top_cpu__DOT__check_memory__5__addr = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__5__expected;
-    __Vtask_tb_top_cpu__DOT__check_memory__5__expected = 0;
-    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__5__actual;
-    __Vtask_tb_top_cpu__DOT__check_memory__5__actual = 0;
+    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__4__addr;
+    __Vtask_tb_top_cpu__DOT__check_memory__4__addr = 0;
+    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__4__expected;
+    __Vtask_tb_top_cpu__DOT__check_memory__4__expected = 0;
+    IData/*31:0*/ __Vtask_tb_top_cpu__DOT__check_memory__4__actual;
+    __Vtask_tb_top_cpu__DOT__check_memory__4__actual = 0;
     // Body
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
-    co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                       "@(posedge tb_top_cpu.clk)", 
-                                                       "tb_top_cpu.sv", 
-                                                       118);
+    tb_top_cpu__DOT____Vrepeat1 = 0x78U;
+    while (VL_LTS_III(32, 0U, tb_top_cpu__DOT____Vrepeat1)) {
+        co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
+                                                           "@(posedge tb_top_cpu.clk)", 
+                                                           "tb_top_cpu.sv", 
+                                                           142);
+        tb_top_cpu__DOT____Vrepeat1 = (tb_top_cpu__DOT____Vrepeat1 
+                                       - (IData)(1U));
+    }
     co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_top_cpu.sv", 
-                                       119);
-    VL_WRITEF("\nInitial arithmetic check:\n");
+                                       143);
+    VL_WRITEF("\nTest results:\n");
     __Vtask_tb_top_cpu__DOT__check_register__0__expected = 0xaU;
     __Vtask_tb_top_cpu__DOT__check_register__0__reg_num = 1U;
     __Vtask_tb_top_cpu__DOT__check_register__0__actual 
@@ -235,13 +118,15 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
         [(0x1fU & __Vtask_tb_top_cpu__DOT__check_register__0__reg_num)];
     if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_register__0__actual 
                      != __Vtask_tb_top_cpu__DOT__check_register__0__expected))) {
-        VL_WRITEF("[FAIL] x%11d = %0# (expected %0#)\n",
+        VL_WRITEF("[FAIL] x%0d = %0# / 0x%08x (expected %0# / 0x%08x)\n",
                   32,__Vtask_tb_top_cpu__DOT__check_register__0__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__0__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__0__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__0__expected,
                   32,__Vtask_tb_top_cpu__DOT__check_register__0__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 99, "");
+        VL_FINISH_MT("tb_top_cpu.sv", 119, "");
     } else {
-        VL_WRITEF("[PASS] x%11d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__0__reg_num,
+        VL_WRITEF("[PASS] x%0d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__0__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__0__actual);
     }
     __Vtask_tb_top_cpu__DOT__check_register__1__expected = 0x14U;
@@ -251,13 +136,15 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
         [(0x1fU & __Vtask_tb_top_cpu__DOT__check_register__1__reg_num)];
     if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_register__1__actual 
                      != __Vtask_tb_top_cpu__DOT__check_register__1__expected))) {
-        VL_WRITEF("[FAIL] x%11d = %0# (expected %0#)\n",
+        VL_WRITEF("[FAIL] x%0d = %0# / 0x%08x (expected %0# / 0x%08x)\n",
                   32,__Vtask_tb_top_cpu__DOT__check_register__1__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__1__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__1__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__1__expected,
                   32,__Vtask_tb_top_cpu__DOT__check_register__1__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 99, "");
+        VL_FINISH_MT("tb_top_cpu.sv", 119, "");
     } else {
-        VL_WRITEF("[PASS] x%11d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__1__reg_num,
+        VL_WRITEF("[PASS] x%0d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__1__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__1__actual);
     }
     __Vtask_tb_top_cpu__DOT__check_register__2__expected = 0x1eU;
@@ -267,77 +154,53 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
         [(0x1fU & __Vtask_tb_top_cpu__DOT__check_register__2__reg_num)];
     if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_register__2__actual 
                      != __Vtask_tb_top_cpu__DOT__check_register__2__expected))) {
-        VL_WRITEF("[FAIL] x%11d = %0# (expected %0#)\n",
+        VL_WRITEF("[FAIL] x%0d = %0# / 0x%08x (expected %0# / 0x%08x)\n",
                   32,__Vtask_tb_top_cpu__DOT__check_register__2__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__2__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__2__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__2__expected,
                   32,__Vtask_tb_top_cpu__DOT__check_register__2__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 99, "");
+        VL_FINISH_MT("tb_top_cpu.sv", 119, "");
     } else {
-        VL_WRITEF("[PASS] x%11d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__2__reg_num,
+        VL_WRITEF("[PASS] x%0d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__2__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__2__actual);
     }
-    tb_top_cpu__DOT____Vrepeat2 = 0x64U;
-    while (VL_LTS_III(32, 0U, tb_top_cpu__DOT____Vrepeat2)) {
-        co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
-                                                           "@(posedge tb_top_cpu.clk)", 
-                                                           "tb_top_cpu.sv", 
-                                                           126);
-        tb_top_cpu__DOT____Vrepeat2 = (tb_top_cpu__DOT____Vrepeat2 
-                                       - (IData)(1U));
-    }
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_top_cpu.sv", 
-                                       127);
-    VL_WRITEF("\nExtended test checks:\n");
-    __Vtask_tb_top_cpu__DOT__check_register__3__expected = 0x14U;
-    __Vtask_tb_top_cpu__DOT__check_register__3__reg_num = 2U;
+    __Vtask_tb_top_cpu__DOT__check_register__3__expected = 0x1eU;
+    __Vtask_tb_top_cpu__DOT__check_register__3__reg_num = 4U;
     __Vtask_tb_top_cpu__DOT__check_register__3__actual 
         = vlSelf->tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__regfile_inst__DOT__regs
         [(0x1fU & __Vtask_tb_top_cpu__DOT__check_register__3__reg_num)];
     if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_register__3__actual 
                      != __Vtask_tb_top_cpu__DOT__check_register__3__expected))) {
-        VL_WRITEF("[FAIL] x%11d = %0# (expected %0#)\n",
+        VL_WRITEF("[FAIL] x%0d = %0# / 0x%08x (expected %0# / 0x%08x)\n",
                   32,__Vtask_tb_top_cpu__DOT__check_register__3__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__3__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__3__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_register__3__expected,
                   32,__Vtask_tb_top_cpu__DOT__check_register__3__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 99, "");
+        VL_FINISH_MT("tb_top_cpu.sv", 119, "");
     } else {
-        VL_WRITEF("[PASS] x%11d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__3__reg_num,
+        VL_WRITEF("[PASS] x%0d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__3__reg_num,
                   32,__Vtask_tb_top_cpu__DOT__check_register__3__actual);
     }
-    __Vtask_tb_top_cpu__DOT__check_register__4__expected = 0x1eU;
-    __Vtask_tb_top_cpu__DOT__check_register__4__reg_num = 4U;
-    __Vtask_tb_top_cpu__DOT__check_register__4__actual 
-        = vlSelf->tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__regfile_inst__DOT__regs
-        [(0x1fU & __Vtask_tb_top_cpu__DOT__check_register__4__reg_num)];
-    if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_register__4__actual 
-                     != __Vtask_tb_top_cpu__DOT__check_register__4__expected))) {
-        VL_WRITEF("[FAIL] x%11d = %0# (expected %0#)\n",
-                  32,__Vtask_tb_top_cpu__DOT__check_register__4__reg_num,
-                  32,__Vtask_tb_top_cpu__DOT__check_register__4__actual,
-                  32,__Vtask_tb_top_cpu__DOT__check_register__4__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 99, "");
-    } else {
-        VL_WRITEF("[PASS] x%11d = %0#\n",32,__Vtask_tb_top_cpu__DOT__check_register__4__reg_num,
-                  32,__Vtask_tb_top_cpu__DOT__check_register__4__actual);
-    }
-    __Vtask_tb_top_cpu__DOT__check_memory__5__expected = 0x1eU;
-    __Vtask_tb_top_cpu__DOT__check_memory__5__addr = 0x10000400U;
-    __Vtask_tb_top_cpu__DOT__check_memory__5__actual 
-        = vlSelf->tb_top_cpu__DOT__dmem[(0x3ffU & (__Vtask_tb_top_cpu__DOT__check_memory__5__addr 
+    __Vtask_tb_top_cpu__DOT__check_memory__4__expected = 0x1eU;
+    __Vtask_tb_top_cpu__DOT__check_memory__4__addr = 0x800U;
+    __Vtask_tb_top_cpu__DOT__check_memory__4__actual 
+        = vlSelf->tb_top_cpu__DOT__dmem[(0x3ffU & (__Vtask_tb_top_cpu__DOT__check_memory__4__addr 
                                                    >> 2U))];
-    if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_memory__5__actual 
-                     != __Vtask_tb_top_cpu__DOT__check_memory__5__expected))) {
+    if (VL_UNLIKELY((__Vtask_tb_top_cpu__DOT__check_memory__4__actual 
+                     != __Vtask_tb_top_cpu__DOT__check_memory__4__expected))) {
         VL_WRITEF("[FAIL] Memory[%x] = %x (expected %x)\n",
-                  32,__Vtask_tb_top_cpu__DOT__check_memory__5__addr,
-                  32,__Vtask_tb_top_cpu__DOT__check_memory__5__actual,
-                  32,__Vtask_tb_top_cpu__DOT__check_memory__5__expected);
-        VL_FINISH_MT("tb_top_cpu.sv", 110, "");
+                  32,__Vtask_tb_top_cpu__DOT__check_memory__4__addr,
+                  32,__Vtask_tb_top_cpu__DOT__check_memory__4__actual,
+                  32,__Vtask_tb_top_cpu__DOT__check_memory__4__expected);
+        VL_FINISH_MT("tb_top_cpu.sv", 134, "");
     } else {
-        VL_WRITEF("[PASS] Memory[%x] = %x\n",32,__Vtask_tb_top_cpu__DOT__check_memory__5__addr,
-                  32,__Vtask_tb_top_cpu__DOT__check_memory__5__actual);
+        VL_WRITEF("[PASS] Memory[%x] = %x\n",32,__Vtask_tb_top_cpu__DOT__check_memory__4__addr,
+                  32,__Vtask_tb_top_cpu__DOT__check_memory__4__actual);
     }
-    VL_WRITEF("\n=====================================\nALL EXTENDED TESTS PASSED\n=====================================\n\n");
-    VL_FINISH_MT("tb_top_cpu.sv", 136, "");
+    VL_WRITEF("\n=====================================\nALL TESTS PASSED\n=====================================\n\n");
+    VL_FINISH_MT("tb_top_cpu.sv", 155, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__3(Vtb_top_cpu___024root* vlSelf) {
@@ -345,20 +208,20 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__3(Vtb_top_c
     Vtb_top_cpu__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_top_cpu___024root___eval_initial__TOP__3\n"); );
     // Init
-    IData/*31:0*/ tb_top_cpu__DOT____Vrepeat3;
-    tb_top_cpu__DOT____Vrepeat3 = 0;
+    IData/*31:0*/ tb_top_cpu__DOT____Vrepeat2;
+    tb_top_cpu__DOT____Vrepeat2 = 0;
     // Body
-    tb_top_cpu__DOT____Vrepeat3 = 0x2710U;
-    while (VL_LTS_III(32, 0U, tb_top_cpu__DOT____Vrepeat3)) {
+    tb_top_cpu__DOT____Vrepeat2 = 0x2710U;
+    while (VL_LTS_III(32, 0U, tb_top_cpu__DOT____Vrepeat2)) {
         co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
                                                            "@(posedge tb_top_cpu.clk)", 
                                                            "tb_top_cpu.sv", 
-                                                           140);
-        tb_top_cpu__DOT____Vrepeat3 = (tb_top_cpu__DOT____Vrepeat3 
+                                                           159);
+        tb_top_cpu__DOT____Vrepeat2 = (tb_top_cpu__DOT____Vrepeat2 
                                        - (IData)(1U));
     }
-    VL_WRITEF("\n[FAIL] Timeout\n\n");
-    VL_FINISH_MT("tb_top_cpu.sv", 142, "");
+    VL_WRITEF("\n[FAIL] Simulation timeout\n\n");
+    VL_FINISH_MT("tb_top_cpu.sv", 161, "");
 }
 
 void Vtb_top_cpu___024root___eval_act(Vtb_top_cpu___024root* vlSelf) {
@@ -425,7 +288,7 @@ void Vtb_top_cpu___024root___eval(Vtb_top_cpu___024root* vlSelf) {
 #ifdef VL_DEBUG
                     Vtb_top_cpu___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("tb_top_cpu.sv", 4, "", "Active region did not converge.");
+                    VL_FATAL_MT("tb_top_cpu.sv", 3, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -441,7 +304,7 @@ void Vtb_top_cpu___024root___eval(Vtb_top_cpu___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtb_top_cpu___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("tb_top_cpu.sv", 4, "", "NBA region did not converge.");
+                VL_FATAL_MT("tb_top_cpu.sv", 3, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtb_top_cpu___024root___eval_nba(vlSelf);

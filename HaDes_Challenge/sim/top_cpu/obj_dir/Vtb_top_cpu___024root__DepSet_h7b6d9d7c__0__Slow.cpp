@@ -42,7 +42,7 @@ VL_ATTR_COLD void Vtb_top_cpu___024root___eval_settle(Vtb_top_cpu___024root* vlS
 #ifdef VL_DEBUG
                 Vtb_top_cpu___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("tb_top_cpu.sv", 4, "", "Settle region did not converge.");
+                VL_FATAL_MT("tb_top_cpu.sv", 3, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -197,10 +197,15 @@ VL_ATTR_COLD void Vtb_top_cpu___024root___ctor_var_reset(Vtb_top_cpu___024root* 
     vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__status_forwards_out = VL_RAND_RESET_I(4);
     vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__is_load = VL_RAND_RESET_I(1);
     vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__is_store = VL_RAND_RESET_I(1);
-    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__mem_width = VL_RAND_RESET_I(6);
-    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_sel = VL_RAND_RESET_I(4);
-    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state = VL_RAND_RESET_I(2);
-    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__load_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state = VL_RAND_RESET_I(1);
+    VL_RAND_RESET_W(65, vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_instr);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_source_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_rd_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_pc = VL_RAND_RESET_I(32);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_next_pc = VL_RAND_RESET_I(32);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_is_load = VL_RAND_RESET_I(1);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_is_store = VL_RAND_RESET_I(1);
+    vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__load_value = VL_RAND_RESET_I(32);
     vlSelf->tb_top_cpu__DOT__dut__DOT__writeback_inst__DOT__writes_rd = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigrprev__TOP__tb_top_cpu__DOT__clk = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
