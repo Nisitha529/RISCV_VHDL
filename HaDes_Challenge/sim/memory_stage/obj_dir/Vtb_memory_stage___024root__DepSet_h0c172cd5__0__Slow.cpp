@@ -12,24 +12,6 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___eval_static(Vtb_memory_stage___02
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_memory_stage___024root___eval_static\n"); );
 }
 
-VL_ATTR_COLD void Vtb_memory_stage___024root___eval_initial__TOP(Vtb_memory_stage___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtb_memory_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_memory_stage___024root___eval_initial__TOP\n"); );
-    // Body
-    vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i = 0U;
-    while (VL_GTS_III(32, 0x400U, vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i)) {
-        vlSelf->tb_memory_stage__DOT__memory[(0x3ffU 
-                                              & vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i)] = 0xdeadbeefU;
-        vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i 
-            = ((IData)(1U) + vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i);
-    }
-    vlSelf->tb_memory_stage__DOT__memory[0U] = 0x12345678U;
-    vlSelf->tb_memory_stage__DOT__memory[2U] = 0xaabbccddU;
-    vlSelf->tb_memory_stage__DOT__memory[4U] = 0x11223344U;
-    vlSelf->tb_memory_stage__DOT__force_error = 0U;
-}
-
 VL_ATTR_COLD void Vtb_memory_stage___024root___eval_final(Vtb_memory_stage___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtb_memory_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -60,7 +42,7 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___eval_settle(Vtb_memory_stage___02
 #ifdef VL_DEBUG
                 Vtb_memory_stage___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("tb_memory_stage.sv", 4, "", "Settle region did not converge.");
+                VL_FATAL_MT("tb_memory_stage.sv", 27, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -84,7 +66,7 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___dump_triggers__stl(Vtb_memory_sta
 }
 #endif  // VL_DEBUG
 
-void Vtb_memory_stage___024root___act_comb__TOP__0(Vtb_memory_stage___024root* vlSelf);
+VL_ATTR_COLD void Vtb_memory_stage___024root___stl_sequent__TOP__0(Vtb_memory_stage___024root* vlSelf);
 
 VL_ATTR_COLD void Vtb_memory_stage___024root___eval_stl(Vtb_memory_stage___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -92,8 +74,7 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___eval_stl(Vtb_memory_stage___024ro
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_memory_stage___024root___eval_stl\n"); );
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
-        Vtb_memory_stage___024root___act_comb__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[6U] = 1U;
+        Vtb_memory_stage___024root___stl_sequent__TOP__0(vlSelf);
         vlSelf->__Vm_traceActivity[5U] = 1U;
         vlSelf->__Vm_traceActivity[4U] = 1U;
         vlSelf->__Vm_traceActivity[3U] = 1U;
@@ -113,16 +94,13 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___dump_triggers__act(Vtb_memory_sta
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(negedge tb_memory_stage.clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge tb_memory_stage.clk)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_memory_stage.clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
     }
     if (vlSelf->__VactTriggered.at(2U)) {
-        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
-    }
-    if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @([changed] tb_memory_stage.rst)\n");
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @(negedge tb_memory_stage.clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -137,16 +115,13 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___dump_triggers__nba(Vtb_memory_sta
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(negedge tb_memory_stage.clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge tb_memory_stage.clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_memory_stage.clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
     }
     if (vlSelf->__VnbaTriggered.at(2U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
-    }
-    if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @([changed] tb_memory_stage.rst)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(negedge tb_memory_stage.clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -175,21 +150,31 @@ VL_ATTR_COLD void Vtb_memory_stage___024root___ctor_var_reset(Vtb_memory_stage__
     vlSelf->tb_memory_stage__DOT__status_backwards_out = VL_RAND_RESET_I(2);
     vlSelf->tb_memory_stage__DOT__jump_address_backwards_in = VL_RAND_RESET_I(32);
     vlSelf->tb_memory_stage__DOT__jump_address_backwards_out = VL_RAND_RESET_I(32);
-    for (int __Vi0 = 0; __Vi0 < 1024; ++__Vi0) {
-        vlSelf->tb_memory_stage__DOT__memory[__Vi0] = VL_RAND_RESET_I(32);
-    }
-    vlSelf->tb_memory_stage__DOT__force_error = VL_RAND_RESET_I(1);
-    vlSelf->tb_memory_stage__DOT__unnamedblk1__DOT__i = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__pass_count = 0;
+    vlSelf->tb_memory_stage__DOT__fail_count = 0;
+    vlSelf->tb_memory_stage__DOT__dut__DOT__wb_state = VL_RAND_RESET_I(1);
+    VL_RAND_RESET_W(65, vlSelf->tb_memory_stage__DOT__dut__DOT__active_instr);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_source_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_addr = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_store_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_pc = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_next_pc = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_sel = VL_RAND_RESET_I(4);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_is_load = VL_RAND_RESET_I(1);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__active_is_store = VL_RAND_RESET_I(1);
     vlSelf->tb_memory_stage__DOT__dut__DOT__is_load = VL_RAND_RESET_I(1);
     vlSelf->tb_memory_stage__DOT__dut__DOT__is_store = VL_RAND_RESET_I(1);
-    vlSelf->tb_memory_stage__DOT__dut__DOT__mem_width = VL_RAND_RESET_I(6);
-    vlSelf->tb_memory_stage__DOT__dut__DOT__wb_sel = VL_RAND_RESET_I(4);
-    vlSelf->tb_memory_stage__DOT__dut__DOT__wb_state = VL_RAND_RESET_I(2);
-    vlSelf->tb_memory_stage__DOT__dut__DOT__load_data = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__access_misaligned = VL_RAND_RESET_I(1);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__byte_sel_comb = VL_RAND_RESET_I(4);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__store_data_comb = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__valid_memory_op = VL_RAND_RESET_I(1);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__launch_memory_op = VL_RAND_RESET_I(1);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__load_value_comb = VL_RAND_RESET_I(32);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__misaligned_status_comb = VL_RAND_RESET_I(4);
+    vlSelf->tb_memory_stage__DOT__dut__DOT__fault_status_comb = VL_RAND_RESET_I(4);
+    vlSelf->tb_memory_stage__DOT__dut__DOT____VdfgTmp_he475b9dc__0 = 0;
     vlSelf->__Vtrigrprev__TOP__tb_memory_stage__DOT__clk = VL_RAND_RESET_I(1);
-    vlSelf->__Vtrigrprev__TOP__tb_memory_stage__DOT__rst = VL_RAND_RESET_I(1);
-    vlSelf->__VactDidInit = 0;
-    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }

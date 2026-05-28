@@ -48,4 +48,6 @@ Vtb_decode_stage__Syms::Vtb_decode_stage__Syms(VerilatedContext* contextp, const
     // Setup each module's pointers to their submodules
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
+    // Setup scopes
+    __Vscope_tb_decode_stage.configure(this, name(), "tb_decode_stage", "tb_decode_stage", -9, VerilatedScope::SCOPE_OTHER);
 }

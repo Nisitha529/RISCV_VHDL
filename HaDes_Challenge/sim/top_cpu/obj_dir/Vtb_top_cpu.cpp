@@ -11,8 +11,8 @@
 Vtb_top_cpu::Vtb_top_cpu(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vtb_top_cpu__Syms(contextp(), _vcname__, this)}
-    , __PVT__tb_top_cpu__DOT__wb_imem{vlSymsp->TOP.__PVT__tb_top_cpu__DOT__wb_imem}
-    , __PVT__tb_top_cpu__DOT__wb_dmem{vlSymsp->TOP.__PVT__tb_top_cpu__DOT__wb_dmem}
+    , __PVT__tb_top_cpu__DOT__fetch_wb{vlSymsp->TOP.__PVT__tb_top_cpu__DOT__fetch_wb}
+    , __PVT__tb_top_cpu__DOT__mem_wb{vlSymsp->TOP.__PVT__tb_top_cpu__DOT__mem_wb}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

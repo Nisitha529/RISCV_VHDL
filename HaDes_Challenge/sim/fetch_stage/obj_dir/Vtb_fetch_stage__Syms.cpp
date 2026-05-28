@@ -52,4 +52,6 @@ Vtb_fetch_stage__Syms::Vtb_fetch_stage__Syms(VerilatedContext* contextp, const c
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
     TOP__tb_fetch_stage__DOT__wb.__Vconfigure(true);
+    // Setup scopes
+    __Vscope_tb_fetch_stage.configure(this, name(), "tb_fetch_stage", "tb_fetch_stage", -9, VerilatedScope::SCOPE_OTHER);
 }

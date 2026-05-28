@@ -32,8 +32,12 @@ class Vtb_top_cpu__Syms final : public VerilatedSyms {
 
     // MODULE INSTANCE STATE
     Vtb_top_cpu___024root          TOP;
-    Vtb_top_cpu_wishbone_interface TOP__tb_top_cpu__DOT__wb_dmem;
-    Vtb_top_cpu_wishbone_interface TOP__tb_top_cpu__DOT__wb_imem;
+    Vtb_top_cpu_wishbone_interface TOP__tb_top_cpu__DOT__fetch_wb;
+    Vtb_top_cpu_wishbone_interface TOP__tb_top_cpu__DOT__mem_wb;
+
+    // SCOPE NAMES
+    VerilatedScope __Vscope_tb_top_cpu;
+    VerilatedScope __Vscope_tb_top_cpu__put_instr;
 
     // CONSTRUCTORS
     Vtb_top_cpu__Syms(VerilatedContext* contextp, const char* namep, Vtb_top_cpu* modelp);

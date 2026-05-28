@@ -32,6 +32,9 @@ class Vtb_decode_stage__Syms final : public VerilatedSyms {
     // MODULE INSTANCE STATE
     Vtb_decode_stage___024root     TOP;
 
+    // SCOPE NAMES
+    VerilatedScope __Vscope_tb_decode_stage;
+
     // CONSTRUCTORS
     Vtb_decode_stage__Syms(VerilatedContext* contextp, const char* namep, Vtb_decode_stage* modelp);
     ~Vtb_decode_stage__Syms();

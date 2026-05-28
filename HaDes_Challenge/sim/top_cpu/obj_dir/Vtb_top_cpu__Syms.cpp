@@ -42,17 +42,20 @@ Vtb_top_cpu__Syms::Vtb_top_cpu__Syms(VerilatedContext* contextp, const char* nam
     , __Vm_modelp{modelp}
     // Setup module instances
     , TOP{this, namep}
-    , TOP__tb_top_cpu__DOT__wb_dmem{this, Verilated::catName(namep, "tb_top_cpu.wb_dmem")}
-    , TOP__tb_top_cpu__DOT__wb_imem{this, Verilated::catName(namep, "tb_top_cpu.wb_imem")}
+    , TOP__tb_top_cpu__DOT__fetch_wb{this, Verilated::catName(namep, "tb_top_cpu.fetch_wb")}
+    , TOP__tb_top_cpu__DOT__mem_wb{this, Verilated::catName(namep, "tb_top_cpu.mem_wb")}
 {
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-9);
     _vm_contextp__->timeprecision(-12);
     // Setup each module's pointers to their submodules
-    TOP.__PVT__tb_top_cpu__DOT__wb_dmem = &TOP__tb_top_cpu__DOT__wb_dmem;
-    TOP.__PVT__tb_top_cpu__DOT__wb_imem = &TOP__tb_top_cpu__DOT__wb_imem;
+    TOP.__PVT__tb_top_cpu__DOT__fetch_wb = &TOP__tb_top_cpu__DOT__fetch_wb;
+    TOP.__PVT__tb_top_cpu__DOT__mem_wb = &TOP__tb_top_cpu__DOT__mem_wb;
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
-    TOP__tb_top_cpu__DOT__wb_dmem.__Vconfigure(true);
-    TOP__tb_top_cpu__DOT__wb_imem.__Vconfigure(false);
+    TOP__tb_top_cpu__DOT__fetch_wb.__Vconfigure(true);
+    TOP__tb_top_cpu__DOT__mem_wb.__Vconfigure(false);
+    // Setup scopes
+    __Vscope_tb_top_cpu.configure(this, name(), "tb_top_cpu", "tb_top_cpu", -9, VerilatedScope::SCOPE_OTHER);
+    __Vscope_tb_top_cpu__put_instr.configure(this, name(), "tb_top_cpu.put_instr", "put_instr", -9, VerilatedScope::SCOPE_OTHER);
 }

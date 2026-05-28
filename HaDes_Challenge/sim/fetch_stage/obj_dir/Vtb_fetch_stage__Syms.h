@@ -34,6 +34,9 @@ class Vtb_fetch_stage__Syms final : public VerilatedSyms {
     Vtb_fetch_stage___024root      TOP;
     Vtb_fetch_stage_wishbone_interface TOP__tb_fetch_stage__DOT__wb;
 
+    // SCOPE NAMES
+    VerilatedScope __Vscope_tb_fetch_stage;
+
     // CONSTRUCTORS
     Vtb_fetch_stage__Syms(VerilatedContext* contextp, const char* namep, Vtb_fetch_stage* modelp);
     ~Vtb_fetch_stage__Syms();

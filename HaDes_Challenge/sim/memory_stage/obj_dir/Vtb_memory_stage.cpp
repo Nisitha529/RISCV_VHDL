@@ -65,6 +65,14 @@ void Vtb_memory_stage::eval_step() {
     Verilated::endOfEval(vlSymsp->__Vm_evalMsgQp);
 }
 
+void Vtb_memory_stage::eval_end_step() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+eval_end_step Vtb_memory_stage::eval_end_step\n"); );
+#ifdef VM_TRACE
+    // Tracing
+    if (VL_UNLIKELY(vlSymsp->__Vm_dumping)) vlSymsp->_traceDump();
+#endif  // VM_TRACE
+}
+
 //============================================================
 // Events and timing
 bool Vtb_memory_stage::eventsPending() { return !vlSymsp->TOP.__VdlySched.empty(); }

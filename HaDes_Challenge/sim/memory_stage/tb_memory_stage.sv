@@ -1,18 +1,32 @@
-// tb_memory_stage.sv – corrected expectations
 `timescale 1ns/1ps
+
+interface wishbone_interface;
+    logic        cyc;
+    logic        stb;
+    logic        ack;
+    logic        err;
+    logic [31:0] adr;
+    logic [3:0]  sel;
+    logic        we;
+    logic [31:0] dat_mosi;
+    logic [31:0] dat_miso;
+
+    modport master (
+        output cyc,
+        output stb,
+        input  ack,
+        input  err,
+        output adr,
+        output sel,
+        output we,
+        output dat_mosi,
+        input  dat_miso
+    );
+endinterface
 
 module tb_memory_stage;
 
     logic clk, rst;
-    initial begin
-        clk = 0;
-        forever #5 clk = ~clk;
-    end
-    initial begin
-        rst = 1;
-        repeat (2) @(posedge clk);
-        rst = 0;
-    end
 
     wishbone_interface wb();
 
@@ -36,290 +50,529 @@ module tb_memory_stage;
     logic [31:0] jump_address_backwards_in;
     logic [31:0] jump_address_backwards_out;
 
+    int pass_count;
+    int fail_count;
+
     memory_stage dut (
-        .clk, .rst,
-        .wb(wb.master),
-        .source_data_in, .rd_data_in,
-        .instruction_in,
-        .program_counter_in, .next_program_counter_in,
-        .source_data_reg_out, .rd_data_reg_out,
-        .instruction_reg_out,
-        .program_counter_reg_out, .next_program_counter_reg_out,
-        .forwarding_out,
-        .status_forwards_in, .status_forwards_out,
-        .status_backwards_in, .status_backwards_out,
-        .jump_address_backwards_in, .jump_address_backwards_out
+        .clk                         (clk),
+        .rst                         (rst),
+        .wb                          (wb.master),
+
+        .source_data_in              (source_data_in),
+        .rd_data_in                  (rd_data_in),
+        .instruction_in              (instruction_in),
+        .program_counter_in          (program_counter_in),
+        .next_program_counter_in     (next_program_counter_in),
+
+        .source_data_reg_out         (source_data_reg_out),
+        .rd_data_reg_out             (rd_data_reg_out),
+        .instruction_reg_out         (instruction_reg_out),
+        .program_counter_reg_out     (program_counter_reg_out),
+        .next_program_counter_reg_out(next_program_counter_reg_out),
+        .forwarding_out              (forwarding_out),
+
+        .status_forwards_in          (status_forwards_in),
+        .status_forwards_out         (status_forwards_out),
+        .status_backwards_in         (status_backwards_in),
+        .status_backwards_out        (status_backwards_out),
+        .jump_address_backwards_in   (jump_address_backwards_in),
+        .jump_address_backwards_out  (jump_address_backwards_out)
     );
 
-    // Wishbone memory slave model (1‑cycle latency)
-    logic [31:0] memory [0:1023];
-    logic        force_error;
-
     initial begin
-        integer i;
-        for (i = 0; i < 1024; i++) memory[i] = 32'hDEADBEEF;
-        memory[0] = 32'h12345678;   // word at address 0
-        memory[2] = 32'hAABBCCDD;   // word at address 8
-        memory[4] = 32'h11223344;   // word at address 16
-        force_error = 0;
+        clk = 1'b0;
+        forever #5 clk = ~clk;
     end
 
-    // Wishbone slave – responds on negedge, handles both reads and writes
-    always_ff @(negedge clk) begin
-        if (rst) begin
-            wb.ack <= 1'b0;
-            wb.err <= 1'b0;
-            wb.dat_miso <= 32'd0;
-        end else begin
-            wb.ack <= 1'b0;
-            wb.err <= 1'b0;
-            if (wb.cyc && wb.stb) begin
-                if (force_error) begin
-                    wb.err <= 1'b1;
-                    wb.dat_miso <= 32'd0;
-                end else begin
-                    wb.ack <= 1'b1;
-                    if (wb.we) begin
-                        memory[{22'b0, wb.adr[11:2]}] <= wb.dat_mosi;
-                    end else begin
-                        wb.dat_miso <= memory[{22'b0, wb.adr[11:2]}];
-                    end
-                end
+    function automatic instruction::t make_instr(
+        input op::t        op_i,
+        input logic [4:0]  rd_i,
+        input logic [4:0]  rs1_i,
+        input logic [4:0]  rs2_i,
+        input logic [31:0] imm_i
+    );
+        begin
+            make_instr = '{
+                op:          op_i,
+                rd_address:  rd_i,
+                rs1_address: rs1_i,
+                rs2_address: rs2_i,
+                csr:         csr::t'(12'h000),
+                immediate:   imm_i
+            };
+        end
+    endfunction
+
+    task automatic clear_bus();
+        begin
+            wb.ack      = 1'b0;
+            wb.err      = 1'b0;
+            wb.dat_miso = 32'd0;
+        end
+    endtask
+
+    task automatic drive_bubble_now();
+        begin
+            source_data_in            = 32'd0;
+            rd_data_in                = 32'd0;
+            instruction_in            = instruction::NOP;
+            program_counter_in        = 32'd0;
+            next_program_counter_in   = 32'd0;
+            status_forwards_in        = pipeline_status::BUBBLE;
+            status_backwards_in       = pipeline_status::READY;
+            jump_address_backwards_in = 32'd0;
+            clear_bus();
+        end
+    endtask
+
+    task automatic drive_bubble_cycle();
+        begin
+            @(negedge clk);
+            drive_bubble_now();
+
+            @(posedge clk);
+            #1;
+        end
+    endtask
+
+    task automatic check32(input string name, input logic [31:0] actual, input logic [31:0] expected);
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=0x%08h expected=0x%08h", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
             end
         end
-    end
+    endtask
 
-    // Helper tasks
-    task apply_and_advance(
-        input logic [31:0] src,
-        input logic [31:0] rd,
-        input instruction::t instr,
-        input logic [31:0] pc,
-        input logic [31:0] next_pc,
-        input pipeline_status::forwards_t fwd_status,
-        input pipeline_status::backwards_t back_status,
-        input logic [31:0] jump_addr
+    task automatic check4(input string name, input logic [3:0] actual, input logic [3:0] expected);
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=0b%04b expected=0b%04b", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
+            end
+        end
+    endtask
+
+    task automatic check_bit(input string name, input logic actual, input logic expected);
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=%0b expected=%0b", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
+            end
+        end
+    endtask
+
+    task automatic check_op(input string name, input op::t actual, input op::t expected);
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=%0d expected=%0d", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
+            end
+        end
+    endtask
+
+    task automatic check_fwd_status(
+        input string name,
+        input pipeline_status::forwards_t actual,
+        input pipeline_status::forwards_t expected
     );
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=%0d expected=%0d", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
+            end
+        end
+    endtask
+
+    task automatic check_bwd_status(
+        input string name,
+        input pipeline_status::backwards_t actual,
+        input pipeline_status::backwards_t expected
+    );
+        begin
+            if (actual !== expected) begin
+                $display("[FAIL] %s: actual=%0d expected=%0d", name, actual, expected);
+                fail_count++;
+            end else begin
+                $display("[PASS] %s", name);
+                pass_count++;
+            end
+        end
+    endtask
+
+    task automatic drive_non_memory(
+        input string name,
+        input op::t op_i,
+        input logic [4:0] rd_i,
+        input logic [31:0] rd_val,
+        input logic [31:0] pc_i
+    );
+        begin
+            $display("\n--- %s ---", name);
+
+            @(negedge clk);
+            source_data_in            = 32'd0;
+            rd_data_in                = rd_val;
+            instruction_in            = make_instr(op_i, rd_i, 5'd1, 5'd2, 32'd0);
+            program_counter_in        = pc_i;
+            next_program_counter_in   = pc_i + 32'd4;
+            status_forwards_in        = pipeline_status::VALID;
+            status_backwards_in       = pipeline_status::READY;
+            jump_address_backwards_in = 32'd0;
+            clear_bus();
+
+            @(posedge clk);
+            #1;
+
+            check_op({name, " op"}, instruction_reg_out.op, op_i);
+            check32({name, " rd"}, rd_data_reg_out, rd_val);
+            check32({name, " pc"}, program_counter_reg_out, pc_i);
+            check32({name, " next_pc"}, next_program_counter_reg_out, pc_i + 32'd4);
+            check_bit({name, " forwarding valid"}, forwarding_out.data_valid, rd_i != 5'd0);
+            check32({name, " forwarding data"}, forwarding_out.data, rd_val);
+            check_fwd_status({name, " status"}, status_forwards_out, pipeline_status::VALID);
+            check_bwd_status({name, " backward"}, status_backwards_out, pipeline_status::READY);
+            check_bit({name, " wb.cyc"}, wb.cyc, 1'b0);
+            check_bit({name, " wb.stb"}, wb.stb, 1'b0);
+
+            drive_bubble_cycle();
+        end
+    endtask
+
+    task automatic start_memory_op(
+        input string name,
+        input op::t op_i,
+        input logic [4:0] rd_i,
+        input logic [31:0] addr_i,
+        input logic [31:0] store_data_i,
+        input logic [31:0] pc_i
+    );
+        begin
+            $display("\n--- %s ---", name);
+
+            @(negedge clk);
+            source_data_in            = store_data_i;
+            rd_data_in                = addr_i;
+            instruction_in            = make_instr(op_i, rd_i, 5'd1, 5'd2, 32'd0);
+            program_counter_in        = pc_i;
+            next_program_counter_in   = pc_i + 32'd4;
+            status_forwards_in        = pipeline_status::VALID;
+            status_backwards_in       = pipeline_status::READY;
+            jump_address_backwards_in = 32'd0;
+            clear_bus();
+
+            @(posedge clk);
+            #1;
+        end
+    endtask
+
+    task automatic finish_load_ok(
+        input string name,
+        input logic [31:0] memory_word,
+        input logic [31:0] expected_value,
+        input logic [4:0] expected_rd,
+        input logic [31:0] expected_pc
+    );
+        begin
+            @(negedge clk);
+            wb.dat_miso = memory_word;
+            wb.ack      = 1'b1;
+            wb.err      = 1'b0;
+
+            @(posedge clk);
+            #1;
+
+            check32({name, " loaded value"}, rd_data_reg_out, expected_value);
+            check32({name, " pc"}, program_counter_reg_out, expected_pc);
+            check_fwd_status({name, " status"}, status_forwards_out, pipeline_status::VALID);
+            check_bit({name, " forwarding valid"}, forwarding_out.data_valid, expected_rd != 5'd0);
+            check32({name, " forwarding data"}, forwarding_out.data, expected_value);
+            check_bwd_status({name, " backward ready"}, status_backwards_out, pipeline_status::READY);
+
+            @(negedge clk);
+            drive_bubble_now();
+
+            @(posedge clk);
+            #1;
+        end
+    endtask
+
+    task automatic finish_store_ok(
+        input string name,
+        input logic [31:0] expected_addr,
+        input logic [31:0] expected_pc
+    );
+        begin
+            @(negedge clk);
+            wb.ack      = 1'b1;
+            wb.err      = 1'b0;
+            wb.dat_miso = 32'd0;
+
+            @(posedge clk);
+            #1;
+
+            check32({name, " address output"}, rd_data_reg_out, expected_addr);
+            check32({name, " pc"}, program_counter_reg_out, expected_pc);
+            check_fwd_status({name, " status"}, status_forwards_out, pipeline_status::VALID);
+            check_bit({name, " forwarding valid"}, forwarding_out.data_valid, 1'b0);
+            check_bwd_status({name, " backward ready"}, status_backwards_out, pipeline_status::READY);
+
+            @(negedge clk);
+            drive_bubble_now();
+
+            @(posedge clk);
+            #1;
+        end
+    endtask
+
+    task automatic finish_fault(
+        input string name,
+        input pipeline_status::forwards_t expected_status
+    );
+        begin
+            @(negedge clk);
+            wb.ack      = 1'b0;
+            wb.err      = 1'b1;
+            wb.dat_miso = 32'hDEAD_DEAD;
+
+            @(posedge clk);
+            #1;
+
+            check_fwd_status({name, " fault status"}, status_forwards_out, expected_status);
+            check_bit({name, " forwarding invalid"}, forwarding_out.data_valid, 1'b0);
+            check_bwd_status({name, " backward ready"}, status_backwards_out, pipeline_status::READY);
+
+            @(negedge clk);
+            drive_bubble_now();
+
+            @(posedge clk);
+            #1;
+        end
+    endtask
+
+    task automatic test_load(
+        input string name,
+        input op::t op_i,
+        input logic [4:0] rd_i,
+        input logic [31:0] addr_i,
+        input logic [31:0] memory_word,
+        input logic [31:0] expected_value,
+        input logic [3:0] expected_sel
+    );
+        logic [31:0] pc_i;
+        begin
+            pc_i = 32'h1000 + pass_count;
+
+            start_memory_op(name, op_i, rd_i, addr_i, 32'd0, pc_i);
+
+            check_bit({name, " request cyc"}, wb.cyc, 1'b1);
+            check_bit({name, " request stb"}, wb.stb, 1'b1);
+            check_bit({name, " request we"}, wb.we, 1'b0);
+            check32({name, " request addr"}, wb.adr, addr_i);
+            check4({name, " request sel"}, wb.sel, expected_sel);
+            check_fwd_status({name, " bubble while busy"}, status_forwards_out, pipeline_status::BUBBLE);
+            check_bwd_status({name, " stall while busy"}, status_backwards_out, pipeline_status::STALL);
+            check_bit({name, " no forwarding while busy"}, forwarding_out.data_valid, 1'b0);
+
+            finish_load_ok(name, memory_word, expected_value, rd_i, pc_i);
+        end
+    endtask
+
+    task automatic test_store(
+        input string name,
+        input op::t op_i,
+        input logic [31:0] addr_i,
+        input logic [31:0] source_i,
+        input logic [31:0] expected_mosi,
+        input logic [3:0] expected_sel
+    );
+        logic [31:0] pc_i;
+        begin
+            pc_i = 32'h2000 + pass_count;
+
+            start_memory_op(name, op_i, 5'd0, addr_i, source_i, pc_i);
+
+            check_bit({name, " request cyc"}, wb.cyc, 1'b1);
+            check_bit({name, " request stb"}, wb.stb, 1'b1);
+            check_bit({name, " request we"}, wb.we, 1'b1);
+            check32({name, " request addr"}, wb.adr, addr_i);
+            check4({name, " request sel"}, wb.sel, expected_sel);
+            check32({name, " request data"}, wb.dat_mosi, expected_mosi);
+            check_fwd_status({name, " bubble while busy"}, status_forwards_out, pipeline_status::BUBBLE);
+            check_bwd_status({name, " stall while busy"}, status_backwards_out, pipeline_status::STALL);
+
+            finish_store_ok(name, addr_i, pc_i);
+        end
+    endtask
+
+    task automatic test_misaligned(
+        input string name,
+        input op::t op_i,
+        input logic [4:0] rd_i,
+        input logic [31:0] addr_i,
+        input pipeline_status::forwards_t expected_status
+    );
+        begin
+            start_memory_op(name, op_i, rd_i, addr_i, 32'hAAAA_BBBB, 32'h3000);
+
+            check_bit({name, " no wb.cyc"}, wb.cyc, 1'b0);
+            check_bit({name, " no wb.stb"}, wb.stb, 1'b0);
+            check_fwd_status({name, " misaligned status"}, status_forwards_out, expected_status);
+            check_bit({name, " no forwarding"}, forwarding_out.data_valid, 1'b0);
+            check_bwd_status({name, " no stall"}, status_backwards_out, pipeline_status::READY);
+
+            drive_bubble_cycle();
+        end
+    endtask
+
+    initial begin
+        pass_count = 0;
+        fail_count = 0;
+
+        drive_bubble_now();
+
+        rst = 1'b1;
+        repeat (3) @(posedge clk);
+        #1;
+
+        check_op("reset NOP", instruction_reg_out.op, instruction::NOP.op);
+        check_fwd_status("reset BUBBLE", status_forwards_out, pipeline_status::BUBBLE);
+        check_bwd_status("reset READY", status_backwards_out, pipeline_status::READY);
+        check_bit("reset wb.cyc", wb.cyc, 1'b0);
+        check_bit("reset wb.stb", wb.stb, 1'b0);
+
+        rst = 1'b0;
+        drive_bubble_cycle();
+
+        drive_non_memory("pass ADD result", op::ADD, 5'd5, 32'h1234_5678, 32'h0100);
+
+        test_load("LW",  op::LW,  5'd6, 32'h0000_0800, 32'hAABB_CCDD, 32'hAABB_CCDD, 4'b1111);
+        test_load("LB byte0 sign", op::LB, 5'd7, 32'h0000_0800, 32'h1122_3380, 32'hFFFF_FF80, 4'b0001);
+        test_load("LB byte1 sign", op::LB, 5'd7, 32'h0000_0801, 32'h1122_8033, 32'hFFFF_FF80, 4'b0010);
+        test_load("LBU byte2", op::LBU, 5'd7, 32'h0000_0802, 32'h11AA_2233, 32'h0000_00AA, 4'b0100);
+        test_load("LBU byte3", op::LBU, 5'd7, 32'h0000_0803, 32'hAA11_2233, 32'h0000_00AA, 4'b1000);
+        test_load("LH low sign", op::LH, 5'd8, 32'h0000_0800, 32'h1234_8001, 32'hFFFF_8001, 4'b0011);
+        test_load("LH high sign", op::LH, 5'd8, 32'h0000_0802, 32'h8001_1234, 32'hFFFF_8001, 4'b1100);
+        test_load("LHU low", op::LHU, 5'd8, 32'h0000_0800, 32'h1234_8001, 32'h0000_8001, 4'b0011);
+        test_load("LHU high", op::LHU, 5'd8, 32'h0000_0802, 32'h8001_1234, 32'h0000_8001, 4'b1100);
+
+        test_store("SW", op::SW, 32'h0000_0900, 32'hDEAD_BEEF, 32'hDEAD_BEEF, 4'b1111);
+        test_store("SB byte0", op::SB, 32'h0000_0900, 32'h0000_00AA, 32'h0000_00AA, 4'b0001);
+        test_store("SB byte1", op::SB, 32'h0000_0901, 32'h0000_00AA, 32'h0000_AA00, 4'b0010);
+        test_store("SB byte2", op::SB, 32'h0000_0902, 32'h0000_00AA, 32'h00AA_0000, 4'b0100);
+        test_store("SB byte3", op::SB, 32'h0000_0903, 32'h0000_00AA, 32'hAA00_0000, 4'b1000);
+        test_store("SH low", op::SH, 32'h0000_0900, 32'h0000_BEEF, 32'h0000_BEEF, 4'b0011);
+        test_store("SH high", op::SH, 32'h0000_0902, 32'h0000_BEEF, 32'hBEEF_0000, 4'b1100);
+
+        test_misaligned("LH misaligned",  op::LH,  5'd1, 32'h0000_0801, pipeline_status::LOAD_MISALIGNED);
+        test_misaligned("LHU misaligned", op::LHU, 5'd1, 32'h0000_0801, pipeline_status::LOAD_MISALIGNED);
+        test_misaligned("LW misaligned",  op::LW,  5'd1, 32'h0000_0802, pipeline_status::LOAD_MISALIGNED);
+        test_misaligned("SH misaligned",  op::SH,  5'd0, 32'h0000_0901, pipeline_status::STORE_MISALIGNED);
+        test_misaligned("SW misaligned",  op::SW,  5'd0, 32'h0000_0902, pipeline_status::STORE_MISALIGNED);
+
+        start_memory_op("LOAD_FAULT", op::LW, 5'd9, 32'h0000_0A00, 32'd0, 32'h4000);
+        check_bwd_status("LOAD_FAULT busy stall", status_backwards_out, pipeline_status::STALL);
+        finish_fault("LOAD_FAULT", pipeline_status::LOAD_FAULT);
+
+        start_memory_op("STORE_FAULT", op::SW, 5'd0, 32'h0000_0A04, 32'hFACE_CAFE, 32'h4004);
+        check_bwd_status("STORE_FAULT busy stall", status_backwards_out, pipeline_status::STALL);
+        finish_fault("STORE_FAULT", pipeline_status::STORE_FAULT);
+
+        $display("\n--- incoming FETCH_FAULT propagation ---");
         @(negedge clk);
-        source_data_in = src;
-        rd_data_in = rd;
-        instruction_in = instr;
-        program_counter_in = pc;
-        next_program_counter_in = next_pc;
-        status_forwards_in = fwd_status;
-        status_backwards_in = back_status;
-        jump_address_backwards_in = jump_addr;
+        source_data_in            = 32'd0;
+        rd_data_in                = 32'd0;
+        instruction_in            = make_instr(op::ADD, 5'd1, 5'd0, 5'd0, 32'd0);
+        program_counter_in        = 32'h5000;
+        next_program_counter_in   = 32'h5004;
+        status_forwards_in        = pipeline_status::FETCH_FAULT;
+        status_backwards_in       = pipeline_status::READY;
+        jump_address_backwards_in = 32'd0;
+        clear_bus();
+
         @(posedge clk);
         #1;
-    endtask
 
-    task check_outputs(
-        input string test_name,
-        input logic [31:0] exp_source_reg,
-        input logic [31:0] exp_rd_reg,
-        input instruction::t exp_instr_reg,
-        input logic [31:0] exp_pc_reg,
-        input logic [31:0] exp_next_pc_reg,
-        input forwarding::t exp_fwd,
-        input pipeline_status::forwards_t exp_fwd_status,
-        input pipeline_status::backwards_t exp_back_status,
-        input logic [31:0] exp_jump_addr
-    );
-        if (source_data_reg_out !== exp_source_reg) begin
-            $display("[FAIL] %s: source_data_reg_out = %h, expected %h", test_name, source_data_reg_out, exp_source_reg);
-            $finish;
-        end
-        if (rd_data_reg_out !== exp_rd_reg) begin
-            $display("[FAIL] %s: rd_data_reg_out = %h, expected %h", test_name, rd_data_reg_out, exp_rd_reg);
-            $finish;
-        end
-        if (instruction_reg_out.op !== exp_instr_reg.op ||
-            instruction_reg_out.rd_address !== exp_instr_reg.rd_address) begin
-            $display("[FAIL] %s: instruction_reg_out mismatch", test_name);
-            $finish;
-        end
-        if (program_counter_reg_out !== exp_pc_reg) begin
-            $display("[FAIL] %s: program_counter_reg_out = %h, expected %h", test_name, program_counter_reg_out, exp_pc_reg);
-            $finish;
-        end
-        if (next_program_counter_reg_out !== exp_next_pc_reg) begin
-            $display("[FAIL] %s: next_program_counter_reg_out = %h, expected %h", test_name, next_program_counter_reg_out, exp_next_pc_reg);
-            $finish;
-        end
-        if (forwarding_out.data_valid !== exp_fwd.data_valid ||
-            forwarding_out.data !== exp_fwd.data ||
-            forwarding_out.address !== exp_fwd.address) begin
-            $display("[FAIL] %s: forwarding_out mismatch", test_name);
-            $finish;
-        end
-        if (status_forwards_out !== exp_fwd_status) begin
-            $display("[FAIL] %s: status_forwards_out = %0d, expected %0d", test_name, status_forwards_out, exp_fwd_status);
-            $finish;
-        end
-        if (status_backwards_out !== exp_back_status) begin
-            $display("[FAIL] %s: status_backwards_out = %0d, expected %0d", test_name, status_backwards_out, exp_back_status);
-            $finish;
-        end
-        if (jump_address_backwards_out !== exp_jump_addr) begin
-            $display("[FAIL] %s: jump_address_backwards_out = %h, expected %h", test_name, jump_address_backwards_out, exp_jump_addr);
-            $finish;
-        end
-        $display("[PASS] %s", test_name);
-    endtask
+        check_fwd_status("FETCH_FAULT propagated", status_forwards_out, pipeline_status::FETCH_FAULT);
+        check_bit("FETCH_FAULT no forwarding", forwarding_out.data_valid, 1'b0);
+        check_op("FETCH_FAULT NOP", instruction_reg_out.op, instruction::NOP.op);
 
-    // Main test sequence
+        drive_bubble_cycle();
+
+        $display("\n--- downstream STALL hold ---");
+        drive_non_memory("STALL baseline", op::ADD, 5'd10, 32'h1111_2222, 32'h6000);
+
+        @(negedge clk);
+        source_data_in            = 32'd0;
+        rd_data_in                = 32'h3333_4444;
+        instruction_in            = make_instr(op::SUB, 5'd11, 5'd0, 5'd0, 32'd0);
+        program_counter_in        = 32'h6004;
+        next_program_counter_in   = 32'h6008;
+        status_forwards_in        = pipeline_status::VALID;
+        status_backwards_in       = pipeline_status::STALL;
+        jump_address_backwards_in = 32'hABCD_0000;
+        clear_bus();
+
+        @(posedge clk);
+        #1;
+
+        check_op("STALL holds op", instruction_reg_out.op, instruction::NOP.op);
+        check_bwd_status("STALL backward", status_backwards_out, pipeline_status::STALL);
+        check32("STALL jump pass", jump_address_backwards_out, 32'hABCD_0000);
+
+        $display("\n--- downstream JUMP flush ---");
+        @(negedge clk);
+        status_backwards_in       = pipeline_status::JUMP;
+        jump_address_backwards_in = 32'hCAFE_BABE;
+
+        @(posedge clk);
+        #1;
+
+        check_op("JUMP flush NOP", instruction_reg_out.op, instruction::NOP.op);
+        check_fwd_status("JUMP flush BUBBLE", status_forwards_out, pipeline_status::BUBBLE);
+        check_bwd_status("JUMP backward", status_backwards_out, pipeline_status::JUMP);
+        check32("JUMP address pass", jump_address_backwards_out, 32'hCAFE_BABE);
+        check_bit("JUMP no forwarding", forwarding_out.data_valid, 1'b0);
+
+        $display("\n========================================");
+        $display("COMPREHENSIVE MEMORY_STAGE TEST SUMMARY");
+        $display("PASSED: %0d", pass_count);
+        $display("FAILED: %0d", fail_count);
+        $display("========================================");
+
+        if (fail_count == 0) begin
+            $display("ALL COMPREHENSIVE MEMORY_STAGE TESTS PASSED");
+            $finish;
+        end else begin
+            $display("COMPREHENSIVE MEMORY_STAGE TESTS FAILED");
+            $fatal;
+        end
+    end
+
     initial begin
-        status_backwards_in = pipeline_status::READY;
-        jump_address_backwards_in = 32'd0;
-        status_forwards_in = pipeline_status::VALID;
+        $dumpfile("tb_memory_stage.vcd");
+        $dumpvars(0, tb_memory_stage);
+    end
 
-        wait (rst == 0);
-        @(posedge clk); #1;
-
-        // 1. ALU passthrough
-        apply_and_advance(
-            32'd0, 32'h12345678,
-            '{op: op::ADD, rd_address: 5'd1, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1000, 32'h1004,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        check_outputs("ALU passthrough",
-            32'd0, 32'h12345678,
-            '{op: op::ADD, rd_address: 5'd1, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1000, 32'h1004,
-            '{data_valid: 1'b1, data: 32'h12345678, address: 5'd1},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 2. LW word load from address 0
-        apply_and_advance(
-            32'd0, 32'd0,
-            '{op: op::LW, rd_address: 5'd2, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1008, 32'h100C,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("LW word load",
-            32'd0, 32'h12345678,
-            '{op: op::LW, rd_address: 5'd2, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1008, 32'h100C,
-            '{data_valid: 1'b1, data: 32'h12345678, address: 5'd2},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 3. SW word store to address 16 (word index 4)
-        apply_and_advance(
-            32'hDEADBEEF, 32'd16,
-            '{op: op::SW, rd_address: 0, rs1_address: 0, rs2_address: 5'd3, immediate: 0, csr: csr::t'(0)},
-            32'h1010, 32'h1014,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("SW word store",
-            32'hDEADBEEF, 32'd16,
-            '{op: op::SW, rd_address: 0, rs1_address: 0, rs2_address: 5'd3, immediate: 0, csr: csr::t'(0)},
-            32'h1010, 32'h1014,
-            '{data_valid: 1'b0, data: 0, address: 0},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-        if (memory[4] !== 32'hDEADBEEF) begin
-            $display("[FAIL] Store check: memory[4]=%h, expected DEADBEEF", memory[4]);
-            $finish;
-        end
-
-        // 4. LB signed byte from address 1 (byte = 0x56, sign‑extended = 0x00000056)
-        apply_and_advance(
-            32'd0, 32'd1,
-            '{op: op::LB, rd_address: 5'd4, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1018, 32'h101C,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("LB signed byte",
-            32'd0, 32'h00000056,
-            '{op: op::LB, rd_address: 5'd4, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1018, 32'h101C,
-            '{data_valid: 1'b1, data: 32'h00000056, address: 5'd4},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 5. LBU unsigned byte from address 2 (0x34 -> 0x00000034)
-        apply_and_advance(
-            32'd0, 32'd2,
-            '{op: op::LBU, rd_address: 5'd5, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1020, 32'h1024,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("LBU unsigned byte",
-            32'd0, 32'h00000034,
-            '{op: op::LBU, rd_address: 5'd5, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1020, 32'h1024,
-            '{data_valid: 1'b1, data: 32'h00000034, address: 5'd5},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 6. LH signed halfword from address 2 (0x1234 -> 0x00001234)
-        apply_and_advance(
-            32'd0, 32'd2,
-            '{op: op::LH, rd_address: 5'd6, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1028, 32'h102C,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("LH signed halfword",
-            32'd0, 32'h00001234,
-            '{op: op::LH, rd_address: 5'd6, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1028, 32'h102C,
-            '{data_valid: 1'b1, data: 32'h00001234, address: 5'd6},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 7. LHU unsigned halfword from address 2 (0x1234 -> 0x00001234)
-        apply_and_advance(
-            32'd0, 32'd2,
-            '{op: op::LHU, rd_address: 5'd7, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1030, 32'h1034,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("LHU unsigned halfword",
-            32'd0, 32'h00001234,
-            '{op: op::LHU, rd_address: 5'd7, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1030, 32'h1034,
-            '{data_valid: 1'b1, data: 32'h00001234, address: 5'd7},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-
-        // 8. Wishbone error
-        force_error = 1;
-        apply_and_advance(
-            32'd0, 32'd0,
-            '{op: op::LW, rd_address: 5'd8, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1038, 32'h103C,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("Wishbone error",
-            32'd0, 32'd0,
-            '{op: op::LW, rd_address: 5'd8, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1038, 32'h103C,
-            '{data_valid: 1'b0, data: 0, address: 0},
-            pipeline_status::VALID, pipeline_status::READY, 32'd0);
-        force_error = 0;
-
-        // 9. Illegal instruction
-        apply_and_advance(
-            32'd0, 32'd0,
-            '{op: op::ILLEGAL, rd_address: 0, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1040, 32'h1044,
-            pipeline_status::VALID, pipeline_status::READY, 32'd0
-        );
-        @(posedge clk); #1;
-        check_outputs("Illegal instruction",
-            32'd0, 32'd0,
-            '{op: op::ILLEGAL, rd_address: 0, rs1_address: 0, rs2_address: 0, immediate: 0, csr: csr::t'(0)},
-            32'h1040, 32'h1044,
-            '{data_valid: 1'b0, data: 0, address: 0},
-            pipeline_status::ILLEGAL_INSTRUCTION, pipeline_status::READY, 32'd0);
-
-        $display("\n=====================================");
-        $display("ALL MEMORY_STAGE TESTS PASSED");
-        $display("=====================================\n");
-        $finish;
+    initial begin
+        repeat (10000) @(posedge clk);
+        $display("[FAIL] Simulation timeout");
+        $fatal;
     end
 
 endmodule

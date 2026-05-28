@@ -12,7 +12,7 @@ VM_TIMING = 1
 # Coverage output mode?  0/1 (from --coverage)
 VM_COVERAGE = 0
 # Parallel builds?  0/1 (from --output-split)
-VM_PARALLEL_BUILDS = 0
+VM_PARALLEL_BUILDS = 1
 # Tracing output mode?  0/1 (from --trace/--trace-fst)
 VM_TRACE = 1
 # Tracing output mode in VCD format?  0/1 (from --trace)
@@ -25,6 +25,7 @@ VM_TRACE_FST = 0
 VM_CLASSES_FAST += \
 	Vtb_decode_stage \
 	Vtb_decode_stage___024root__DepSet_h5132c84a__0 \
+	Vtb_decode_stage___024root__DepSet_h5132c84a__1 \
 	Vtb_decode_stage___024root__DepSet_ha66737b3__0 \
 	Vtb_decode_stage__main \
 

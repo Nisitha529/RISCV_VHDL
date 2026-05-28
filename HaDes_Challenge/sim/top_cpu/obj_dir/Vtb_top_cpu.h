@@ -31,8 +31,8 @@ class Vtb_top_cpu VL_NOT_FINAL : public VerilatedModel {
     // CELLS
     // Public to allow access to /* verilator public */ items.
     // Otherwise the application code can consider these internals.
-    Vtb_top_cpu_wishbone_interface* const __PVT__tb_top_cpu__DOT__wb_imem;
-    Vtb_top_cpu_wishbone_interface* const __PVT__tb_top_cpu__DOT__wb_dmem;
+    Vtb_top_cpu_wishbone_interface* const __PVT__tb_top_cpu__DOT__fetch_wb;
+    Vtb_top_cpu_wishbone_interface* const __PVT__tb_top_cpu__DOT__mem_wb;
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.

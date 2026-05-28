@@ -28,41 +28,36 @@ void Vtb_fetch_stage___024root__trace_chg_sub_0(Vtb_fetch_stage___024root* vlSel
         bufp->chgBit(oldp+0,(vlSelf->tb_fetch_stage__DOT__rst));
         bufp->chgCData(oldp+1,(vlSelf->tb_fetch_stage__DOT__status_backwards_in),2);
         bufp->chgIData(oldp+2,(vlSelf->tb_fetch_stage__DOT__jump_address_backwards_in),32);
-        bufp->chgBit(oldp+3,(vlSelf->tb_fetch_stage__DOT__force_error));
-        bufp->chgBit(oldp+4,((1U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in))));
-        bufp->chgBit(oldp+5,((2U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in))));
+        bufp->chgIData(oldp+3,(vlSelf->tb_fetch_stage__DOT__pass_count),32);
+        bufp->chgIData(oldp+4,(vlSelf->tb_fetch_stage__DOT__fail_count),32);
+        bufp->chgIData(oldp+5,(vlSelf->tb_fetch_stage__DOT__addr),32);
+        bufp->chgBit(oldp+6,((1U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in))));
+        bufp->chgBit(oldp+7,((2U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in))));
+        bufp->chgBit(oldp+8,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.ack));
+        bufp->chgBit(oldp+9,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.err));
+        bufp->chgIData(oldp+10,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.dat_miso),32);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[3U])) {
-        bufp->chgIData(oldp+6,(vlSelf->tb_fetch_stage__DOT__instruction_reg_out),32);
-        bufp->chgIData(oldp+7,(vlSelf->tb_fetch_stage__DOT__program_counter_reg_out),32);
-        bufp->chgCData(oldp+8,(vlSelf->tb_fetch_stage__DOT__status_forwards_out),4);
-        bufp->chgBit(oldp+9,(vlSelf->tb_fetch_stage__DOT__dut__DOT__wb_state));
-        bufp->chgIData(oldp+10,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pc),32);
-        bufp->chgIData(oldp+11,(vlSelf->tb_fetch_stage__DOT__dut__DOT__request_pc),32);
-        bufp->chgBit(oldp+12,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_valid));
-        bufp->chgIData(oldp+13,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_instr),32);
-        bufp->chgIData(oldp+14,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_pc),32);
-        bufp->chgCData(oldp+15,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_status),4);
-        bufp->chgBit(oldp+16,(vlSelf->tb_fetch_stage__DOT__dut__DOT__kill_response));
-        bufp->chgIData(oldp+17,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.adr),32);
-        bufp->chgCData(oldp+18,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.sel),4);
-        bufp->chgIData(oldp+19,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.dat_mosi),32);
-        bufp->chgBit(oldp+20,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.cyc));
-        bufp->chgBit(oldp+21,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.stb));
-        bufp->chgBit(oldp+22,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.we));
+        bufp->chgIData(oldp+11,(vlSelf->tb_fetch_stage__DOT__instruction_reg_out),32);
+        bufp->chgIData(oldp+12,(vlSelf->tb_fetch_stage__DOT__program_counter_reg_out),32);
+        bufp->chgCData(oldp+13,(vlSelf->tb_fetch_stage__DOT__status_forwards_out),4);
+        bufp->chgBit(oldp+14,(vlSelf->tb_fetch_stage__DOT__dut__DOT__wb_state));
+        bufp->chgIData(oldp+15,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pc),32);
+        bufp->chgIData(oldp+16,(vlSelf->tb_fetch_stage__DOT__dut__DOT__request_pc),32);
+        bufp->chgBit(oldp+17,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_valid));
+        bufp->chgIData(oldp+18,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_instr),32);
+        bufp->chgIData(oldp+19,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_pc),32);
+        bufp->chgCData(oldp+20,(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_status),4);
+        bufp->chgBit(oldp+21,(vlSelf->tb_fetch_stage__DOT__dut__DOT__kill_response));
+        bufp->chgBit(oldp+22,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.cyc));
+        bufp->chgBit(oldp+23,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.stb));
+        bufp->chgIData(oldp+24,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.adr),32);
+        bufp->chgCData(oldp+25,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.sel),4);
+        bufp->chgBit(oldp+26,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.we));
+        bufp->chgIData(oldp+27,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.dat_mosi),32);
     }
-    if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[4U])) {
-        bufp->chgBit(oldp+23,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.err));
-        bufp->chgIData(oldp+24,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.dat_miso),32);
-        bufp->chgBit(oldp+25,(vlSymsp->TOP__tb_fetch_stage__DOT__wb.ack));
-    }
-    bufp->chgBit(oldp+26,(vlSelf->tb_fetch_stage__DOT__clk));
-    bufp->chgBit(oldp+27,(vlSelf->tb_fetch_stage__DOT__dut__DOT__response_valid));
-    bufp->chgBit(oldp+28,((1U & (~ ((IData)(vlSelf->tb_fetch_stage__DOT__dut__DOT__wb_state) 
-                                    | ((IData)(vlSelf->tb_fetch_stage__DOT__dut__DOT__pending_valid) 
-                                       | ((1U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in)) 
-                                          | (2U == (IData)(vlSelf->tb_fetch_stage__DOT__status_backwards_in)))))))));
-    bufp->chgIData(oldp+29,(vlSelf->tb_fetch_stage__DOT__init_mem__DOT__i),32);
+    bufp->chgBit(oldp+28,(vlSelf->tb_fetch_stage__DOT__clk));
+    bufp->chgBit(oldp+29,(vlSelf->tb_fetch_stage__DOT__dut__DOT__response_valid));
 }
 
 void Vtb_fetch_stage___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
@@ -76,5 +71,4 @@ void Vtb_fetch_stage___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*un
     vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[2U] = 0U;
     vlSymsp->TOP.__Vm_traceActivity[3U] = 0U;
-    vlSymsp->TOP.__Vm_traceActivity[4U] = 0U;
 }

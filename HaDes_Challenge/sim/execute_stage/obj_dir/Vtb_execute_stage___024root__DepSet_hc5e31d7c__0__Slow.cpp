@@ -42,7 +42,7 @@ VL_ATTR_COLD void Vtb_execute_stage___024root___eval_settle(Vtb_execute_stage___
 #ifdef VL_DEBUG
                 Vtb_execute_stage___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("tb_execute_stage.sv", 4, "", "Settle region did not converge.");
+                VL_FATAL_MT("tb_execute_stage.sv", 3, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -75,6 +75,7 @@ VL_ATTR_COLD void Vtb_execute_stage___024root___eval_stl(Vtb_execute_stage___024
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
         Vtb_execute_stage___024root___act_comb__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[5U] = 1U;
         vlSelf->__Vm_traceActivity[4U] = 1U;
         vlSelf->__Vm_traceActivity[3U] = 1U;
         vlSelf->__Vm_traceActivity[2U] = 1U;
@@ -93,16 +94,13 @@ VL_ATTR_COLD void Vtb_execute_stage___024root___dump_triggers__act(Vtb_execute_s
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VactTriggered.at(0U)) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge tb_execute_stage.clk)\n");
     }
     if (vlSelf->__VactTriggered.at(1U)) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge tb_execute_stage.clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
     }
     if (vlSelf->__VactTriggered.at(2U)) {
-        VL_DBG_MSGF("         'act' region trigger index 2 is active: @([changed] tb_execute_stage.rst)\n");
-    }
-    if (vlSelf->__VactTriggered.at(3U)) {
-        VL_DBG_MSGF("         'act' region trigger index 3 is active: @(negedge tb_execute_stage.clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @(negedge tb_execute_stage.clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -117,16 +115,13 @@ VL_ATTR_COLD void Vtb_execute_stage___024root___dump_triggers__nba(Vtb_execute_s
         VL_DBG_MSGF("         No triggers active\n");
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge tb_execute_stage.clk)\n");
     }
     if (vlSelf->__VnbaTriggered.at(1U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge tb_execute_stage.clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([true] __VdlySched.awaitingCurrentTime())\n");
     }
     if (vlSelf->__VnbaTriggered.at(2U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @([changed] tb_execute_stage.rst)\n");
-    }
-    if (vlSelf->__VnbaTriggered.at(3U)) {
-        VL_DBG_MSGF("         'nba' region trigger index 3 is active: @(negedge tb_execute_stage.clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(negedge tb_execute_stage.clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -143,26 +138,41 @@ VL_ATTR_COLD void Vtb_execute_stage___024root___ctor_var_reset(Vtb_execute_stage
     VL_RAND_RESET_W(65, vlSelf->tb_execute_stage__DOT__instruction_in);
     vlSelf->tb_execute_stage__DOT__program_counter_in = VL_RAND_RESET_I(32);
     vlSelf->tb_execute_stage__DOT__source_data_reg_out = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__rd_data_reg_out = VL_RAND_RESET_I(32);
+    VL_RAND_RESET_W(65, vlSelf->tb_execute_stage__DOT__instruction_reg_out);
+    vlSelf->tb_execute_stage__DOT__program_counter_reg_out = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__next_program_counter_reg_out = VL_RAND_RESET_I(32);
     vlSelf->tb_execute_stage__DOT__forwarding_out = VL_RAND_RESET_Q(38);
     vlSelf->tb_execute_stage__DOT__status_forwards_in = VL_RAND_RESET_I(4);
+    vlSelf->tb_execute_stage__DOT__status_forwards_out = VL_RAND_RESET_I(4);
     vlSelf->tb_execute_stage__DOT__status_backwards_in = VL_RAND_RESET_I(2);
+    vlSelf->tb_execute_stage__DOT__status_backwards_out = VL_RAND_RESET_I(2);
     vlSelf->tb_execute_stage__DOT__jump_address_backwards_in = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__jump_address_backwards_out = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__pass_count = 0;
+    vlSelf->tb_execute_stage__DOT__fail_count = 0;
     vlSelf->tb_execute_stage__DOT__dut__DOT__alu_op = VL_RAND_RESET_I(4);
     vlSelf->tb_execute_stage__DOT__dut__DOT__alu_use_imm = VL_RAND_RESET_I(1);
     vlSelf->tb_execute_stage__DOT__dut__DOT__is_branch = VL_RAND_RESET_I(1);
     vlSelf->tb_execute_stage__DOT__dut__DOT__is_jump = VL_RAND_RESET_I(1);
-    vlSelf->tb_execute_stage__DOT__dut__DOT__is_store = VL_RAND_RESET_I(1);
-    vlSelf->tb_execute_stage__DOT__dut__DOT__is_load = VL_RAND_RESET_I(1);
     vlSelf->tb_execute_stage__DOT__dut__DOT__is_jalr = VL_RAND_RESET_I(1);
-    vlSelf->tb_execute_stage__DOT__dut__DOT__op2 = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__is_load = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__is_store = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__is_fence_i = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__is_system_or_csr = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__alu_op2 = VL_RAND_RESET_I(32);
     vlSelf->tb_execute_stage__DOT__dut__DOT__alu_result = VL_RAND_RESET_I(32);
     vlSelf->tb_execute_stage__DOT__dut__DOT__take_branch = VL_RAND_RESET_I(1);
-    vlSelf->tb_execute_stage__DOT__dut__DOT__next_pc = VL_RAND_RESET_I(32);
-    vlSelf->tb_execute_stage__DOT__dut__DOT__rd_value = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__branch_target = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__next_pc_comb = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__branch_or_jump_redirect = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__fetch_misaligned = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__rd_value_comb = VL_RAND_RESET_I(32);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__forward_valid_comb = VL_RAND_RESET_I(1);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__status_backwards_comb = VL_RAND_RESET_I(2);
+    vlSelf->tb_execute_stage__DOT__dut__DOT__jump_address_comb = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__tb_execute_stage__DOT__clk = VL_RAND_RESET_I(1);
-    vlSelf->__Vtrigrprev__TOP__tb_execute_stage__DOT__rst = VL_RAND_RESET_I(1);
-    vlSelf->__VactDidInit = 0;
-    for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }

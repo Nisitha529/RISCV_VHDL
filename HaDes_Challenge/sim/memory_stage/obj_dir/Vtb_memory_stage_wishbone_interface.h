@@ -14,14 +14,9 @@ class Vtb_memory_stage_wishbone_interface final : public VerilatedModule {
   public:
 
     // DESIGN SPECIFIC STATE
-    CData/*3:0*/ sel;
-    CData/*0:0*/ cyc;
-    CData/*0:0*/ stb;
-    CData/*0:0*/ we;
     CData/*0:0*/ ack;
     CData/*0:0*/ err;
     IData/*31:0*/ adr;
-    IData/*31:0*/ dat_mosi;
     IData/*31:0*/ dat_miso;
 
     // INTERNAL VARIABLES

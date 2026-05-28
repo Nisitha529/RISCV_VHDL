@@ -6,6 +6,7 @@
 
 #include "Vtb_writeback_stage___024root.h"
 
+VL_ATTR_COLD void Vtb_writeback_stage___024root___eval_initial__TOP(Vtb_writeback_stage___024root* vlSelf);
 VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__0(Vtb_writeback_stage___024root* vlSelf);
 VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__1(Vtb_writeback_stage___024root* vlSelf);
 VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__2(Vtb_writeback_stage___024root* vlSelf);
@@ -15,14 +16,13 @@ void Vtb_writeback_stage___024root___eval_initial(Vtb_writeback_stage___024root*
     Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___eval_initial\n"); );
     // Body
+    Vtb_writeback_stage___024root___eval_initial__TOP(vlSelf);
     vlSelf->__Vm_traceActivity[1U] = 1U;
     Vtb_writeback_stage___024root___eval_initial__TOP__0(vlSelf);
     Vtb_writeback_stage___024root___eval_initial__TOP__1(vlSelf);
     Vtb_writeback_stage___024root___eval_initial__TOP__2(vlSelf);
     vlSelf->__Vtrigrprev__TOP__tb_writeback_stage__DOT__clk 
         = vlSelf->tb_writeback_stage__DOT__clk;
-    vlSelf->__Vtrigrprev__TOP__tb_writeback_stage__DOT__rst 
-        = vlSelf->tb_writeback_stage__DOT__rst;
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__0(Vtb_writeback_stage___024root* vlSelf) {
@@ -34,639 +34,89 @@ VL_INLINE_OPT VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__0(V
     while (1U) {
         co_await vlSelf->__VdlySched.delay(0x1388U, 
                                            "tb_writeback_stage.sv", 
-                                           12);
+                                           75);
         vlSelf->tb_writeback_stage__DOT__clk = (1U 
                                                 & (~ (IData)(vlSelf->tb_writeback_stage__DOT__clk)));
     }
-}
-
-VL_INLINE_OPT VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__1(Vtb_writeback_stage___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___eval_initial__TOP__1\n"); );
-    // Body
-    vlSelf->tb_writeback_stage__DOT__rst = 1U;
-    co_await vlSelf->__VtrigSched_ha16a72ed__0.trigger(
-                                                       "@(posedge tb_writeback_stage.clk)", 
-                                                       "tb_writeback_stage.sv", 
-                                                       16);
-    co_await vlSelf->__VtrigSched_ha16a72ed__0.trigger(
-                                                       "@(posedge tb_writeback_stage.clk)", 
-                                                       "tb_writeback_stage.sv", 
-                                                       16);
-    vlSelf->tb_writeback_stage__DOT__rst = 0U;
-}
-
-VL_INLINE_OPT VlCoroutine Vtb_writeback_stage___024root___eval_initial__TOP__2(Vtb_writeback_stage___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___eval_initial__TOP__2\n"); );
-    // Init
-    std::string __Vtask_tb_writeback_stage__DOT__check__0__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__0__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__0__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__0__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__0__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__0__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__0__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__0__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__1__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__1__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__1__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__1__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__1__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__1__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__1__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__1__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__2__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__2__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__2__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__2__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__2__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__2__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__2__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__2__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__3__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__3__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__3__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__3__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__3__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__3__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__3__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__3__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__4__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__4__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__4__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__4__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__4__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__4__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__4__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__4__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__5__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__5__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__5__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__5__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__5__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__5__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__5__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__5__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__6__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__6__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__6__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__6__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__6__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__6__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__6__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__6__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__7__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__7__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__7__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__7__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__7__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__7__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__7__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__7__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__8__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__8__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__8__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__8__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__8__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__8__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__8__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__8__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_addr = 0;
-    std::string __Vtask_tb_writeback_stage__DOT__check__9__test_name;
-    VlWide<3>/*64:0*/ __Vtask_tb_writeback_stage__DOT__check__9__instr;
-    VL_ZERO_W(65, __Vtask_tb_writeback_stage__DOT__check__9__instr);
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__9__rd_val;
-    __Vtask_tb_writeback_stage__DOT__check__9__rd_val = 0;
-    CData/*0:0*/ __Vtask_tb_writeback_stage__DOT__check__9__exp_valid;
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_valid = 0;
-    IData/*31:0*/ __Vtask_tb_writeback_stage__DOT__check__9__exp_data;
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_data = 0;
-    CData/*4:0*/ __Vtask_tb_writeback_stage__DOT__check__9__exp_addr;
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_addr = 0;
-    // Body
-    vlSelf->tb_writeback_stage__DOT__source_data_in = 0U;
-    vlSelf->tb_writeback_stage__DOT__program_counter_in = 0U;
-    vlSelf->tb_writeback_stage__DOT__next_program_counter_in = 0U;
-    vlSelf->tb_writeback_stage__DOT__external_interrupt_in = 0U;
-    vlSelf->tb_writeback_stage__DOT__timer_interrupt_in = 0U;
-    vlSelf->tb_writeback_stage__DOT__status_forwards_in = 0U;
-    while (vlSelf->tb_writeback_stage__DOT__rst) {
-        co_await vlSelf->__VtrigSched_h29cd0448__0.trigger(
-                                                           "@([changed] tb_writeback_stage.rst)", 
-                                                           "tb_writeback_stage.sv", 
-                                                           100);
-    }
-    co_await vlSelf->__VtrigSched_ha16a72ed__0.trigger(
-                                                       "@(posedge tb_writeback_stage.clk)", 
-                                                       "tb_writeback_stage.sv", 
-                                                       101);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       101);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_addr = 3U;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_data = 0x2aU;
-    __Vtask_tb_writeback_stage__DOT__check__0__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__0__rd_val = 0x2aU;
-    __Vtask_tb_writeback_stage__DOT__check__0__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__0__instr[1U] = 0xd8c00000U;
-    __Vtask_tb_writeback_stage__DOT__check__0__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__0__test_name = 
-        std::string{"ADD writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__0__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__0__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__0__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__0__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__0__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__0__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__0__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__0__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__0__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__0__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__0__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__0__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__0__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__0__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_addr = 5U;
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_data = 0x64U;
-    __Vtask_tb_writeback_stage__DOT__check__1__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__1__rd_val = 0x64U;
-    __Vtask_tb_writeback_stage__DOT__check__1__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__1__instr[1U] = 0x91400000U;
-    __Vtask_tb_writeback_stage__DOT__check__1__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__1__test_name = 
-        std::string{"ADDI writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__1__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__1__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__1__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__1__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__1__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__1__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__1__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__1__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__1__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__1__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__1__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__1__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__1__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__1__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_addr = 2U;
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_data = 0xdeadbeefU;
-    __Vtask_tb_writeback_stage__DOT__check__2__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__2__rd_val = 0xdeadbeefU;
-    __Vtask_tb_writeback_stage__DOT__check__2__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__2__instr[1U] = 0x60800000U;
-    __Vtask_tb_writeback_stage__DOT__check__2__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__2__test_name = 
-        std::string{"LW writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__2__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__2__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__2__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__2__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__2__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__2__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__2__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__2__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__2__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__2__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__2__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__2__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__2__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__2__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_addr = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_data = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__exp_valid = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__rd_val = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__instr[1U] = 0x78000000U;
-    __Vtask_tb_writeback_stage__DOT__check__3__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__3__test_name = 
-        std::string{"SB no write"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__3__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__3__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__3__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__3__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__3__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__3__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__3__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__3__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__3__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__3__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__3__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__3__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__3__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__3__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_addr = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_data = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__exp_valid = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__rd_val = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__instr[1U] = 0x20000000U;
-    __Vtask_tb_writeback_stage__DOT__check__4__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__4__test_name = 
-        std::string{"BEQ no write"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__4__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__4__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__4__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__4__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__4__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__4__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__4__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__4__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__4__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__4__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__4__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__4__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__4__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__4__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_addr = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_data = 0x1004U;
-    __Vtask_tb_writeback_stage__DOT__check__5__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__5__rd_val = 0x1004U;
-    __Vtask_tb_writeback_stage__DOT__check__5__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__5__instr[1U] = 0x10400000U;
-    __Vtask_tb_writeback_stage__DOT__check__5__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__5__test_name = 
-        std::string{"JAL writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__5__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__5__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__5__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__5__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__5__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__5__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__5__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__5__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__5__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__5__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__5__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__5__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__5__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__5__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_addr = 0xaU;
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_data = 0x12345000U;
-    __Vtask_tb_writeback_stage__DOT__check__6__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__6__rd_val = 0x12345000U;
-    __Vtask_tb_writeback_stage__DOT__check__6__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__6__instr[1U] = 0x2800000U;
-    __Vtask_tb_writeback_stage__DOT__check__6__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__6__test_name = 
-        std::string{"LUI writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__6__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__6__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__6__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__6__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__6__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__6__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__6__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__6__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__6__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__6__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__6__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__6__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__6__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__6__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_addr = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_data = 0x500U;
-    __Vtask_tb_writeback_stage__DOT__check__7__exp_valid = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__7__rd_val = 0x500U;
-    __Vtask_tb_writeback_stage__DOT__check__7__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__7__instr[1U] = 0x48400300U;
-    __Vtask_tb_writeback_stage__DOT__check__7__instr[2U] = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__7__test_name = 
-        std::string{"CSRRW writes rd"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__7__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__7__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__7__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__7__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__7__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__7__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__7__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__7__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__7__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__7__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__7__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__7__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__7__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__7__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_addr = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_data = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__8__exp_valid = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__8__rd_val = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__8__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__8__instr[1U] = 0x88000000U;
-    __Vtask_tb_writeback_stage__DOT__check__8__instr[2U] = 1U;
-    __Vtask_tb_writeback_stage__DOT__check__8__test_name = 
-        std::string{"Illegal no write"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__8__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__8__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__8__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__8__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__8__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__8__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__8__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__8__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__8__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__8__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__8__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__8__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__8__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n",-1,&(__Vtask_tb_writeback_stage__DOT__check__8__test_name));
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_addr = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_data = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__9__exp_valid = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__9__rd_val = 0x3e7U;
-    __Vtask_tb_writeback_stage__DOT__check__9__instr[0U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__9__instr[1U] = 0xd8000000U;
-    __Vtask_tb_writeback_stage__DOT__check__9__instr[2U] = 0U;
-    __Vtask_tb_writeback_stage__DOT__check__9__test_name = 
-        std::string{"Write to x0 invalid"};
-    vlSelf->tb_writeback_stage__DOT__instruction_in[0U] 
-        = __Vtask_tb_writeback_stage__DOT__check__9__instr[0U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-        = __Vtask_tb_writeback_stage__DOT__check__9__instr[1U];
-    vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
-        = __Vtask_tb_writeback_stage__DOT__check__9__instr[2U];
-    vlSelf->tb_writeback_stage__DOT__rd_data_in = __Vtask_tb_writeback_stage__DOT__check__9__rd_val;
-    co_await vlSelf->__VdlySched.delay(0x3e8U, "tb_writeback_stage.sv", 
-                                       64);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
-    if (VL_UNLIKELY(((1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                    >> 0x25U))) != (IData)(__Vtask_tb_writeback_stage__DOT__check__9__exp_valid)))) {
-        VL_WRITEF("[FAIL] %@: data_valid = %b, expected %b\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__9__test_name),
-                  1,(1U & (IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                                   >> 0x25U))),1,(IData)(__Vtask_tb_writeback_stage__DOT__check__9__exp_valid));
-        VL_FINISH_MT("tb_writeback_stage.sv", 67, "");
-    }
-    if (VL_UNLIKELY(((IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)) != __Vtask_tb_writeback_stage__DOT__check__9__exp_data))) {
-        VL_WRITEF("[FAIL] %@: data = %x, expected %x\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__9__test_name),
-                  32,(IData)((vlSelf->tb_writeback_stage__DOT__forwarding_out 
-                              >> 5U)),32,__Vtask_tb_writeback_stage__DOT__check__9__exp_data);
-        VL_FINISH_MT("tb_writeback_stage.sv", 71, "");
-    }
-    if (VL_UNLIKELY(((0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)) 
-                     != (IData)(__Vtask_tb_writeback_stage__DOT__check__9__exp_addr)))) {
-        VL_WRITEF("[FAIL] %@: address = %0#, expected %0#\n",
-                  -1,&(__Vtask_tb_writeback_stage__DOT__check__9__test_name),
-                  5,(0x1fU & (IData)(vlSelf->tb_writeback_stage__DOT__forwarding_out)),
-                  5,(IData)(__Vtask_tb_writeback_stage__DOT__check__9__exp_addr));
-        VL_FINISH_MT("tb_writeback_stage.sv", 75, "");
-    }
-    VL_WRITEF("[PASS] %@\n\n=====================================\nALL WRITEBACK_STAGE TESTS PASSED\n=====================================\n\n",
-              -1,&(__Vtask_tb_writeback_stage__DOT__check__9__test_name));
-    VL_FINISH_MT("tb_writeback_stage.sv", 186, "");
-    vlSelf->__Vm_traceActivity[2U] = 1U;
 }
 
 VL_INLINE_OPT void Vtb_writeback_stage___024root___act_comb__TOP__0(Vtb_writeback_stage___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___act_comb__TOP__0\n"); );
+    // Init
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0 = 0;
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0 = 0;
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0 = 0;
     // Body
-    vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd 
+    if ((8U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+        if ((4U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 7U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+        }
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception 
+            = (1U & (IData)((0U == (7U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)))));
+    } else {
+        if ((4U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause 
+                    = ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))
+                        ? 6U : 5U);
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+            } else if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 4U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+            } else {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 2U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+            }
+        } else if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 1U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__program_counter_in;
+            } else {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__next_program_counter_in;
+            }
+        } else {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        }
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception 
+            = (1U & (IData)((0U != (6U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)))));
+    }
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x2fU == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd_normal 
         = (1U & ((1U & vlSelf->tb_writeback_stage__DOT__instruction_in[2U])
-                  ? ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-                         >> 0x1fU)) & ((0x40000000U 
-                                        & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
-                                        ? ((0x20000000U 
-                                            & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
-                                            ? (IData)(
-                                                      (0x18000000U 
-                                                       != 
-                                                       (0x18000000U 
-                                                        & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
-                                            : (IData)(
-                                                      (0U 
-                                                       != 
-                                                       (0x18000000U 
-                                                        & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))
-                                        : ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-                                               >> 0x1dU)) 
-                                           | (IData)(
-                                                     (0U 
-                                                      == 
-                                                      (0x18000000U 
-                                                       & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))))
+                  ? (IData)(((0U == (0xc0000000U & 
+                                     vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                             & ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                    >> 0x1dU)) | (IData)(
+                                                         (0U 
+                                                          == 
+                                                          (0x18000000U 
+                                                           & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))))
                   : ((vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
                       >> 0x1fU) ? (IData)((0U != (0x70000000U 
                                                   & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
@@ -678,15 +128,166 @@ VL_INLINE_OPT void Vtb_writeback_stage___024root___act_comb__TOP__0(Vtb_writebac
                               : (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
                                  >> 0x1cU)) : (~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
                                                   >> 0x1dU))))));
-    vlSelf->tb_writeback_stage__DOT__forwarding_out 
-        = (((QData)((IData)(((IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd) 
-                             & (0U != (0x1fU & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-                                                >> 0x16U)))))) 
-            << 0x25U) | (((QData)((IData)(vlSelf->tb_writeback_stage__DOT__rd_data_in)) 
-                          << 5U) | (QData)((IData)(
-                                                   (0x1fU 
-                                                    & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
-                                                       >> 0x16U))))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+        = ((0x300U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+            ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus
+            : ((0x304U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie
+                : ((0x305U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec
+                    : ((0x341U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                        ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc
+                        : ((0x342U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                            ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mcause
+                            : ((0x343U == (0xfffU & 
+                                           vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                                ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtval
+                                : ((0x344U == (0xfffU 
+                                               & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip
+                                    : 0U)))))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr 
+        = (IData)((((0x40000000U == (0xc0000000U & 
+                                     vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                    & vlSelf->tb_writeback_stage__DOT__instruction_in[2U]) 
+                   & ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                       ? (IData)((0x18000000U != (0x18000000U 
+                                                  & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
+                       : (IData)((0U != (0x18000000U 
+                                         & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))));
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x27U == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x28U == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__external_interrupt_taken 
+        = ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+            >> 3U) & ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie 
+                       >> 0xbU) & (IData)(vlSelf->tb_writeback_stage__DOT__external_interrupt_in)));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__timer_interrupt_taken 
+        = ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+            >> 3U) & ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie 
+                       >> 7U) & (IData)(vlSelf->tb_writeback_stage__DOT__timer_interrupt_in)));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data 
+        = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data;
+    if (((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+         & (IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr))) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable 
+            = (IData)((((0x40000000U == (0xc0000000U 
+                                         & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                        & vlSelf->tb_writeback_stage__DOT__instruction_in[2U]) 
+                       & ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                           ? ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                               ? ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                      >> 0x1bU)) & 
+                                  (0U != vlSelf->tb_writeback_stage__DOT__source_data_in))
+                               : ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                      >> 0x1bU)) | 
+                                  (0U != vlSelf->tb_writeback_stage__DOT__source_data_in)))
+                           : ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                               ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                   ? (0U != vlSelf->tb_writeback_stage__DOT__source_data_in)
+                                   : (0U != vlSelf->tb_writeback_stage__DOT__source_data_in))
+                               : (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                  >> 0x1bU)))));
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data 
+            = ((1U & vlSelf->tb_writeback_stage__DOT__instruction_in[2U])
+                ? ((vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                    >> 0x1fU) ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data
+                    : ((0x40000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                        ? ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                            ? ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data
+                                    : (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       & (~ vlSelf->tb_writeback_stage__DOT__source_data_in)))
+                                : ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       | vlSelf->tb_writeback_stage__DOT__source_data_in)
+                                    : vlSelf->tb_writeback_stage__DOT__source_data_in))
+                            : ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       & (~ vlSelf->tb_writeback_stage__DOT__source_data_in))
+                                    : (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       | vlSelf->tb_writeback_stage__DOT__source_data_in))
+                                : ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? vlSelf->tb_writeback_stage__DOT__source_data_in
+                                    : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data)))
+                        : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data))
+                : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data);
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__external_interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0x8000000bU;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 1U;
+    } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__timer_interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0x80000007U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 1U;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 0xbU;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 3U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 1U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 1U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+        = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+    if ((((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+          & (~ (IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken))) 
+         & (0x2fU != (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                          >> 0x1bU)))))) {
+        if (vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb 
+                = (0U != (0x1fU & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                   >> 0x16U)));
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+                = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data;
+        } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd_normal) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb 
+                = (0U != (0x1fU & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                   >> 0x16U)));
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+                = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+        }
+    }
 }
 
 void Vtb_writeback_stage___024root___eval_act(Vtb_writeback_stage___024root* vlSelf) {
@@ -697,6 +298,421 @@ void Vtb_writeback_stage___024root___eval_act(Vtb_writeback_stage___024root* vlS
     if (((vlSelf->__VactTriggered.at(0U) | vlSelf->__VactTriggered.at(1U)) 
          | vlSelf->__VactTriggered.at(2U))) {
         Vtb_writeback_stage___024root___act_comb__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[3U] = 1U;
+    }
+}
+
+VL_INLINE_OPT void Vtb_writeback_stage___024root___nba_sequent__TOP__0(Vtb_writeback_stage___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___nba_sequent__TOP__0\n"); );
+    // Init
+    IData/*31:0*/ __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus;
+    __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus = 0;
+    // Body
+    __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+        = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus;
+    if (vlSelf->tb_writeback_stage__DOT__rst) {
+        __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus = 0U;
+        vlSelf->tb_writeback_stage__DOT__status_backwards_out = 0U;
+        vlSelf->tb_writeback_stage__DOT__jump_address_backwards_out = 0U;
+        vlSelf->tb_writeback_stage__DOT__forwarding_out = 0ULL;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mcause = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie = 0U;
+    } else {
+        if (vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken) {
+            __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                = ((0xffffff7fU & __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus) 
+                   | (0x80U & (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                               << 4U)));
+            __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                = (0xfffffff7U & __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus);
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtval 
+                = vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mcause 
+                = vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc 
+                = vlSelf->tb_writeback_stage__DOT__program_counter_in;
+        } else {
+            if (((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+                 & (0x2fU == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                        << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                                  >> 0x1bU)))))) {
+                __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                    = ((0xfffffff7U & __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus) 
+                       | (8U & (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                                >> 4U)));
+                __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                    = (0x80U | __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus);
+            } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable) {
+                if ((0x300U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                    __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+                        = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                }
+            }
+            if ((1U & (~ ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+                          & (0x2fU == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                                 << 5U) 
+                                                | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                                   >> 0x1bU)))))))) {
+                if (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable) {
+                    if ((0x300U != (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                        if ((0x304U != (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                            if ((0x305U != (0xfffU 
+                                            & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                if ((0x341U != (0xfffU 
+                                                & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                    if ((0x342U != 
+                                         (0xfffU & 
+                                          vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                        if ((0x343U 
+                                             == (0xfffU 
+                                                 & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                            vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtval 
+                                                = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                                        }
+                                    }
+                                    if ((0x342U == 
+                                         (0xfffU & 
+                                          vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mcause 
+                                            = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                                    }
+                                }
+                                if ((0x341U == (0xfffU 
+                                                & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc 
+                                        = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken) {
+            vlSelf->tb_writeback_stage__DOT__status_backwards_out = 2U;
+            vlSelf->tb_writeback_stage__DOT__jump_address_backwards_out 
+                = vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address;
+        } else {
+            vlSelf->tb_writeback_stage__DOT__status_backwards_out = 0U;
+            vlSelf->tb_writeback_stage__DOT__jump_address_backwards_out = 0U;
+        }
+        vlSelf->tb_writeback_stage__DOT__forwarding_out 
+            = (((QData)((IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb)) 
+                << 0x25U) | (((QData)((IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb)) 
+                              << 5U) | (QData)((IData)(
+                                                       (0x1fU 
+                                                        & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                                           >> 0x16U))))));
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip 
+            = ((0xffffff7fU & vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip) 
+               | ((IData)(vlSelf->tb_writeback_stage__DOT__timer_interrupt_in) 
+                  << 7U));
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip 
+            = ((0xfffff7ffU & vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip) 
+               | ((IData)(vlSelf->tb_writeback_stage__DOT__external_interrupt_in) 
+                  << 0xbU));
+        if ((1U & (~ (IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken)))) {
+            if ((1U & (~ ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+                          & (0x2fU == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                                 << 5U) 
+                                                | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                                   >> 0x1bU)))))))) {
+                if (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable) {
+                    if ((0x300U != (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                        if ((0x304U != (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                            if ((0x305U != (0xfffU 
+                                            & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                if ((0x341U != (0xfffU 
+                                                & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                    if ((0x342U != 
+                                         (0xfffU & 
+                                          vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                        if ((0x343U 
+                                             != (0xfffU 
+                                                 & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                            if ((0x344U 
+                                                 == 
+                                                 (0xfffU 
+                                                  & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                                vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip 
+                                                    = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if ((0x305U == (0xfffU 
+                                            & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                                vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec 
+                                    = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                            }
+                        }
+                        if ((0x304U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))) {
+                            vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie 
+                                = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+        = __Vdly__tb_writeback_stage__DOT__dut__DOT__csr_mstatus;
+}
+
+VL_INLINE_OPT void Vtb_writeback_stage___024root___nba_comb__TOP__0(Vtb_writeback_stage___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___nba_comb__TOP__0\n"); );
+    // Init
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0 = 0;
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0 = 0;
+    CData/*0:0*/ tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0;
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0 = 0;
+    // Body
+    if ((8U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+        if ((4U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        } else {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 7U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+        }
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception 
+            = (1U & (IData)((0U == (7U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)))));
+    } else {
+        if ((4U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause 
+                    = ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))
+                        ? 6U : 5U);
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+            } else if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 4U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+            } else {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 2U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+            }
+        } else if ((2U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+            if ((1U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in))) {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 1U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__program_counter_in;
+            } else {
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+                vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval 
+                    = vlSelf->tb_writeback_stage__DOT__next_program_counter_in;
+            }
+        } else {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause = 0U;
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval = 0U;
+        }
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception 
+            = (1U & (IData)((0U != (6U & (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)))));
+    }
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x2fU == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd_normal 
+        = (1U & ((1U & vlSelf->tb_writeback_stage__DOT__instruction_in[2U])
+                  ? (IData)(((0U == (0xc0000000U & 
+                                     vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                             & ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                    >> 0x1dU)) | (IData)(
+                                                         (0U 
+                                                          == 
+                                                          (0x18000000U 
+                                                           & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))))
+                  : ((vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                      >> 0x1fU) ? (IData)((0U != (0x70000000U 
+                                                  & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
+                      : ((0x40000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                          ? ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                              ? (IData)((0x18000000U 
+                                         != (0x18000000U 
+                                             & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
+                              : (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                 >> 0x1cU)) : (~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                                  >> 0x1dU))))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr 
+        = (IData)((((0x40000000U == (0xc0000000U & 
+                                     vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                    & vlSelf->tb_writeback_stage__DOT__instruction_in[2U]) 
+                   & ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                       ? (IData)((0x18000000U != (0x18000000U 
+                                                  & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])))
+                       : (IData)((0U != (0x18000000U 
+                                         & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))))));
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x27U == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0 
+        = ((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+           & (0x28U == (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                  << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                            >> 0x1bU)))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+        = ((0x300U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+            ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus
+            : ((0x304U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie
+                : ((0x305U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec
+                    : ((0x341U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                        ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc
+                        : ((0x342U == (0xfffU & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                            ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mcause
+                            : ((0x343U == (0xfffU & 
+                                           vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                                ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtval
+                                : ((0x344U == (0xfffU 
+                                               & vlSelf->tb_writeback_stage__DOT__instruction_in[1U]))
+                                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mip
+                                    : 0U)))))));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__external_interrupt_taken 
+        = ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+            >> 3U) & ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie 
+                       >> 0xbU) & (IData)(vlSelf->tb_writeback_stage__DOT__external_interrupt_in)));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__timer_interrupt_taken 
+        = ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mstatus 
+            >> 3U) & ((vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mie 
+                       >> 7U) & (IData)(vlSelf->tb_writeback_stage__DOT__timer_interrupt_in)));
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data 
+        = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data;
+    if (((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+         & (IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr))) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_enable 
+            = (IData)((((0x40000000U == (0xc0000000U 
+                                         & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])) 
+                        & vlSelf->tb_writeback_stage__DOT__instruction_in[2U]) 
+                       & ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                           ? ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                               ? ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                      >> 0x1bU)) & 
+                                  (0U != vlSelf->tb_writeback_stage__DOT__source_data_in))
+                               : ((~ (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                      >> 0x1bU)) | 
+                                  (0U != vlSelf->tb_writeback_stage__DOT__source_data_in)))
+                           : ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                               ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                   ? (0U != vlSelf->tb_writeback_stage__DOT__source_data_in)
+                                   : (0U != vlSelf->tb_writeback_stage__DOT__source_data_in))
+                               : (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                  >> 0x1bU)))));
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_write_data 
+            = ((1U & vlSelf->tb_writeback_stage__DOT__instruction_in[2U])
+                ? ((vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                    >> 0x1fU) ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data
+                    : ((0x40000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                        ? ((0x20000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                            ? ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data
+                                    : (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       & (~ vlSelf->tb_writeback_stage__DOT__source_data_in)))
+                                : ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       | vlSelf->tb_writeback_stage__DOT__source_data_in)
+                                    : vlSelf->tb_writeback_stage__DOT__source_data_in))
+                            : ((0x10000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                ? ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       & (~ vlSelf->tb_writeback_stage__DOT__source_data_in))
+                                    : (vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data 
+                                       | vlSelf->tb_writeback_stage__DOT__source_data_in))
+                                : ((0x8000000U & vlSelf->tb_writeback_stage__DOT__instruction_in[1U])
+                                    ? vlSelf->tb_writeback_stage__DOT__source_data_in
+                                    : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data)))
+                        : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data))
+                : vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data);
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__external_interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0x8000000bU;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 1U;
+    } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__timer_interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause = 0x80000007U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken = 1U;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__interrupt_cause;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__pipeline_exception) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_tval;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__exception_cause;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hc0a4638a__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 0xbU;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_hcb080270__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_tval = 0U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_cause = 3U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken = 1U;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address = 0U;
+    if (vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 1U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mtvec;
+    } else if (tb_writeback_stage__DOT__dut__DOT____VdfgExtracted_h8f4b082b__0) {
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_taken = 1U;
+        vlSelf->tb_writeback_stage__DOT__dut__DOT__redirect_address 
+            = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_mepc;
+    }
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb = 0U;
+    vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+        = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+    if ((((0U == (IData)(vlSelf->tb_writeback_stage__DOT__status_forwards_in)) 
+          & (~ (IData)(vlSelf->tb_writeback_stage__DOT__dut__DOT__trap_taken))) 
+         & (0x2fU != (0x3fU & ((vlSelf->tb_writeback_stage__DOT__instruction_in[2U] 
+                                << 5U) | (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                          >> 0x1bU)))))) {
+        if (vlSelf->tb_writeback_stage__DOT__dut__DOT__is_csr) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb 
+                = (0U != (0x1fU & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                   >> 0x16U)));
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+                = vlSelf->tb_writeback_stage__DOT__dut__DOT__csr_read_data;
+        } else if (vlSelf->tb_writeback_stage__DOT__dut__DOT__writes_rd_normal) {
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_writes_rd_comb 
+                = (0U != (0x1fU & (vlSelf->tb_writeback_stage__DOT__instruction_in[1U] 
+                                   >> 0x16U)));
+            vlSelf->tb_writeback_stage__DOT__dut__DOT__wb_rd_data_comb 
+                = vlSelf->tb_writeback_stage__DOT__rd_data_in;
+        }
     }
 }
 
@@ -705,9 +721,14 @@ void Vtb_writeback_stage___024root___eval_nba(Vtb_writeback_stage___024root* vlS
     Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___eval_nba\n"); );
     // Body
+    if (vlSelf->__VnbaTriggered.at(0U)) {
+        Vtb_writeback_stage___024root___nba_sequent__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[4U] = 1U;
+    }
     if (((vlSelf->__VnbaTriggered.at(0U) | vlSelf->__VnbaTriggered.at(1U)) 
          | vlSelf->__VnbaTriggered.at(2U))) {
-        Vtb_writeback_stage___024root___act_comb__TOP__0(vlSelf);
+        Vtb_writeback_stage___024root___nba_comb__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[5U] = 1U;
     }
 }
 
@@ -747,7 +768,7 @@ void Vtb_writeback_stage___024root___eval(Vtb_writeback_stage___024root* vlSelf)
 #ifdef VL_DEBUG
                     Vtb_writeback_stage___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("tb_writeback_stage.sv", 4, "", "Active region did not converge.");
+                    VL_FATAL_MT("tb_writeback_stage.sv", 3, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -763,7 +784,7 @@ void Vtb_writeback_stage___024root___eval(Vtb_writeback_stage___024root* vlSelf)
 #ifdef VL_DEBUG
                 Vtb_writeback_stage___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("tb_writeback_stage.sv", 4, "", "NBA region did not converge.");
+                VL_FATAL_MT("tb_writeback_stage.sv", 3, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtb_writeback_stage___024root___eval_nba(vlSelf);
@@ -776,11 +797,11 @@ void Vtb_writeback_stage___024root___timing_commit(Vtb_writeback_stage___024root
     Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___timing_commit\n"); );
     // Body
-    if ((1U & (~ (IData)(vlSelf->__VactTriggered.at(1U))))) {
+    if ((1U & (~ (IData)(vlSelf->__VactTriggered.at(0U))))) {
         vlSelf->__VtrigSched_ha16a72ed__0.commit("@(posedge tb_writeback_stage.clk)");
     }
     if ((1U & (~ (IData)(vlSelf->__VactTriggered.at(2U))))) {
-        vlSelf->__VtrigSched_h29cd0448__0.commit("@([changed] tb_writeback_stage.rst)");
+        vlSelf->__VtrigSched_ha16a73b4__0.commit("@(negedge tb_writeback_stage.clk)");
     }
 }
 
@@ -789,14 +810,14 @@ void Vtb_writeback_stage___024root___timing_resume(Vtb_writeback_stage___024root
     Vtb_writeback_stage__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_writeback_stage___024root___timing_resume\n"); );
     // Body
-    if (vlSelf->__VactTriggered.at(0U)) {
+    if (vlSelf->__VactTriggered.at(1U)) {
         vlSelf->__VdlySched.resume();
     }
-    if (vlSelf->__VactTriggered.at(1U)) {
+    if (vlSelf->__VactTriggered.at(0U)) {
         vlSelf->__VtrigSched_ha16a72ed__0.resume("@(posedge tb_writeback_stage.clk)");
     }
     if (vlSelf->__VactTriggered.at(2U)) {
-        vlSelf->__VtrigSched_h29cd0448__0.resume("@([changed] tb_writeback_stage.rst)");
+        vlSelf->__VtrigSched_ha16a73b4__0.resume("@(negedge tb_writeback_stage.clk)");
     }
 }
 

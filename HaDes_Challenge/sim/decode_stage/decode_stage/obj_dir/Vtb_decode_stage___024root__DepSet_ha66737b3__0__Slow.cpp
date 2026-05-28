@@ -42,7 +42,7 @@ VL_ATTR_COLD void Vtb_decode_stage___024root___eval_settle(Vtb_decode_stage___02
 #ifdef VL_DEBUG
                 Vtb_decode_stage___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("tb_decode_stage.sv", 4, "", "Settle region did not converge.");
+                VL_FATAL_MT("tb_decode_stage.sv", 3, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -138,26 +138,29 @@ VL_ATTR_COLD void Vtb_decode_stage___024root___ctor_var_reset(Vtb_decode_stage__
     vlSelf->tb_decode_stage__DOT__exe_forwarding_in = VL_RAND_RESET_Q(38);
     vlSelf->tb_decode_stage__DOT__mem_forwarding_in = VL_RAND_RESET_Q(38);
     vlSelf->tb_decode_stage__DOT__wb_forwarding_in = VL_RAND_RESET_Q(38);
-    vlSelf->tb_decode_stage__DOT__status_forwards_in = VL_RAND_RESET_I(4);
-    vlSelf->tb_decode_stage__DOT__status_backwards_in = VL_RAND_RESET_I(2);
-    vlSelf->tb_decode_stage__DOT__jump_address_backwards_in = VL_RAND_RESET_I(32);
     vlSelf->tb_decode_stage__DOT__rs1_data_reg_out = VL_RAND_RESET_I(32);
     vlSelf->tb_decode_stage__DOT__rs2_data_reg_out = VL_RAND_RESET_I(32);
     vlSelf->tb_decode_stage__DOT__program_counter_reg_out = VL_RAND_RESET_I(32);
     VL_RAND_RESET_W(65, vlSelf->tb_decode_stage__DOT__instruction_reg_out);
+    vlSelf->tb_decode_stage__DOT__status_forwards_in = VL_RAND_RESET_I(4);
     vlSelf->tb_decode_stage__DOT__status_forwards_out = VL_RAND_RESET_I(4);
+    vlSelf->tb_decode_stage__DOT__status_backwards_in = VL_RAND_RESET_I(2);
+    vlSelf->tb_decode_stage__DOT__status_backwards_out = VL_RAND_RESET_I(2);
+    vlSelf->tb_decode_stage__DOT__jump_address_backwards_in = VL_RAND_RESET_I(32);
     vlSelf->tb_decode_stage__DOT__jump_address_backwards_out = VL_RAND_RESET_I(32);
-    vlSelf->tb_decode_stage__DOT__dut__DOT__imm_type = VL_RAND_RESET_I(3);
-    vlSelf->tb_decode_stage__DOT__dut__DOT__imm_out = VL_RAND_RESET_I(32);
-    vlSelf->tb_decode_stage__DOT__dut__DOT__rs1_fwd = VL_RAND_RESET_I(32);
-    vlSelf->tb_decode_stage__DOT__dut__DOT__rs2_fwd = VL_RAND_RESET_I(32);
-    VL_RAND_RESET_W(65, vlSelf->tb_decode_stage__DOT__dut__DOT__instr_packed);
+    vlSelf->tb_decode_stage__DOT__pass_count = 0;
+    vlSelf->tb_decode_stage__DOT__fail_count = 0;
+    VL_RAND_RESET_W(65, vlSelf->tb_decode_stage__DOT__dut__DOT__decoded_instruction);
+    vlSelf->tb_decode_stage__DOT__dut__DOT__rs1_selected = VL_RAND_RESET_I(32);
+    vlSelf->tb_decode_stage__DOT__dut__DOT__rs2_selected = VL_RAND_RESET_I(32);
     vlSelf->tb_decode_stage__DOT__dut__DOT__rs1_used = VL_RAND_RESET_I(1);
     vlSelf->tb_decode_stage__DOT__dut__DOT__rs2_used = VL_RAND_RESET_I(1);
+    vlSelf->tb_decode_stage__DOT__dut__DOT__instruction_decoder_inst__DOT__imm_type = VL_RAND_RESET_I(3);
+    vlSelf->tb_decode_stage__DOT__dut__DOT__instruction_decoder_inst__DOT__imm_out = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
-        vlSelf->tb_decode_stage__DOT__dut__DOT__regfile_inst__DOT__regs[__Vi0] = VL_RAND_RESET_I(32);
+        vlSelf->tb_decode_stage__DOT__dut__DOT__register_file_inst__DOT__regs[__Vi0] = VL_RAND_RESET_I(32);
     }
-    vlSelf->tb_decode_stage__DOT__dut__DOT__regfile_inst__DOT__i = VL_RAND_RESET_I(32);
+    vlSelf->tb_decode_stage__DOT__dut__DOT__register_file_inst__DOT__i = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__tb_decode_stage__DOT__clk = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
