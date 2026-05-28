@@ -1,0 +1,396 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Design internal header
+// See Vtb_mcu.h for the primary calling header
+
+#ifndef VERILATED_VTB_MCU___024ROOT_H_
+#define VERILATED_VTB_MCU___024ROOT_H_  // guard
+
+#include "verilated.h"
+#include "verilated_timing.h"
+
+class Vtb_mcu__Syms;
+class Vtb_mcu_wishbone_interface;
+
+
+class Vtb_mcu___024root final : public VerilatedModule {
+  public:
+    // CELLS
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__fetch_bus;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__8__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__7__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__6__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__5__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__4__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__3__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__2__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__1__KET__;
+    Vtb_mcu_wishbone_interface* __PVT__tb_mcu__DOT__dut__DOT__mem_bus_slaves__BRA__0__KET__;
+
+    // DESIGN SPECIFIC STATE
+    // Anonymous structures to workaround compiler member-count bugs
+    struct {
+        CData/*0:0*/ tb_mcu__DOT__clk;
+        CData/*0:0*/ tb_mcu__DOT__clk_mem;
+        CData/*0:0*/ tb_mcu__DOT__clk_vga;
+        CData/*3:0*/ tb_mcu__DOT__segments_select;
+        CData/*4:0*/ tb_mcu__DOT__buttons_async;
+        CData/*3:0*/ tb_mcu__DOT__vga_red;
+        CData/*3:0*/ tb_mcu__DOT__vga_blue;
+        CData/*3:0*/ tb_mcu__DOT__vga_green;
+        CData/*0:0*/ tb_mcu__DOT__vga_hsync;
+        CData/*0:0*/ tb_mcu__DOT__vga_vsync;
+        CData/*0:0*/ tb_mcu__DOT__uart_rx_async;
+        CData/*4:0*/ tb_mcu__DOT__dut__DOT__buttons;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__rst;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__rst__VforceRd;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__rst__VforceEn;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__rst__VforceVal;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__timer_interrupt;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__external_interrupt;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__uart_rx_sync__DOT__stages;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__if_id_status;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_ex_status;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_status;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_status;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_backwards_out;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_backwards_out;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_backwards_in;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_backwards_in;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_backwards_in;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_rs1_used;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_rs2_used;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__late_result_use_hazard_raw;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__late_result_use_hazard;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_status_in;
+        CData/*2:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__hazard_instruction_decoder__DOT__imm_type;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__wb_state;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pending_valid;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pending_status;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__kill_response;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__response_valid;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__can_request;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__rs1_used;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__rs2_used;
+        CData/*2:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__instruction_decoder_inst__DOT__imm_type;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__alu_op;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__alu_use_imm;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_branch;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_jump;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_jalr;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_load;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_store;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_fence_i;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__is_system_or_csr;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__take_branch;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__branch_or_jump_redirect;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__fetch_misaligned;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__forward_valid_comb;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__status_backwards_comb;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_state;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__is_load;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__is_store;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__valid_memory_op;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__access_misaligned;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__byte_sel_comb;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_sel;
+    };
+    struct {
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_is_load;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_is_store;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__launch_memory_op;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_cyc_comb;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_stb_comb;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_sel_comb;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_we_comb;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_fault_status_comb;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT____VdfgTmp_he475b9dc__0;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__is_csr;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_write_enable;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__writes_rd_normal;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__pipeline_exception;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__timer_interrupt_taken;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__external_interrupt_taken;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__interrupt_taken;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__trap_taken;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__redirect_taken;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__wb_writes_rd_comb;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT____VdfgExtracted_hc0a4638a__0;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT____VdfgExtracted_hcb080270__0;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT____VdfgExtracted_h8f4b082b__0;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__err;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__count;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_leds__DOT__wb_write_sel;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_segments__DOT__wb_write_sel;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_segments__DOT__segments_select_reg;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_buffer_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_err_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_intr_enable_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_buffer_empty;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_buffer_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_err_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_intr_enable_reg;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_buffer_full;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_intr_enable_sig;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_intr_enable_sig;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_active;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_buffer_sig;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__wb_access;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__wb_read_rx_buffer;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__wb_write_tx_buffer;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__wb_write_rx_status;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__wb_write_tx_status;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_tx_module__DOT__tx_byte_reg;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_tx_module__DOT__bit_idx;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_rx_module__DOT__rx_byte_reg;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_rx_module__DOT__bit_idx;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_rx_module__DOT__rx_err_reg;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_timer__DOT__wb_write_sel;
+        CData/*3:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__wishbone_we;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__hsync;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vsync;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__draw;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__draw_delayed;
+        CData/*4:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__pixel_offset;
+        CData/*4:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__pixel_offset_delayed;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__hsync_delayed;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vsync_delayed;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT____Vlvbound_h6855bf08__0;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT____Vlvbound_h683e2b0c__0;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT____Vlvbound_h6852d903__0;
+        CData/*7:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT____Vlvbound_h68574cc7__0;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__test_stb;
+    };
+    struct {
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__test_sel;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__interrupt_enable;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__interrupt_sel;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__counter_sel;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__stall_count;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__stall_sel;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__stall_ack;
+        CData/*0:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__error_sel;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__button_conditioning__BRA__0__KET____DOT__button_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__button_conditioning__BRA__1__KET____DOT__button_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__button_conditioning__BRA__2__KET____DOT__button_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__button_conditioning__BRA__3__KET____DOT__button_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__button_conditioning__BRA__4__KET____DOT__button_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__0__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__1__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__2__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__3__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__4__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__5__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__6__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__7__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__8__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__9__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__10__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__11__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__12__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__13__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__14__KET____DOT__switch_sync__DOT__stages;
+        CData/*1:0*/ tb_mcu__DOT__dut__DOT__switch_conditioning__BRA__15__KET____DOT__switch_sync__DOT__stages;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__producer_valid;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__consumer_uses_rs1;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__consumer_uses_rs2;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__243__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__244__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__244__op_i;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__245__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__245__op_i;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__producer_valid;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__consumer_uses_rs1;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__consumer_uses_rs2;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__247__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__248__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__248__op_i;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__249__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__249__op_i;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__producer_valid;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__consumer_uses_rs1;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__consumer_uses_rs2;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__251__Vfuncout;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__252__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_load_op__252__op_i;
+        CData/*0:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__253__Vfuncout;
+        CData/*5:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_csr_op__253__op_i;
+        CData/*0:0*/ __Vdly__tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__wb_state;
+        CData/*4:0*/ __Vdlyvlsb__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v0;
+        CData/*7:0*/ __Vdlyvval__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v0;
+        CData/*0:0*/ __Vdlyvset__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v0;
+        CData/*4:0*/ __Vdlyvlsb__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v1;
+        CData/*7:0*/ __Vdlyvval__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v1;
+        CData/*0:0*/ __Vdlyvset__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v1;
+        CData/*4:0*/ __Vdlyvlsb__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v2;
+    };
+    struct {
+        CData/*7:0*/ __Vdlyvval__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v2;
+        CData/*0:0*/ __Vdlyvset__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v2;
+        CData/*4:0*/ __Vdlyvlsb__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v3;
+        CData/*7:0*/ __Vdlyvval__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v3;
+        CData/*0:0*/ __Vdlyvset__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v3;
+        CData/*0:0*/ __Vtrigrprev__TOP__tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__launch_memory_op;
+        CData/*0:0*/ __VstlDidInit;
+        CData/*0:0*/ __Vtrigrprev__TOP__tb_mcu__DOT__clk;
+        CData/*0:0*/ __Vtrigrprev__TOP__tb_mcu__DOT__clk_mem;
+        CData/*0:0*/ __Vtrigrprev__TOP__tb_mcu__DOT__clk_vga;
+        CData/*0:0*/ __VactDidInit;
+        CData/*0:0*/ __VactContinue;
+        SData/*15:0*/ tb_mcu__DOT__switches_async;
+        SData/*8:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__select;
+        SData/*8:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__masked_ack;
+        SData/*8:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__masked_err;
+        SData/*15:0*/ tb_mcu__DOT__dut__DOT__wb_leds__DOT__leds_reg;
+        SData/*9:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__column;
+        SData/*9:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__row;
+        SData/*11:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__color;
+        SData/*15:0*/ __Vdlyvdim0__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v0;
+        SData/*15:0*/ __Vdlyvdim0__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v1;
+        SData/*15:0*/ __Vdlyvdim0__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v2;
+        SData/*15:0*/ __Vdlyvdim0__tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory__v3;
+        IData/*31:0*/ tb_mcu__DOT__pass_count;
+        IData/*31:0*/ tb_mcu__DOT__fail_count;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__if_id_instruction;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__if_id_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_ex_rs1_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_ex_rs2_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_ex_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_source_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_rd_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_next_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_source_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_rd_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_next_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_jump_address_out;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_jump_address_out;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_jump_address_out;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_jump_address_in;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_jump_address_in;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_jump_address_in;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__hazard_instruction_decoder__DOT__imm_out;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__request_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pending_instr;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pending_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__rs1_selected;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__rs2_selected;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__instruction_decoder_inst__DOT__imm_out;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__register_file_inst__DOT__i;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__alu_op2;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__alu_result;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__branch_target;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__next_pc_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__rd_value_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__execute_inst__DOT__jump_address_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__store_data_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_source_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_addr;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_store_data;
+    };
+    struct {
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_next_pc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_adr_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__wb_dat_mosi_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_load_value_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__live_load_value_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mstatus;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mie;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mtvec;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mepc;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mcause;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mtval;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_mip;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_read_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__csr_write_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__exception_cause;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__exception_tval;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__interrupt_cause;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__trap_cause;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__trap_tval;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__redirect_address;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__writeback_inst__DOT__wb_rd_data_comb;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__dat_miso;
+        VlWide<9>/*287:0*/ tb_mcu__DOT__dut__DOT__peripheral_bus_interconnect__DOT__masked_dat_miso;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_segments__DOT__segments_reg;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_segments__DOT__timer;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__tx_state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__rx_state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_tx_module__DOT__clk_count;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_tx_module__DOT__tx_state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_rx_module__DOT__clk_count;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_uart__DOT__uart_rx_module__DOT__rx_state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_read_data;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT____Vcellout__vga_memory__wb_read_data;
+        IData/*18:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__pixel_idx;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__next_state;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__wb_read_pipeline;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__vga_read_pipeline;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__test_reg;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__interrupt_counter;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__counter;
+        IData/*31:0*/ tb_mcu__DOT__dut__DOT__wb_test__DOT__stall_reg;
+        IData/*31:0*/ __Vdly__tb_mcu__DOT__dut__DOT__cpu__DOT__fetch_inst__DOT__pc;
+        IData/*31:0*/ __VstlIterCount;
+        IData/*31:0*/ __VactIterCount;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__id_ex_instruction;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_instruction;
+        QData/*37:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__ex_mem_forwarding;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_instruction;
+        QData/*37:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__mem_wb_forwarding;
+        QData/*37:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__wb_forwarding;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__if_id_decoded_instruction;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__decoded_instruction;
+        VlWide<3>/*64:0*/ tb_mcu__DOT__dut__DOT__cpu__DOT__memory_inst__DOT__active_instr;
+        QData/*63:0*/ tb_mcu__DOT__dut__DOT__wb_timer__DOT__mtime;
+        QData/*63:0*/ tb_mcu__DOT__dut__DOT__wb_timer__DOT__mtimecmp;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__producer_instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__242__consumer_instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__243__instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__producer_instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__246__consumer_instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__247__instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__producer_instr;
+    };
+    struct {
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__source_match_late_producer__250__consumer_instr;
+        VlWide<3>/*64:0*/ __Vfunc_tb_mcu__DOT__dut__DOT__cpu__DOT__is_late_rd_producer__251__instr;
+        VlUnpacked<IData/*31:0*/, 32> tb_mcu__DOT__dut__DOT__cpu__DOT__decode_inst__DOT__register_file_inst__DOT__regs;
+        VlUnpacked<IData/*31:0*/, 8192> tb_mcu__DOT__dut__DOT__ram__DOT__memory;
+        VlUnpacked<IData/*31:0*/, 38400> tb_mcu__DOT__dut__DOT__wb_vga__DOT__vga_memory__DOT__memory;
+        VlUnpacked<CData/*0:0*/, 10> __Vm_traceActivity;
+    };
+    VlDelayScheduler __VdlySched;
+    VlTriggerScheduler __VtrigSched_h6b8a7bc3__0;
+    VlTriggerScheduler __VtrigSched_h6b8a7882__0;
+    VlTriggerVec<2> __VstlTriggered;
+    VlTriggerVec<6> __VactTriggered;
+    VlTriggerVec<6> __VnbaTriggered;
+
+    // INTERNAL VARIABLES
+    Vtb_mcu__Syms* const vlSymsp;
+
+    // PARAMETERS
+    static constexpr VlUnpacked<SData/*11:0*/, 16> tb_mcu__DOT__dut__DOT__wb_vga__DOT__PALETTE = {{
+        0x0000U, 0x000aU, 0x00a0U, 0x00aaU, 0x0a00U, 0x0a0aU, 0x0a50U, 0x0aaaU,
+        0x0555U, 0x055fU, 0x05f5U, 0x05ffU, 0x0f55U, 0x0f5fU, 0x0ff5U, 0x0fffU
+    }};
+
+    // CONSTRUCTORS
+    Vtb_mcu___024root(Vtb_mcu__Syms* symsp, const char* v__name);
+    ~Vtb_mcu___024root();
+    VL_UNCOPYABLE(Vtb_mcu___024root);
+
+    // INTERNAL METHODS
+    void __Vconfigure(bool first);
+} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
+
+
+#endif  // guard

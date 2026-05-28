@@ -1,3 +1,4 @@
+// fetch_stage.sv
 `timescale 1ns/1ps
 
 module fetch_stage #(
@@ -16,7 +17,7 @@ module fetch_stage #(
     input  logic [DATA_WIDTH - 1 : 0]   jump_address_backwards_in
 );
 
-    localparam logic [31:0] NOP_INSTR = 32'h00000013;
+    localparam logic [DATA_WIDTH - 1 : 0] NOP_INSTR = 32'h0000_0013;
 
     typedef enum logic [0:0] {
         WB_IDLE,
@@ -25,12 +26,12 @@ module fetch_stage #(
 
     wb_state_t wb_state;
 
-    logic [31:0] pc;
-    logic [31:0] request_pc;
+    logic [DATA_WIDTH - 1 : 0] pc;
+    logic [DATA_WIDTH - 1 : 0] request_pc;
 
-    logic pending_valid;
-    logic [31:0] pending_instr;
-    logic [31:0] pending_pc;
+    logic                      pending_valid;
+    logic [DATA_WIDTH - 1 : 0] pending_instr;
+    logic [DATA_WIDTH - 1 : 0] pending_pc;
     pipeline_status::forwards_t pending_status;
 
     logic kill_response;
@@ -38,25 +39,64 @@ module fetch_stage #(
     logic downstream_stall;
     logic downstream_jump;
     logic response_valid;
+    logic response_is_error;
+    logic can_request;
 
-    assign downstream_stall = (status_backwards_in == pipeline_status::STALL);
-    assign downstream_jump  = (status_backwards_in == pipeline_status::JUMP);
-    assign response_valid   = (wb_state == WB_BUSY) && (wb.ack || wb.err);
+    assign downstream_stall   = (status_backwards_in == pipeline_status::STALL);
+    assign downstream_jump    = (status_backwards_in == pipeline_status::JUMP);
+    assign response_valid     = (wb_state == WB_BUSY) && (wb.ack || wb.err);
+    assign response_is_error  = wb.err;
 
+    assign can_request = (wb_state == WB_IDLE) &&
+                         !pending_valid       &&
+                         !downstream_stall    &&
+                         !downstream_jump;
+
+    // ------------------------------------------------------------------
+    // Stale response tracking
+    //
+    // If a jump happens while a fetch is outstanding, the returning
+    // response belongs to the old path and must be ignored.
+    // ------------------------------------------------------------------
     always_ff @(posedge clk) begin
         if (rst) begin
-            wb_state      <= WB_IDLE;
-            wb.cyc        <= 1'b0;
-            wb.stb        <= 1'b0;
-            wb.adr        <= 32'd0;
-            wb.sel        <= 4'b1111;
-            wb.we         <= 1'b0;
-            wb.dat_mosi   <= 32'd0;
-
-            pc            <= constants::RESET_ADDRESS;
-            request_pc    <= constants::RESET_ADDRESS;
-
             kill_response <= 1'b0;
+        end else begin
+            if (downstream_jump && (wb_state == WB_BUSY) && !response_valid) begin
+                kill_response <= 1'b1;
+            end else if (response_valid) begin
+                kill_response <= 1'b0;
+            end
+        end
+    end
+
+    // ------------------------------------------------------------------
+    // Wishbone request FSM
+    //
+    // IMPORTANT:
+    //   The CPU PC is byte-addressed.
+    //   The Wishbone address is word-addressed.
+    //
+    // Therefore:
+    //   wb.adr <= pc[31:2]
+    //
+    // This is required for MCU RAM:
+    //   RESET_ADDRESS      = 0x00040000
+    //   RESET_ADDRESS >> 2 = 0x00010000 = MEMORY_START
+    // ------------------------------------------------------------------
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            wb_state    <= WB_IDLE;
+
+            wb.cyc      <= 1'b0;
+            wb.stb      <= 1'b0;
+            wb.adr      <= 32'd0;
+            wb.sel      <= 4'b1111;
+            wb.we       <= 1'b0;
+            wb.dat_mosi <= 32'd0;
+
+            pc          <= constants::RESET_ADDRESS;
+            request_pc  <= constants::RESET_ADDRESS;
         end else begin
             wb.sel      <= 4'b1111;
             wb.we       <= 1'b0;
@@ -64,32 +104,26 @@ module fetch_stage #(
 
             if (downstream_jump) begin
                 pc <= jump_address_backwards_in;
-
-                if (wb_state == WB_BUSY && !response_valid) begin
-                    kill_response <= 1'b1;
-                end
-
-                if (wb_state == WB_IDLE) begin
-                    wb.cyc <= 1'b0;
-                    wb.stb <= 1'b0;
-                end
             end
 
-            case (wb_state)
+            unique case (wb_state)
+
                 WB_IDLE: begin
                     wb.cyc <= 1'b0;
                     wb.stb <= 1'b0;
 
-                    if (!downstream_stall && !downstream_jump && !pending_valid) begin
-                        wb.cyc      <= 1'b1;
-                        wb.stb      <= 1'b1;
+                    if (can_request) begin
+                        wb.cyc <= 1'b1;
+                        wb.stb <= 1'b1;
 
-                        // byte-addressed Wishbone address
-                        wb.adr      <= pc;
+                        // Correct HaDes-V Wishbone instruction address:
+                        // word address, not byte address.
+                        wb.adr <= {2'b00, pc[DATA_WIDTH - 1 : 2]};
 
-                        request_pc  <= pc;
-                        pc          <= pc + 32'd4;
-                        wb_state    <= WB_BUSY;
+                        request_pc <= pc;
+                        pc         <= pc + 32'd4;
+
+                        wb_state <= WB_BUSY;
                     end
                 end
 
@@ -98,13 +132,9 @@ module fetch_stage #(
                     wb.stb <= 1'b1;
 
                     if (response_valid) begin
-                        wb.cyc     <= 1'b0;
-                        wb.stb     <= 1'b0;
-                        wb_state   <= WB_IDLE;
-
-                        if (kill_response) begin
-                            kill_response <= 1'b0;
-                        end
+                        wb.cyc   <= 1'b0;
+                        wb.stb   <= 1'b0;
+                        wb_state <= WB_IDLE;
                     end
                 end
 
@@ -117,6 +147,9 @@ module fetch_stage #(
         end
     end
 
+    // ------------------------------------------------------------------
+    // Forward pipeline output
+    // ------------------------------------------------------------------
     always_ff @(posedge clk) begin
         if (rst) begin
             instruction_reg_out     <= NOP_INSTR;
@@ -146,7 +179,7 @@ module fetch_stage #(
                     pending_valid <= 1'b1;
                     pending_pc    <= request_pc;
 
-                    if (wb.err) begin
+                    if (response_is_error) begin
                         pending_instr  <= NOP_INSTR;
                         pending_status <= pipeline_status::FETCH_FAULT;
                     end else begin
@@ -159,11 +192,12 @@ module fetch_stage #(
                     instruction_reg_out     <= pending_instr;
                     program_counter_reg_out <= pending_pc;
                     status_forwards_out     <= pending_status;
-                    pending_valid           <= 1'b0;
+
+                    pending_valid <= 1'b0;
                 end else if (response_valid && !kill_response) begin
                     program_counter_reg_out <= request_pc;
 
-                    if (wb.err) begin
+                    if (response_is_error) begin
                         instruction_reg_out <= NOP_INSTR;
                         status_forwards_out <= pipeline_status::FETCH_FAULT;
                     end else begin

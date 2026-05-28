@@ -34,7 +34,7 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__0(Vtb_top_c
     while (1U) {
         co_await vlSelf->__VdlySched.delay(0x1388U, 
                                            "tb_top_cpu.sv", 
-                                           93);
+                                           97);
         vlSelf->tb_top_cpu__DOT__clk = (1U & (~ (IData)(vlSelf->tb_top_cpu__DOT__clk)));
     }
 }
@@ -177,47 +177,52 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___act_comb__TOP__0(Vtb_top_cpu___024roo
         vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_dat_mosi_comb 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__store_data_comb;
     }
-    vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__decode_backwards_in = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__decode_jump_address_in = 0U;
+    vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_in = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in = 0U;
     if ((2U == ((IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__writeback_inst__DOT__redirect_taken)
                  ? 2U : 0U))) {
-        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__writeback_jump_address_out;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_jump_address_in 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__writeback_jump_address_out;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_in 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__writeback_jump_address_out;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in = 2U;
     } else if ((2U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_out))) {
-        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_out;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_jump_address_in 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_out;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 2U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in = 0U;
     } else if ((1U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__memory_backwards_out))) {
-        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 1U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_backwards_in = 1U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_jump_address_in = 0U;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 1U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in = 1U;
     } else if (vlSelf->tb_top_cpu__DOT__dut__DOT__late_result_use_hazard) {
-        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 1U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_backwards_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_jump_address_in = 0U;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in = 1U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_jump_address_in = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in = 0U;
     }
+    vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__can_request 
+        = (1U & (~ ((IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state) 
+                    | ((IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid) 
+                       | ((1U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in)) 
+                          | (2U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in)))))));
     vlSelf->tb_top_cpu__DOT__dut__DOT__execute_inst__DOT__status_backwards_comb = 0U;
     vlSelf->tb_top_cpu__DOT__dut__DOT__execute_inst__DOT__jump_address_comb = 0U;
     if ((2U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__execute_backwards_in))) {

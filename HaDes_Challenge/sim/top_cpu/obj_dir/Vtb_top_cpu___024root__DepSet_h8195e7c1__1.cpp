@@ -15,18 +15,18 @@ VL_INLINE_OPT VlCoroutine Vtb_top_cpu___024root___eval_initial__TOP__2(Vtb_top_c
     IData/*31:0*/ tb_top_cpu__DOT____Vrepeat3;
     tb_top_cpu__DOT____Vrepeat3 = 0;
     // Body
-    tb_top_cpu__DOT____Vrepeat3 = 0xc350U;
+    tb_top_cpu__DOT____Vrepeat3 = 0x13880U;
     while (VL_LTS_III(32, 0U, tb_top_cpu__DOT____Vrepeat3)) {
         co_await vlSelf->__VtrigSched_h569e505b__0.trigger(
                                                            "@(posedge tb_top_cpu.clk)", 
                                                            "tb_top_cpu.sv", 
-                                                           901);
+                                                           1151);
         tb_top_cpu__DOT____Vrepeat3 = (tb_top_cpu__DOT____Vrepeat3 
                                        - (IData)(1U));
     }
-    VL_WRITEF("[FAIL] Global simulation timeout\n[%0t] %%Error: tb_top_cpu.sv:903: Assertion failed in %Ntb_top_cpu\n",
+    VL_WRITEF("[FAIL] Global simulation timeout\n[%0t] %%Error: tb_top_cpu.sv:1153: Assertion failed in %Ntb_top_cpu\n",
               64,VL_TIME_UNITED_Q(1000),-9,vlSymsp->name());
-    VL_STOP_MT("tb_top_cpu.sv", 903, "");
+    VL_STOP_MT("tb_top_cpu.sv", 1153, "");
 }
 
 #ifdef VL_DEBUG
@@ -93,8 +93,6 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state = 0;
     IData/*31:0*/ __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc;
     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc = 0;
-    CData/*0:0*/ __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response;
-    __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 0;
     IData/*31:0*/ __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_instruction;
     __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_instruction = 0;
     IData/*31:0*/ __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_pc;
@@ -150,8 +148,6 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
     IData/*31:0*/ __Vdly__tb_top_cpu__DOT__dut__DOT__writeback_inst__DOT__csr_mstatus;
     __Vdly__tb_top_cpu__DOT__dut__DOT__writeback_inst__DOT__csr_mstatus = 0;
     // Body
-    __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response 
-        = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response;
     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc 
         = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc;
     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state 
@@ -206,9 +202,9 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
         = vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__active_addr;
     __Vdly__tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state 
         = vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__wb_state;
+    __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_pc = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_pc;
     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid 
         = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid;
-    __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_pc = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_pc;
     __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_status 
         = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_status;
     __Vdlyvset__tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__register_file_inst__DOT__regs__v0 = 0U;
@@ -269,7 +265,7 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
                                                    & (((IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc) 
                                                        & (IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb)) 
                                                       & (0x40600U 
-                                                         != vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr)));
+                                                         != vlSelf->tb_top_cpu__DOT__fetch_pc_byte)));
     if (vlSelf->tb_top_cpu__DOT__rst) {
         vlSelf->tb_top_cpu__DOT__dut__DOT__decode_inst__DOT__register_file_inst__DOT__i = 0x20U;
         __Vdly__tb_top_cpu__DOT__dut__DOT__ex_mem_pc = 0U;
@@ -544,6 +540,8 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
         __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid = 0U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_pc 
             = __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_pc;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid 
+            = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid;
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_status 
             = __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_status;
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_instruction 
@@ -598,6 +596,8 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
         }
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_pc 
             = __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_pc;
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid 
+            = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid;
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_status 
             = __Vdly__tb_top_cpu__DOT__dut__DOT__if_id_status;
         vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_instruction 
@@ -1573,8 +1573,9 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
                                                    & (((IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc) 
                                                        & (IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb)) 
                                                       & (0x40600U 
-                                                         == vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr)));
+                                                         == vlSelf->tb_top_cpu__DOT__fetch_pc_byte)));
     if (vlSelf->tb_top_cpu__DOT__rst) {
+        vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 0U;
         vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.dat_miso = 0U;
         __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state = 0U;
         vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 0U;
@@ -1582,39 +1583,32 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
         vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr = 0U;
         __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc = 0x40000U;
         vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__request_pc = 0x40000U;
-        __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 0U;
     } else {
+        if ((((2U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in)) 
+              & (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state)) 
+             & (~ (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__response_valid)))) {
+            vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 1U;
+        } else if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__response_valid) {
+            vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 0U;
+        }
         if (((IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc) 
              & (IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb))) {
             vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.dat_miso 
-                = (((0x40000U <= vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr) 
-                    & (0x800U > ((vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr 
-                                  - (IData)(0x40000U)) 
-                                 >> 2U))) ? vlSelf->tb_top_cpu__DOT__imem
-                   [(0x7ffU & ((vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr 
-                                - (IData)(0x40000U)) 
-                               >> 2U))] : 0x13U);
+                = (((0x40000U <= vlSelf->tb_top_cpu__DOT__fetch_pc_byte) 
+                    & (0x800U > vlSelf->tb_top_cpu__DOT__fetch_word_index))
+                    ? vlSelf->tb_top_cpu__DOT__imem
+                   [(0x7ffU & vlSelf->tb_top_cpu__DOT__fetch_word_index)]
+                    : 0x13U);
         }
         if ((2U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in))) {
             __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc 
                 = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_jump_address_in;
-            if (((IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state) 
-                 & (~ (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__response_valid)))) {
-                __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 1U;
-            }
-            if ((1U & (~ (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state)))) {
-                vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 0U;
-                vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb = 0U;
-            }
         }
         if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state) {
             if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state) {
                 vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 1U;
                 vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb = 1U;
                 if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__response_valid) {
-                    if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response) {
-                        __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response = 0U;
-                    }
                     vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 0U;
                     vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb = 0U;
                     __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state = 0U;
@@ -1627,13 +1621,12 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
         } else {
             vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 0U;
             vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb = 0U;
-            if ((((1U != (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in)) 
-                  & (2U != (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_backwards_in))) 
-                 & (~ (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid)))) {
+            if (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__can_request) {
                 vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.cyc = 1U;
                 vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.stb = 1U;
                 vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr 
-                    = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc;
+                    = (vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc 
+                       >> 2U);
                 __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state = 1U;
                 vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__request_pc 
                     = vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc;
@@ -3864,220 +3857,220 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
     }
     vlSelf->tb_top_cpu__DOT__dut__DOT__late_result_use_hazard_raw = 0U;
     if ((0U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_status))) {
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_uses_rs2 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_uses_rs2 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs2_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_uses_rs1 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_uses_rs1 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs1_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_valid 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_valid 
             = (0U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__id_ex_status));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_ex_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_ex_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_ex_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__Vfuncout = 0U;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[0U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[1U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[2U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__Vfuncout = 0U;
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[0U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[0U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[1U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[1U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[2U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[2U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__Vfuncout 
-            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__Vfuncout 
+            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i))))
-                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i) 
-                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__op_i))))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__instr[1U] 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i))))
+                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i) 
+                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__op_i))))));
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__Vfuncout 
-            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__Vfuncout 
+            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__op_i))))
-                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__op_i) 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__op_i))))
+                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__op_i) 
                                     >> 1U)))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__Vfuncout 
-            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__870__Vfuncout) 
-               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__871__Vfuncout));
-        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_valid) 
-              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__869__Vfuncout)) 
-             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__Vfuncout 
+            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1389__Vfuncout) 
+               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1390__Vfuncout));
+        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_valid) 
+              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1388__Vfuncout)) 
+             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[1U] 
                                 >> 0x16U))))) {
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_uses_rs1) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_uses_rs1) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_instr[1U] 
                               >> 0x11U)) == (0x1fU 
-                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[1U] 
+                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[1U] 
                                                 >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__Vfuncout = 1U;
             }
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_uses_rs2) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_uses_rs2) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__consumer_instr[1U] 
                               >> 0xcU)) == (0x1fU & 
-                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__producer_instr[1U] 
+                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__producer_instr[1U] 
                                              >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__Vfuncout = 1U;
             }
         }
-        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__868__Vfuncout) {
+        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1387__Vfuncout) {
             vlSelf->tb_top_cpu__DOT__dut__DOT__late_result_use_hazard_raw = 1U;
         }
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_uses_rs2 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_uses_rs2 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs2_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_uses_rs1 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_uses_rs1 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs1_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_valid 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_valid 
             = (0U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__ex_mem_status));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__ex_mem_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__ex_mem_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__ex_mem_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__Vfuncout = 0U;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[0U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[1U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[2U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__Vfuncout = 0U;
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[0U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[0U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[1U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[1U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[2U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[2U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__Vfuncout 
-            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__Vfuncout 
+            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i))))
-                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i) 
-                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__op_i))))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__instr[1U] 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i))))
+                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i) 
+                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__op_i))))));
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__Vfuncout 
-            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__Vfuncout 
+            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__op_i))))
-                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__op_i) 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__op_i))))
+                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__op_i) 
                                     >> 1U)))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__Vfuncout 
-            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__874__Vfuncout) 
-               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__875__Vfuncout));
-        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_valid) 
-              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__873__Vfuncout)) 
-             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__Vfuncout 
+            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1393__Vfuncout) 
+               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1394__Vfuncout));
+        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_valid) 
+              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1392__Vfuncout)) 
+             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[1U] 
                                 >> 0x16U))))) {
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_uses_rs1) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_uses_rs1) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_instr[1U] 
                               >> 0x11U)) == (0x1fU 
-                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[1U] 
+                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[1U] 
                                                 >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__Vfuncout = 1U;
             }
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_uses_rs2) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_uses_rs2) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__consumer_instr[1U] 
                               >> 0xcU)) == (0x1fU & 
-                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__producer_instr[1U] 
+                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__producer_instr[1U] 
                                              >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__Vfuncout = 1U;
             }
         }
-        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__872__Vfuncout) {
+        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1391__Vfuncout) {
             vlSelf->tb_top_cpu__DOT__dut__DOT__late_result_use_hazard_raw = 1U;
         }
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_uses_rs2 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_uses_rs2 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs2_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_uses_rs1 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_uses_rs1 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__id_rs1_used;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__if_id_decoded_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_valid 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_valid 
             = (0U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__mem_wb_status));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[0U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[0U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__mem_wb_instruction[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[1U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__mem_wb_instruction[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[2U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[2U] 
             = vlSelf->tb_top_cpu__DOT__dut__DOT__mem_wb_instruction[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__Vfuncout = 0U;
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[0U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[0U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[1U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[1U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[2U] 
-            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[2U];
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__Vfuncout = 0U;
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[0U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[0U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[1U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[1U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[2U] 
+            = vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[2U];
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__Vfuncout 
-            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__Vfuncout 
+            = (1U & (IData)(((0x28U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i))))
-                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i) 
-                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__op_i))))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__op_i 
-            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[2U] 
-                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__instr[1U] 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i))))
+                                 : (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i) 
+                                     >> 1U) | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__op_i))))));
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__op_i 
+            = (0x3fU & ((vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[2U] 
+                         << 5U) | (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__instr[1U] 
                                    >> 0x1bU)));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__Vfuncout 
-            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__op_i))) 
-                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__op_i))
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__Vfuncout 
+            = (1U & (IData)(((8U == (0x38U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__op_i))) 
+                             & ((4U & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__op_i))
                                  ? (IData)((3U != (3U 
-                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__op_i))))
-                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__op_i) 
+                                                   & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__op_i))))
+                                 : ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__op_i) 
                                     >> 1U)))));
-        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__Vfuncout 
-            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__878__Vfuncout) 
-               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__879__Vfuncout));
-        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_valid) 
-              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__877__Vfuncout)) 
-             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[1U] 
+        vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__Vfuncout 
+            = ((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_load_op__1397__Vfuncout) 
+               | (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_csr_op__1398__Vfuncout));
+        if ((((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_valid) 
+              & (IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__is_late_rd_producer__1396__Vfuncout)) 
+             & (0U != (0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[1U] 
                                 >> 0x16U))))) {
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_uses_rs1) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_uses_rs1) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_instr[1U] 
                               >> 0x11U)) == (0x1fU 
-                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[1U] 
+                                             & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[1U] 
                                                 >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__Vfuncout = 1U;
             }
-            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_uses_rs2) 
-                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__consumer_instr[1U] 
+            if (((IData)(vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_uses_rs2) 
+                 & ((0x1fU & (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__consumer_instr[1U] 
                               >> 0xcU)) == (0x1fU & 
-                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__producer_instr[1U] 
+                                            (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__producer_instr[1U] 
                                              >> 0x16U))))) {
-                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__Vfuncout = 1U;
+                vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__Vfuncout = 1U;
             }
         }
-        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__876__Vfuncout) {
+        if (vlSelf->__Vfunc_tb_top_cpu__DOT__dut__DOT__source_match_late_producer__1395__Vfuncout) {
             vlSelf->tb_top_cpu__DOT__dut__DOT__late_result_use_hazard_raw = 1U;
         }
     }
@@ -4136,15 +4129,16 @@ VL_INLINE_OPT void Vtb_top_cpu___024root___nba_sequent__TOP__0(Vtb_top_cpu___024
     }
     vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc 
         = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pc;
-    vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid 
-        = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__pending_valid;
-    vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response 
-        = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__kill_response;
     vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state 
         = __Vdly__tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state;
     vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT__valid_memory_op 
         = ((0U == (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__ex_mem_status)) 
            & (IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__memory_inst__DOT____VdfgTmp_he475b9dc__0));
+    vlSelf->tb_top_cpu__DOT__fetch_pc_byte = (vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.adr 
+                                              << 2U);
+    vlSelf->tb_top_cpu__DOT__fetch_word_index = ((vlSelf->tb_top_cpu__DOT__fetch_pc_byte 
+                                                  - (IData)(0x40000U)) 
+                                                 >> 2U);
     vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__response_valid 
         = ((IData)(vlSelf->tb_top_cpu__DOT__dut__DOT__fetch_inst__DOT__wb_state) 
            & ((IData)(vlSymsp->TOP__tb_top_cpu__DOT__fetch_wb.ack) 

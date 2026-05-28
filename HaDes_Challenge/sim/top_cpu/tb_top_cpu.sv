@@ -59,6 +59,7 @@ module tb_top_cpu;
     localparam logic [31:0] RESET_PC        = constants::RESET_ADDRESS;
     localparam logic [31:0] DATA_BASE       = 32'h0000_0100;
     localparam logic [31:0] TRAP_PC         = RESET_PC + 32'h0000_0300;
+    localparam logic [31:0] JALR_TARGET_PC  = RESET_PC + 32'h0000_0500;
     localparam logic [31:0] FETCH_FAULT_PC  = RESET_PC + 32'h0000_0600;
     localparam logic [31:0] DATA_FAULT_ADDR = 32'h0000_0400;
 
@@ -78,6 +79,9 @@ module tb_top_cpu;
     localparam logic [31:0] MSTATUS_MIE = 32'h0000_0008;
     localparam logic [31:0] MIE_MTIE    = 32'h0000_0080;
     localparam logic [31:0] MIE_MEIE    = 32'h0000_0800;
+
+    logic [31:0] expected_auipc_value;
+    logic [31:0] expected_jalr_link_value;
 
     cpu dut (
         .clk                   (clk),
@@ -297,6 +301,10 @@ module tb_top_cpu;
         lui = enc_u(imm20, rd, 7'b0110111);
     endfunction
 
+    function automatic logic [31:0] auipc(input logic [4:0] rd, input logic [19:0] imm20);
+        auipc = enc_u(imm20, rd, 7'b0010111);
+    endfunction
+
     function automatic logic [31:0] csrrw(input logic [4:0] rd, input logic [11:0] csr_addr, input logic [4:0] rs1);
         csrrw = {csr_addr, rs1, 3'b001, rd, 7'b1110011};
     endfunction
@@ -425,6 +433,40 @@ module tb_top_cpu;
         end
     endtask
 
+    task automatic emit_taken_branch(
+        inout logic [31:0] pc,
+        input logic [31:0] branch_instr,
+        input logic signed [11:0] good_value,
+        input logic signed [11:0] bad_value,
+        input logic signed [11:0] mem_offset
+    );
+        begin
+            put_instr(pc, branch_instr); pc += 4;
+            put_instr(pc, addi(5'd28, 5'd0, bad_value)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, mem_offset)); pc += 4;
+            put_instr(pc, jal(5'd0, 21'sd12)); pc += 4;
+            put_instr(pc, addi(5'd28, 5'd0, good_value)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, mem_offset)); pc += 4;
+        end
+    endtask
+
+    task automatic emit_not_taken_branch(
+        inout logic [31:0] pc,
+        input logic [31:0] branch_instr,
+        input logic signed [11:0] good_value,
+        input logic signed [11:0] bad_value,
+        input logic signed [11:0] mem_offset
+    );
+        begin
+            put_instr(pc, branch_instr); pc += 4;
+            put_instr(pc, addi(5'd28, 5'd0, good_value)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, mem_offset)); pc += 4;
+            put_instr(pc, jal(5'd0, 21'sd12)); pc += 4;
+            put_instr(pc, addi(5'd28, 5'd0, bad_value)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, mem_offset)); pc += 4;
+        end
+    endtask
+
     // ------------------------------------------------------------------
     // Program 1: Integrated core path + ECALL/MRET
     // ------------------------------------------------------------------
@@ -535,7 +577,192 @@ module tb_top_cpu;
     endtask
 
     // ------------------------------------------------------------------
-    // Program 2: Generic exception/fault test
+    // Program 2: Focused remaining RV32I ALU/branch/JALR variants
+    // ------------------------------------------------------------------
+    task automatic load_alu_branch_jalr_program();
+        logic [31:0] pc;
+        begin
+            clear_memories();
+
+            expected_auipc_value     = 32'd0;
+            expected_jalr_link_value = 32'd0;
+
+            pc = RESET_PC;
+
+            put_instr(pc, addi(5'd10, 5'd0, 12'sd256)); pc += 4;
+
+            put_instr(pc, addi(5'd1,  5'd0, 12'sd15)); pc += 4;
+            put_instr(pc, addi(5'd2,  5'd0, 12'sd5));  pc += 4;
+            put_instr(pc, add_instr(5'd3, 5'd1, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd3, 5'd10, 12'sd64)); pc += 4;
+
+            put_instr(pc, sub_instr(5'd3, 5'd1, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd3, 5'd10, 12'sd68)); pc += 4;
+
+            put_instr(pc, and_instr(5'd3, 5'd1, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd3, 5'd10, 12'sd72)); pc += 4;
+
+            put_instr(pc, or_instr(5'd3, 5'd1, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd3, 5'd10, 12'sd76)); pc += 4;
+
+            put_instr(pc, xor_instr(5'd3, 5'd1, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd3, 5'd10, 12'sd80)); pc += 4;
+
+            put_instr(pc, addi(5'd4, 5'd0, 12'sd1)); pc += 4;
+            put_instr(pc, addi(5'd5, 5'd0, 12'sd3)); pc += 4;
+            put_instr(pc, sll_instr(5'd6, 5'd4, 5'd5)); pc += 4;
+            put_instr(pc, sw(5'd6, 5'd10, 12'sd84)); pc += 4;
+
+            put_instr(pc, addi(5'd7, 5'd0, 12'sd128)); pc += 4;
+            put_instr(pc, srl_instr(5'd8, 5'd7, 5'd5)); pc += 4;
+            put_instr(pc, sw(5'd8, 5'd10, 12'sd88)); pc += 4;
+
+            put_instr(pc, addi(5'd9, 5'd0, -12'sd16)); pc += 4;
+            put_instr(pc, addi(5'd5, 5'd0, 12'sd2)); pc += 4;
+            put_instr(pc, sra_instr(5'd11, 5'd9, 5'd5)); pc += 4;
+            put_instr(pc, sw(5'd11, 5'd10, 12'sd92)); pc += 4;
+
+            put_instr(pc, addi(5'd12, 5'd0, -12'sd1)); pc += 4;
+            put_instr(pc, addi(5'd13, 5'd0, 12'sd1)); pc += 4;
+            put_instr(pc, slt_instr(5'd14, 5'd12, 5'd13)); pc += 4;
+            put_instr(pc, sw(5'd14, 5'd10, 12'sd96)); pc += 4;
+
+            put_instr(pc, sltu_instr(5'd14, 5'd12, 5'd13)); pc += 4;
+            put_instr(pc, sw(5'd14, 5'd10, 12'sd100)); pc += 4;
+
+            put_instr(pc, addi(5'd15, 5'd1, -12'sd3)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd104)); pc += 4;
+
+            put_instr(pc, andi(5'd15, 5'd1, 12'sd6)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd108)); pc += 4;
+
+            put_instr(pc, addi(5'd16, 5'd0, 12'sd32)); pc += 4;
+            put_instr(pc, ori(5'd15, 5'd16, 12'sd5)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd112)); pc += 4;
+
+            put_instr(pc, addi(5'd16, 5'd0, 12'sd42)); pc += 4;
+            put_instr(pc, xori(5'd15, 5'd16, 12'sd15)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd116)); pc += 4;
+
+            put_instr(pc, addi(5'd17, 5'd0, -12'sd1)); pc += 4;
+            put_instr(pc, slti(5'd15, 5'd17, 12'sd1)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd120)); pc += 4;
+
+            put_instr(pc, sltiu(5'd15, 5'd17, 12'sd1)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd124)); pc += 4;
+
+            put_instr(pc, addi(5'd18, 5'd0, 12'sd1)); pc += 4;
+            put_instr(pc, slli(5'd15, 5'd18, 5'd4)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd128)); pc += 4;
+
+            put_instr(pc, addi(5'd18, 5'd0, 12'sd128)); pc += 4;
+            put_instr(pc, srli(5'd15, 5'd18, 5'd3)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd132)); pc += 4;
+
+            put_instr(pc, addi(5'd18, 5'd0, -12'sd16)); pc += 4;
+            put_instr(pc, srai(5'd15, 5'd18, 5'd2)); pc += 4;
+            put_instr(pc, sw(5'd15, 5'd10, 12'sd136)); pc += 4;
+
+            put_instr(pc, lui(5'd21, 20'h12345)); pc += 4;
+            put_instr(pc, sw(5'd21, 5'd10, 12'sd140)); pc += 4;
+
+            expected_auipc_value = pc;
+            put_instr(pc, auipc(5'd22, 20'h00000)); pc += 4;
+            put_instr(pc, sw(5'd22, 5'd10, 12'sd144)); pc += 4;
+
+            put_instr(pc, addi(5'd1, 5'd0, 12'sd5)); pc += 4;
+            put_instr(pc, addi(5'd2, 5'd0, 12'sd7)); pc += 4;
+            put_instr(pc, addi(5'd3, 5'd0, -12'sd1)); pc += 4;
+            put_instr(pc, addi(5'd4, 5'd0, 12'sd1)); pc += 4;
+
+            emit_taken_branch(pc, beq(5'd1, 5'd1, 13'sd16), 12'sd101, 12'sd999, 12'sd148);
+            emit_taken_branch(pc, bne(5'd1, 5'd2, 13'sd16), 12'sd102, 12'sd999, 12'sd152);
+            emit_taken_branch(pc, blt(5'd3, 5'd4, 13'sd16), 12'sd103, 12'sd999, 12'sd156);
+            emit_taken_branch(pc, bge(5'd4, 5'd3, 13'sd16), 12'sd104, 12'sd999, 12'sd160);
+            emit_taken_branch(pc, bltu(5'd4, 5'd3, 13'sd16), 12'sd105, 12'sd999, 12'sd164);
+            emit_taken_branch(pc, bgeu(5'd3, 5'd4, 13'sd16), 12'sd106, 12'sd999, 12'sd168);
+
+            emit_not_taken_branch(pc, beq(5'd1, 5'd2, 13'sd16), 12'sd111, 12'sd999, 12'sd172);
+            emit_not_taken_branch(pc, bne(5'd1, 5'd1, 13'sd16), 12'sd112, 12'sd999, 12'sd176);
+            emit_not_taken_branch(pc, blt(5'd4, 5'd3, 13'sd16), 12'sd113, 12'sd999, 12'sd180);
+            emit_not_taken_branch(pc, bge(5'd3, 5'd4, 13'sd16), 12'sd114, 12'sd999, 12'sd184);
+            emit_not_taken_branch(pc, bltu(5'd3, 5'd4, 13'sd16), 12'sd115, 12'sd999, 12'sd188);
+            emit_not_taken_branch(pc, bgeu(5'd4, 5'd3, 13'sd16), 12'sd116, 12'sd999, 12'sd192);
+
+            put_instr(pc, lui(5'd22, JALR_TARGET_PC[31:12])); pc += 4;
+            put_instr(pc, addi(5'd22, 5'd22, JALR_TARGET_PC[11:0])); pc += 4;
+
+            expected_jalr_link_value = pc + 32'd4;
+            put_instr(pc, jalr(5'd23, 5'd22, 12'sd0)); pc += 4;
+
+            put_instr(pc, addi(5'd28, 5'd0, 12'sd999)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, 12'sd200)); pc += 4;
+            put_instr(pc, jal(5'd0, 21'sd0)); pc += 4;
+
+            pc = JALR_TARGET_PC;
+
+            put_instr(pc, sw(5'd23, 5'd10, 12'sd196)); pc += 4;
+            put_instr(pc, addi(5'd28, 5'd0, 12'sd1)); pc += 4;
+            put_instr(pc, sw(5'd28, 5'd10, 12'sd200)); pc += 4;
+            put_instr(pc, jal(5'd0, 21'sd0)); pc += 4;
+        end
+    endtask
+
+    task automatic run_alu_branch_jalr_program();
+        begin
+            $display("\n============================================================");
+            $display("TEST 2: Focused RV32I ALU + branch variants + JALR");
+            $display("============================================================");
+
+            load_alu_branch_jalr_program();
+            reset_cpu();
+
+            wait_for_word("ALU/branch/JALR final marker", DATA_BASE + 32'd200, 32'd1, 5000);
+
+            check32("ADD",        load_word(DATA_BASE + 32'd64),  32'd20);
+            check32("SUB",        load_word(DATA_BASE + 32'd68),  32'd10);
+            check32("AND",        load_word(DATA_BASE + 32'd72),  32'd5);
+            check32("OR",         load_word(DATA_BASE + 32'd76),  32'd15);
+            check32("XOR",        load_word(DATA_BASE + 32'd80),  32'd10);
+            check32("SLL",        load_word(DATA_BASE + 32'd84),  32'd8);
+            check32("SRL",        load_word(DATA_BASE + 32'd88),  32'd16);
+            check32("SRA",        load_word(DATA_BASE + 32'd92),  32'hFFFF_FFFC);
+            check32("SLT",        load_word(DATA_BASE + 32'd96),  32'd1);
+            check32("SLTU",       load_word(DATA_BASE + 32'd100), 32'd0);
+
+            check32("ADDI",       load_word(DATA_BASE + 32'd104), 32'd12);
+            check32("ANDI",       load_word(DATA_BASE + 32'd108), 32'd6);
+            check32("ORI",        load_word(DATA_BASE + 32'd112), 32'd37);
+            check32("XORI",       load_word(DATA_BASE + 32'd116), 32'd37);
+            check32("SLTI",       load_word(DATA_BASE + 32'd120), 32'd1);
+            check32("SLTIU",      load_word(DATA_BASE + 32'd124), 32'd0);
+            check32("SLLI",       load_word(DATA_BASE + 32'd128), 32'd16);
+            check32("SRLI",       load_word(DATA_BASE + 32'd132), 32'd16);
+            check32("SRAI",       load_word(DATA_BASE + 32'd136), 32'hFFFF_FFFC);
+            check32("LUI",        load_word(DATA_BASE + 32'd140), 32'h1234_5000);
+            check32("AUIPC",      load_word(DATA_BASE + 32'd144), expected_auipc_value);
+
+            check32("BEQ taken",  load_word(DATA_BASE + 32'd148), 32'd101);
+            check32("BNE taken",  load_word(DATA_BASE + 32'd152), 32'd102);
+            check32("BLT taken",  load_word(DATA_BASE + 32'd156), 32'd103);
+            check32("BGE taken",  load_word(DATA_BASE + 32'd160), 32'd104);
+            check32("BLTU taken", load_word(DATA_BASE + 32'd164), 32'd105);
+            check32("BGEU taken", load_word(DATA_BASE + 32'd168), 32'd106);
+
+            check32("BEQ not taken",  load_word(DATA_BASE + 32'd172), 32'd111);
+            check32("BNE not taken",  load_word(DATA_BASE + 32'd176), 32'd112);
+            check32("BLT not taken",  load_word(DATA_BASE + 32'd180), 32'd113);
+            check32("BGE not taken",  load_word(DATA_BASE + 32'd184), 32'd114);
+            check32("BLTU not taken", load_word(DATA_BASE + 32'd188), 32'd115);
+            check32("BGEU not taken", load_word(DATA_BASE + 32'd192), 32'd116);
+
+            check32("JALR link",       load_word(DATA_BASE + 32'd196), expected_jalr_link_value);
+            check32("JALR final path", load_word(DATA_BASE + 32'd200), 32'd1);
+        end
+    endtask
+
+    // ------------------------------------------------------------------
+    // Program 3: Generic exception/fault test
     // ------------------------------------------------------------------
     task automatic load_exception_program(input logic [31:0] fault_instr);
         logic [31:0] pc;
@@ -660,7 +887,7 @@ module tb_top_cpu;
     endtask
 
     // ------------------------------------------------------------------
-    // Program 3: Interrupt tests
+    // Program 4: Interrupt tests
     // ------------------------------------------------------------------
     task automatic load_interrupt_program(input logic enable_timer, input logic enable_external);
         logic [31:0] pc;
@@ -744,7 +971,26 @@ module tb_top_cpu;
 
     // ------------------------------------------------------------------
     // Wishbone instruction memory model
+    //
+    // IMPORTANT:
+    // Corrected fetch_stage drives:
+    //
+    //     fetch_wb.adr = PC >> 2
+    //
+    // Therefore this testbench reconstructs:
+    //
+    //     fetch_pc_byte = fetch_wb.adr << 2
+    //
+    // before indexing imem[].
     // ------------------------------------------------------------------
+    logic [31:0] fetch_pc_byte;
+    logic [31:0] fetch_word_index;
+
+    always_comb begin
+        fetch_pc_byte    = {fetch_wb.adr[29:0], 2'b00};
+        fetch_word_index = (fetch_pc_byte - RESET_PC) >> 2;
+    end
+
     always_ff @(posedge clk) begin
         if (rst) begin
             fetch_wb.ack      <= 1'b0;
@@ -752,15 +998,15 @@ module tb_top_cpu;
             fetch_wb.dat_miso <= 32'd0;
         end else begin
             fetch_wb.ack <= fetch_wb.cyc && fetch_wb.stb &&
-                            (fetch_wb.adr != FETCH_FAULT_PC);
+                            (fetch_pc_byte != FETCH_FAULT_PC);
 
             fetch_wb.err <= fetch_wb.cyc && fetch_wb.stb &&
-                            (fetch_wb.adr == FETCH_FAULT_PC);
+                            (fetch_pc_byte == FETCH_FAULT_PC);
 
             if (fetch_wb.cyc && fetch_wb.stb) begin
-                if ((fetch_wb.adr >= RESET_PC) &&
-                    (((fetch_wb.adr - RESET_PC) >> 2) < IMEM_WORDS)) begin
-                    fetch_wb.dat_miso <= imem[(fetch_wb.adr - RESET_PC) >> 2];
+                if ((fetch_pc_byte >= RESET_PC) &&
+                    (fetch_word_index < IMEM_WORDS)) begin
+                    fetch_wb.dat_miso <= imem[fetch_word_index];
                 end else begin
                     fetch_wb.dat_miso <= nop();
                 end
@@ -770,6 +1016,8 @@ module tb_top_cpu;
 
     // ------------------------------------------------------------------
     // Wishbone data memory model
+    //
+    // Data accesses remain byte-addressed.
     // ------------------------------------------------------------------
     always_ff @(posedge clk) begin
         if (rst) begin
@@ -817,6 +1065,8 @@ module tb_top_cpu;
         rst                   = 1'b0;
 
         run_core_program();
+
+        run_alu_branch_jalr_program();
 
         run_exception_test("ILLEGAL_INSTRUCTION",
                            32'hFFFF_FFFF,
@@ -898,7 +1148,7 @@ module tb_top_cpu;
     end
 
     initial begin
-        repeat (50000) @(posedge clk);
+        repeat (80000) @(posedge clk);
         $display("[FAIL] Global simulation timeout");
         $fatal;
     end
