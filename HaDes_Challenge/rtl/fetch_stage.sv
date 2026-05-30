@@ -26,41 +26,35 @@ module fetch_stage #(
 
     wb_state_t wb_state;
 
-    logic [DATA_WIDTH - 1 : 0] pc;
-    logic [DATA_WIDTH - 1 : 0] request_pc;
+    logic [DATA_WIDTH - 1 : 0]  pc;
+    logic [DATA_WIDTH - 1 : 0]  request_pc;
 
-    logic                      pending_valid;
-    logic [DATA_WIDTH - 1 : 0] pending_instr;
-    logic [DATA_WIDTH - 1 : 0] pending_pc;
+    logic                       pending_valid;
+    logic [DATA_WIDTH - 1 : 0]  pending_instr;
+    logic [DATA_WIDTH - 1 : 0]  pending_pc;
     pipeline_status::forwards_t pending_status;
 
-    logic kill_response;
+    logic                       kill_response;
 
-    logic downstream_stall;
-    logic downstream_jump;
-    logic response_valid;
-    logic response_is_error;
-    logic can_request;
+    logic                       downstream_stall;
+    logic                       downstream_jump;
+    logic                       response_valid;
+    logic                       response_is_error;
+    logic                       can_request;
 
     assign downstream_stall   = (status_backwards_in == pipeline_status::STALL);
     assign downstream_jump    = (status_backwards_in == pipeline_status::JUMP);
     assign response_valid     = (wb_state == WB_BUSY) && (wb.ack || wb.err);
     assign response_is_error  = wb.err;
 
-    assign can_request = (wb_state == WB_IDLE) &&
-                         !pending_valid       &&
-                         !downstream_stall    &&
-                         !downstream_jump;
+    assign can_request        = (wb_state == WB_IDLE) && !pending_valid && !downstream_stall && !downstream_jump;
 
-    // ------------------------------------------------------------------
     // Stale response tracking
-    //
     // If a jump happens while a fetch is outstanding, the returning
     // response belongs to the old path and must be ignored.
-    // ------------------------------------------------------------------
     always_ff @(posedge clk) begin
         if (rst) begin
-            kill_response <= 1'b0;
+            kill_response     <= 1'b0;
         end else begin
             if (downstream_jump && (wb_state == WB_BUSY) && !response_valid) begin
                 kill_response <= 1'b1;
@@ -70,9 +64,7 @@ module fetch_stage #(
         end
     end
 
-    // ------------------------------------------------------------------
     // Wishbone request FSM
-    //
     // IMPORTANT:
     //   The CPU PC is byte-addressed.
     //   The Wishbone address is word-addressed.
@@ -83,7 +75,6 @@ module fetch_stage #(
     // This is required for MCU RAM:
     //   RESET_ADDRESS      = 0x00040000
     //   RESET_ADDRESS >> 2 = 0x00010000 = MEMORY_START
-    // ------------------------------------------------------------------
     always_ff @(posedge clk) begin
         if (rst) begin
             wb_state    <= WB_IDLE;

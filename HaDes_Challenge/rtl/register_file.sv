@@ -5,16 +5,16 @@ module register_file #(
   input  logic                      clk,
 	input  logic                      rst,
 
-	input  logic [ADDR_WIDTH - 1 : 0] rs1_addr,
-	input  logic [ADDR_WIDTH - 1 : 0] rs2_addr,
+	input  logic [ADDR_WIDTH - 1 : 0] read_address1,
+	input  logic [ADDR_WIDTH - 1 : 0] read_address2,
 
 	input  logic                      write_enable,
 
-	input  logic [ADDR_WIDTH - 1 : 0] rd_addr,
-	input  logic [DATA_WIDTH - 1 : 0] rd_data,
+	input  logic [ADDR_WIDTH - 1 : 0] write_address,
+	input  logic [DATA_WIDTH - 1 : 0] write_data,
 
-	output logic [DATA_WIDTH - 1 : 0] rs1_data,
-  output logic [DATA_WIDTH - 1 : 0] rs2_data
+	output logic [DATA_WIDTH - 1 : 0] read_data1,
+  output logic [DATA_WIDTH - 1 : 0] read_data2
 );
 
   logic [DATA_WIDTH - 1 : 0] regs  [0 : 31];
@@ -27,13 +27,13 @@ module register_file #(
         regs [i] <= '0;
 			end
 		end else begin
-			if (write_enable && (rd_addr != 0)) begin
-				regs [rd_addr] <= rd_data;
+			if (write_enable && (write_address != 0)) begin
+				regs [write_address] <= write_data;
 			end
 		end
 	end
 
-	assign rs1_data = (rs1_addr == 0) ? '0 : regs [rs1_addr];
-	assign rs2_data = (rs2_addr == 0) ? '0 : regs [rs2_addr];
+	assign read_data1 = (read_address1 == 0) ? '0 : regs [read_address1];
+	assign read_data2 = (read_address2 == 0) ? '0 : regs [read_address2];
     
 endmodule

@@ -222,13 +222,13 @@ VL_ATTR_COLD void Vtb_mcu___024root__trace_init_sub__TOP__0(Vtb_mcu___024root* v
     tracep->declBus(c+490,"ADDR_WIDTH", false,-1, 31,0);
     tracep->declBit(c+451,"clk", false,-1);
     tracep->declBit(c+454,"rst", false,-1);
-    tracep->declBus(c+208,"rs1_addr", false,-1, 4,0);
-    tracep->declBus(c+209,"rs2_addr", false,-1, 4,0);
+    tracep->declBus(c+208,"read_address1", false,-1, 4,0);
+    tracep->declBus(c+209,"read_address2", false,-1, 4,0);
     tracep->declBit(c+210,"write_enable", false,-1);
-    tracep->declBus(c+211,"rd_addr", false,-1, 4,0);
-    tracep->declBus(c+212,"rd_data", false,-1, 31,0);
-    tracep->declBus(c+193,"rs1_data", false,-1, 31,0);
-    tracep->declBus(c+194,"rs2_data", false,-1, 31,0);
+    tracep->declBus(c+211,"write_address", false,-1, 4,0);
+    tracep->declBus(c+212,"write_data", false,-1, 31,0);
+    tracep->declBus(c+193,"read_data1", false,-1, 31,0);
+    tracep->declBus(c+194,"read_data2", false,-1, 31,0);
     for (int i = 0; i < 32; ++i) {
         tracep->declBus(c+213+i*1,"regs", true,(i+0), 31,0);
     }

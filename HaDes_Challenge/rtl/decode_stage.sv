@@ -50,15 +50,19 @@ module decode_stage (
     // If your module is still named "regfile", rename module and file to "register_file",
     // or change this instance name back to regfile.
     register_file register_file_inst (
-        .clk          (clk),
-        .rst          (rst),
-        .rs1_addr     (decoded_instruction.rs1_address),
-        .rs2_addr     (decoded_instruction.rs2_address),
-        .write_enable (wb_forwarding_in.data_valid),
-        .rd_addr      (wb_forwarding_in.address),
-        .rd_data      (wb_forwarding_in.data),
-        .rs1_data     (rs1_raw),
-        .rs2_data     (rs2_raw)
+        .clk           (clk),
+        .rst           (rst),
+
+        .read_address1 (decoded_instruction.rs1_address),
+        .read_address2 (decoded_instruction.rs2_address),
+        
+        .write_enable  (wb_forwarding_in.data_valid),
+        
+        .write_address (wb_forwarding_in.address),
+        .write_data    (wb_forwarding_in.data),
+        
+        .read_data1    (rs1_raw),
+        .read_data2    (rs2_raw)
     );
 
     always_comb begin
